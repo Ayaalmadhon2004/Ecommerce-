@@ -1,0 +1,166 @@
+.flashSales{
+    padding:70px 0 0 210px;
+
+}
+.rectangle{
+    background-color:var(--red);
+    width:20px;
+    height:40px;
+    border-radius:4px;
+}
+.topHeader{
+    display:flex;
+    align-items: center;
+    gap:16px;
+}
+.topHeader h3{
+    color:var(--red);
+    font-weight:600;
+    font-size:var(--text-16);
+    line-height:20px;
+
+}
+.mainHeader{
+    display: flex;
+    align-items: center;
+    gap:200px;
+}
+
+.arrows{
+    gap:8px;
+     display:flex;
+    align-items: center;
+    margin:auto;
+}
+.arrows i{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background-color:var(--gray-bg);
+    padding:11px 11px 11px 11px;
+}
+
+.mainHeader h2{
+    font-weight: 600;
+    font-size:36px;
+    line-height:48px;
+    letter-spacing: 4%;
+
+}
+.countdown span{
+    font-weight: 500;
+    font-size:12px;
+    line-height:18px;
+    font-family: poppins;
+}
+
+.countdown div{
+    font-weight: 700;
+    font-size:32px;
+    line-height:30px;
+    letter-spacing:4%;
+
+}
+
+.dots{
+    display:flex;
+    gap:8px;
+    color:var(--light-red);
+    width:4px;
+    height:4px;
+}
+
+/**********cards***********/
+.mainContainer{
+    display:flex;
+    gap:30px;
+    margin-top:2rem;
+}
+.imagContainer img{
+    width:270px;
+    height:250px;
+    border-radius:4px;
+    background-color:#f5f5f5;
+
+}
+
+.cardBody h4{
+    font-weight: 500;
+    font-size:16px;
+    line-height:24px;
+}
+.prices{
+    display:flex;
+    gap:12px;
+    margin:8px 0 8px 0;
+}
+.price{
+    font-weight: 500;
+    font-size:16px;
+    line-height:24px;
+    color:var(--red);
+}
+.btn{
+    width:234px;
+    height:56px;
+    padding:16px 48px 16px 48px;
+    background-color:var(--red);
+    border:none;
+    border-radius:4px;
+    color:var(--white);
+    margin:40px 0 0 450px;
+}
+
+.imagContainer{
+    position:relative;
+}
+
+.discount{
+    width:55px;
+    height:26px;
+    display:flex;
+    position:absolute;
+    margin:-240px 0 0px 12px;
+    border-radius:4px;
+    padding:4px 12px 4px 12px;
+    gap:10px;
+    background-color:var(--red);
+    color:var(--white);
+}
+
+.seeLove{
+   display:flex;
+   flex-direction:column;
+   align-items: flex-start;
+   gap:8px;
+   position:absolute;
+   margin:-240px 0 0 230px;
+}
+
+.seeLove .fa-heart{
+    width:34px;
+    height:34px;
+    padding:5px 0 0 5px;
+    border-radius:50%;
+    background-color:var(--white);
+}
+
+.prevPrice{
+    color:var(--gray);
+    text-decoration:line-through;
+}
+
+.stars{
+    display:flex;
+    gap:8px;
+}
+
+.stars .fa-star{
+    background-color:var(--red);
+}
+
+@media screen and (max-width:480px){
+    .flashSales{
+      padding:var(--padding-480);
+    }
+}

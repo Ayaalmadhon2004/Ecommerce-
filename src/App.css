@@ -1,0 +1,31 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
+  
+}
+:root{
+  --black:#000000;
+  --white:#FFFFFF;
+  --red:#DB4444;
+  --light-red:#E07575;
+  --gray-bg:#F5F5F5;
+  --green:#00FF66;
+  --text-24:24px;
+  --text-16:16px;
+  --text-48:48px;
+  --font-inter:'Inter',sans serif;
+  --weight-700:700;
+  --weight-400:400;
+  --weight-500:500;
+  --weight-600:600;
+  --main-padding:70px 0 0 210px;
+  --padding-480:40px 0 0 80px;
+
+
+
+}
+
+a{
+  text-decoration: none;
+}

@@ -1,0 +1,59 @@
+.musicExperience{
+    padding:var(--main-padding);
+    display:flex;
+    align-items: center;
+    background-color:var(--black);
+}
+.left h2{
+    color:var(--green);
+    font-weight: 600;
+    font-size:16px;
+    line-height:20px;
+    margin-top:20px;
+    width:443px;
+}
+.left p{
+    font-weight: 600;
+    font-size:48px;
+    line-height:60px;
+    letter-spacing:4%;
+    color:var(--white);
+}
+.right img{
+    width:568px;
+    height:330px;
+    padding:37px 0 0 0px;
+}
+
+.timing{
+    display:flex;
+    gap:24px;
+    margin-top:20px;
+
+}
+.timing li{
+    background-color:var(--white);
+    width:62px;
+    height:62px;
+    border-radius:50%;
+    padding:5px 0 0 2px;
+    text-align: center;
+    font-weight: 600;
+    font-size:16px;
+}
+
+.timing span{
+    font-weight: 400;
+    font-size:11px;
+
+}
+
+.btn{
+    background-color:var(--green);
+    width:171px;
+    height:56px;
+    padding:16px 48px 16px 48px;
+    gap:10px;
+    margin:20px 0 0 10px;
+    border-radius:4px;
+}
