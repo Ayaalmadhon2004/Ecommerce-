@@ -1,6 +1,6 @@
 .topContainer{
     background-color: var(--black);
-    width:1528px;
+    width:100%;
     height:48px;
 
 }
@@ -37,18 +37,18 @@
 
 @media screen and (max-width:768px){
     .topHeader {
-    padding-left:210px;
+    padding-left:40px;
     }
     .topHeader {
-    gap:180px;
+    gap:100px;
    }
 }
 
 @media screen and (max-width:480px){
-    .topHeader {
-    padding-left:210px;
+    .topContainer{
+    height:60px;
     }
     .topHeader {
-    gap:180px;
-   }
+    padding:12px 0 0 7px;
+    }
 }

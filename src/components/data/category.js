@@ -26,7 +26,7 @@ const category =[
     {
         id:4,
         vector:"assets/vectors/Category-Headphone.png",
-        vector:"assets/vectors/whiteVectors/Category-Headphone.png",
+        vector:"assets/vectors/whiteVectors/Category-Headphone (1).png",
         name:"Headphone",
     },
     {

@@ -3,6 +3,9 @@
     display:flex;
     align-items: center;
     background-color:var(--black);
+    width:100vw;
+    margin-bottom:var(--margin-bottom);
+
 }
 .left h2{
     color:var(--green);
@@ -56,4 +59,16 @@
     gap:10px;
     margin:20px 0 0 10px;
     border-radius:4px;
+}
+
+@media screen and (max-width:480px){
+    .musicExperience{
+    padding:var(--padding-480);
+     width:200vw;
+
+    }
+    .right img{
+    width:400px;
+    }
+
 }

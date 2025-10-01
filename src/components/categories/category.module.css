@@ -1,5 +1,7 @@
 .category{
     padding:var(--main-padding);
+    margin-bottom:var(--margin-bottom);
+
 }
 .topHeader{
     display:flex;
@@ -24,17 +26,16 @@
     font-size:36px;
     line-height:48px;
     letter-spacing: 4%;
+    width:100%;
     margin:1rem 0 1rem 0;
-
 }
 .mainHeader{
     display:flex;
     align-items: center;
-    gap:600px;
 }
 .arrows{
     gap:8px;
-     display:flex;
+    display:flex;
     align-items: center;
     margin:auto;
 }
@@ -57,7 +58,6 @@
     border-radius:4px;
     border:1px dotted var(--black);
     position:relative;
-
 }
 .card:hover{
     background-color:var(--red);
@@ -71,6 +71,10 @@
     align-items: center;    /* horizontal centering */
     justify-content: center;/* vertical centering if div has height */
     text-align: center; 
+}
+.containerCard{
+    margin-bottom:2rem;
+
 }
 .img img{
     position:absolute;
@@ -99,10 +103,27 @@
     .category{
     padding:var(--padding-480);
     }
+    .containerCard{
+    gap:5px; 
+    }
+    .card{
+    width:1170px;
+    }
     .mainHeader{
-    gap:750px;
+    gap:500px;
+    }
+    .mainHeader h2{
+        width:200px;
+    }
+    .mainHeader h2{
+        display:inline-block;
+        margin-bottom:1rem;
+    }
+    .img{
+        width:120px;
+        margin-bottom:1rem;
     }
     .containerCard{
-    gap:90px; 
+        margin-bottom:1rem;
     }
 }

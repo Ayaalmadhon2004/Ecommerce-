@@ -1,0 +1,41 @@
+.services{
+    padding:70px 0 0 350px;
+    margin-bottom:var(--margin-bottom);
+}
+.container{
+    display:flex;
+    align-items: center;
+    gap:88px;
+}
+.imgContainer{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background-color: #c4c4c4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+.service img{
+    width:50px;
+    height:50px;
+    font-size:30px;
+    background-color: var(--black);
+    border-radius:50%;
+    object-fit: contain;
+}
+.service h3{
+    margin:24px 0 8px 0;
+    font-weight: 600;
+    font-size:20px;
+}
+
+.service p{
+    font-weight: 400;
+    font-size:14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}

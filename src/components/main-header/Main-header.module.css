@@ -3,6 +3,7 @@
     align-items: center;
     gap:80px;
     padding:70px 0 0 210px;
+    margin-bottom:var(--margin-bottom);
 }
 
 .list li {
@@ -83,7 +84,7 @@
     height:45px;
   }
   .subLeft{
-    margin-bottom:50px;
+    margin:20px 0 50px 0;
   }
   .right{
     width:642px;
@@ -144,23 +145,38 @@
 
 @media screen and (max-width:480px){
    .mainHeader{
-    gap:160px;
-    padding:70px 0 0 80px;
+    gap:0px;
+    padding:70px 0 0 7px;
    }
  
    .sale{
-    font-size: 40px;
+    font-size: 30px;
    }
-  .subRight img{
-    width:396px;
-    height:300px;
-  }
+  .subRight {
+  position: relative; /* parent becomes a positioning context */
+}
+
+.subRight img {
+  width: 100px;
+  height: 100px;
+  position: absolute; /* float above content */
+  top: 0;  /* adjust as needed */
+  right: 0; /* adjust as needed */
+  z-index: 999;
+}
   .iphone img{
-    width:45px;
-    height:45px;
+    width:30px;
+    height:30px;
   }
-  .subLeft{
-    margin-bottom:50px;
+  
+.right{
+    display:flex;
+    flex-direction: column;
+    padding:0 0 0 0px;
+    width:300px;
+  }
+.subLeft{
+    margin:20px 0 50px 0;
   }
 
 }

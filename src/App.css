@@ -2,8 +2,14 @@
   margin:0;
   padding:0;
   box-sizing: border-box;
-  
 }
+
+html, body {
+    width: 100%;
+    height:auto;
+    overflow-x: hidden; 
+  }
+
 :root{
   --black:#000000;
   --white:#FFFFFF;
@@ -20,7 +26,8 @@
   --weight-500:500;
   --weight-600:600;
   --main-padding:70px 0 0 210px;
-  --padding-480:40px 0 0 80px;
+  --padding-480:40px 0 0 7px;
+  --margin-bottom:50px;
 
 
 

@@ -1,16 +1,31 @@
+import { useState } from "react"
 import styles from "./header.module.css"
 
 function Header() {
+  const [menuOpen,setMenuOpen]=useState(false);
   return (
     <div className={styles.header}>
       <div className={styles.container}>
         <span className={styles.logo}>Exclusive</span>
-        <ul className={styles.list}>
+
+        
+        <div className={styles.menu}>
+           <div 
+          className={styles.burger} 
+          onClick={() => setMenuOpen(!menuOpen)}
+           >
+         {menuOpen ? <i class="fa-solid fa-x"></i> :<i className="fa-solid fa-bars"></i> }
+         </div>
+        <ul className={`${styles.list} ${menuOpen ? styles.showMenu : ""}`}>
           <li><a href="#">Home</a></li>
           <li><a href="#">Contact</a></li>
           <li><a href="#">About</a></li>
           <li><a href="#">Sign Up</a></li>
         </ul>
+
+        </div>
+
+
         <div className={styles.searching}>
            <input className={styles.search} type="text" placeholder="What are you looking for?"></input><i class="fa-solid fa-magnifying-glass"></i>
            <i class="fa-solid fa-heart"></i>

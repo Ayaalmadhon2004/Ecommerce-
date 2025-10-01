@@ -1,8 +1,8 @@
-.flashSales{
+.sellingProducts{
     padding:70px 0 0 210px;
     margin-bottom:var(--margin-bottom);
-
 }
+
 .rectangle{
     background-color:var(--red);
     width:20px;
@@ -25,50 +25,6 @@
     display: flex;
     align-items: center;
     gap:200px;
-}
-
-.arrows{
-    gap:8px;
-    display:flex;
-    align-items: center;
-    margin:auto;
-}
-.arrows i{
-    width:46px;
-    height:46px;
-    border-radius:50%;
-    background-color:var(--gray-bg);
-    padding:11px 11px 11px 11px;
-}
-
-.mainHeader h2{
-    font-weight: 600;
-    font-size:36px;
-    line-height:48px;
-    letter-spacing: 4%;
-
-}
-.countdown span{
-    font-weight: 500;
-    font-size:12px;
-    line-height:18px;
-    font-family: poppins;
-}
-
-.countdown div{
-    font-weight: 700;
-    font-size:32px;
-    line-height:30px;
-    letter-spacing:4%;
-
-}
-
-.dots{
-    display:flex;
-    gap:8px;
-    color:var(--light-red);
-    width:4px;
-    height:4px;
 }
 
 /**********cards***********/
@@ -117,19 +73,6 @@
     position:relative;
 }
 
-.discount{
-    width:55px;
-    height:26px;
-    display:flex;
-    position:absolute;
-    margin:-240px 0 0px 12px;
-    border-radius:4px;
-    padding:4px 12px 4px 12px;
-    gap:10px;
-    background-color:var(--red);
-    color:var(--white);
-}
-
 .seeLove{
    display:flex;
    flex-direction:column;
@@ -160,36 +103,3 @@
 .stars .fa-star{
     background-color:var(--red);
 }
-
-@media screen and (max-width:480px){
-    .flashSales{
-      padding:var(--padding-480);
-    }
-    .mainHeader{
-      gap:10px;
-    }
-      .mainContainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; 
-    }
-      
-
-     .btn{
-    margin:40px 0 0 120px;
-}
-.arrows{
-    display:none;
-}
-.mainContainer{
-    gap:10px;
-}
-.imagContainer img{
-    width:230px;
-}
-.seeLove{
-   margin:-240px 0 0 200px;
-}
-
-}
-
