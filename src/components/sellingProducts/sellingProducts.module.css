@@ -1,6 +1,6 @@
 .sellingProducts{
     padding:70px 0 0 210px;
-    margin-bottom:var(--margin-bottom);
+    margin-bottom:100px;
 }
 
 .rectangle{
@@ -24,7 +24,20 @@
 .mainHeader{
     display: flex;
     align-items: center;
-    gap:200px;
+    gap:220px;
+}
+
+.mainHeader h2{
+    font-weight: 600;
+    font-size:36px;
+    line-height:48px;
+    letter-spacing:4%;
+}
+
+.mainHeader .btn{
+    padding:16px 48px 16px 48px;
+    width:159px;
+    height:56px;
 }
 
 /**********cards***********/
@@ -66,7 +79,7 @@
     border:none;
     border-radius:4px;
     color:var(--white);
-    margin:40px 0 0 450px;
+    margin:40px 0 0 350px;
 }
 
 .imagContainer{
@@ -102,4 +115,92 @@
 
 .stars .fa-star{
     background-color:var(--red);
+}
+
+@media screen and (max-width:992px){
+    .sellingProducts{
+    padding:var(--padding-992);
+    }
+    .mainHeader{
+        gap:30px;
+    }
+    .mainContainer {
+    padding:0 0 0 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px; /* مسافة ثابتة بين الكروت */
+    justify-content: center; /* يخليهم دايمًا في الوسط */
+    }
+    .card {
+    flex: 1 1 calc(33.333% - 30px); /* 3 كروت في الصف */
+    max-width: calc(33.333% - 30px);
+    }
+    .imagContainer img{
+    width:230px;
+    }
+    .seeLove{
+     margin:-240px 0 0 200px;
+    }
+    .btn{
+    margin:40px 0 0 270px;
+    }
+}
+
+@media screen and (max-width:768px){
+    .sellingProducts{
+     padding:var(--padding-768);
+    }
+
+    .mainHeader{
+        gap:10px;
+    }
+
+    .mainHeader h2{
+    font-size:30px;
+    line-height:30px;
+    }
+
+    .mainContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    gap:35px;
+    padding-left:50px;
+    }
+
+    .imagContainer img{
+    width:260px;
+    }
+
+    .seeLove{
+     margin:-240px 0 0 220px;
+    }
+    .btn{
+    margin:40px 0 0 170px;
+    }
+}
+
+@media screen and (max-width:480px){
+    .sellingProducts{
+     padding:var(--padding-480);
+    }
+    .mainHeader{
+        gap:0;
+    }
+     .mainHeader h2{
+    font-size:30px;
+    line-height:30px;
+    }
+    .mainContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    gap:5px;
+    }
+    .imagContainer img{
+    width:240px;
+    }
+    .seeLove{
+     margin:-240px 0 0 200px;
+    }
 }

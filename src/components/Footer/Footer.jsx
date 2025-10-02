@@ -12,7 +12,7 @@ export default function Footer() {
           <p className={styles.text}>Get 10% off your first order</p>
           <div className={styles.inputBox}>
             <input type="email" placeholder="Enter your email" />
-            <button>➡</button>
+            <button><i class="fa-solid fa-paper-plane"></i></button>
           </div>
         </div>
 
@@ -52,23 +52,23 @@ export default function Footer() {
           <h2>Download App</h2>
           <p className={styles.text}>Save $3 with App New User Only</p>
           <div className={styles.appBox}>
-            <img src="/qr.png" alt="QR Code" className={styles.qr} />
+            <img src="/assets/photos/Qrcode 1.png" alt="QR Code" className={styles.qr} />
             <div className={styles.storeBtns}>
-              <img src="/googleplay.png" alt="Google Play" />
-              <img src="/appstore.png" alt="App Store" />
+              <img src="/assets/photos/png-transparent-google-play-store-logo-google-play-app-store-android-wallets-text-label-logo.png" alt="Google Play" />
+              <img src="/assets/photos/AppStore.png" alt="App Store" />
             </div>
           </div>
           <div className={styles.socials}>
-            <a href="#"><img src="/facebook.png" alt="Facebook" /></a>
-            <a href="#"><img src="/twitter.png" alt="Twitter" /></a>
-            <a href="#"><img src="/instagram.png" alt="Instagram" /></a>
-            <a href="#"><img src="/linkedin.png" alt="LinkedIn" /></a>
-          </div>
+             <i class="fa-brands fa-facebook-f"></i>
+             <i class="fa-brands fa-instagram"></i>
+             <i class="fa-brands fa-twitter"></i>  
+             <i class="fa-brands fa-linkedin-in"></i>
+          </div>      
         </div>
 
       </div>
       <div className={styles.bottom}>
-        © Copyright Rimel 2022. All right reserved
+        © Copyright aya almadhon . All right reserved
       </div>
     </footer>
   );

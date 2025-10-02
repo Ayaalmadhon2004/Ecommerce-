@@ -26,12 +26,12 @@
     font-size:36px;
     line-height:48px;
     letter-spacing: 4%;
-    width:100%;
     margin:1rem 0 1rem 0;
 }
 .mainHeader{
     display:flex;
     align-items: center;
+    gap:600px;
 }
 .arrows{
     gap:8px;
@@ -50,6 +50,7 @@
     display:flex;
     align-items: center;
     gap:30px;
+    flex-wrap: wrap;
     
 }
 .card{
@@ -98,6 +99,50 @@
 .hover{
     opacity:0;
 }
+@media screen and (max-width:992px){
+    .category{
+    padding:var(--padding-992);
+    }
+    .mainHeader{
+    gap:300px;
+    }
+}
+
+@media screen and (max-width:768px){
+    .category{
+    padding:var(--padding-768);
+    }
+    .containerCard{
+    gap:5px; 
+    }
+
+    .mainHeader{
+    gap:500px;
+    }
+    .mainHeader h2{
+        width:0px;
+    }
+    .mainHeader h2{
+        display:inline-block;
+        margin-bottom:1rem;
+        font-size:30px;
+        width:100%;
+    }
+    .img{
+        width:120px;
+        margin-bottom:1rem;
+    }
+    .containerCard{
+        margin-bottom:1rem;
+    }
+     .card {
+        width: calc(33.333% - 10px); /* 3 كروت في الصف */
+        height: auto;
+    }
+    .arrows{
+        display:none;
+    }
+}
 
 @media screen and (max-width:480px){
     .category{
@@ -106,18 +151,18 @@
     .containerCard{
     gap:5px; 
     }
-    .card{
-    width:1170px;
-    }
+
     .mainHeader{
     gap:500px;
     }
     .mainHeader h2{
-        width:200px;
+        width:0px;
     }
     .mainHeader h2{
         display:inline-block;
         margin-bottom:1rem;
+        font-size:30px;
+        width:100%;
     }
     .img{
         width:120px;
@@ -125,5 +170,12 @@
     }
     .containerCard{
         margin-bottom:1rem;
+    }
+     .card {
+        width: calc(33.333% - 10px); /* 3 كروت في الصف */
+        height: auto;
+    }
+    .arrows{
+        display:none;
     }
 }

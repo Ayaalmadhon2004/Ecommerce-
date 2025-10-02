@@ -1,0 +1,118 @@
+.exploreProducts{
+    padding:var(--main-padding);
+}
+.rectangle{
+    background-color:var(--red);
+    width:20px;
+    height:40px;
+    border-radius:4px;
+}
+.topHeader{
+    display:flex;
+    align-items: center;
+    gap:16px;
+}
+.topHeader h3{
+    color:var(--red);
+    font-weight:600;
+    font-size:var(--text-16);
+    line-height:20px;
+}
+.mainHeader{
+    display: flex;
+    align-items: center;
+    gap:570px;
+}
+
+.arrows{
+    gap:8px;
+    display:flex;
+    align-items: center;
+    margin:auto;
+}
+.arrows i{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background-color:var(--gray-bg);
+    padding:11px 11px 11px 11px;
+}
+
+.mainHeader h2{
+    font-weight: 600;
+    font-size:36px;
+    line-height:48px;
+    letter-spacing: 4%;
+}
+/**********cards***********/
+.mainContainer{
+    display:flex;
+    gap:40px;
+    margin-top:2rem;
+    width:1200px;
+    flex-wrap: wrap;
+}
+.imagContainer img{
+    width:260px;
+    height:250px;
+    border-radius:4px;
+    background-color:#f5f5f5;
+
+}
+
+.cardBody h4{
+    font-weight: 500;
+    font-size:16px;
+    line-height:24px;
+}
+.prices{
+    display:flex;
+    gap:12px;
+    margin:8px 0 8px 0;
+}
+.price{
+    font-weight: 500;
+    font-size:16px;
+    line-height:24px;
+    color:var(--red);
+}
+.btn{
+    width:234px;
+    height:56px;
+    padding:16px 48px 16px 48px;
+    background-color:var(--red);
+    border:none;
+    border-radius:4px;
+    color:var(--white);
+    margin:40px 0 0 450px;
+}
+
+.imagContainer{
+    position:relative;
+}
+.seeLove{
+   display:flex;
+   flex-direction:column;
+   align-items: flex-start;
+   gap:8px;
+   position:absolute;
+   margin:-240px 0 0 230px;
+}
+
+.seeLove .fa-heart{
+    width:34px;
+    height:34px;
+    padding:5px 0 0 5px;
+    border-radius:50%;
+    background-color:var(--white);
+}
+
+.prevPrice{
+    color:var(--gray);
+    text-decoration:line-through;
+}
+
+.stars{
+    display:flex;
+    gap:8px;
+}

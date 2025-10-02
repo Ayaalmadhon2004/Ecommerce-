@@ -15,7 +15,8 @@ function MusicExperience() {
        <div className={styles.btn}>Buy Now !</div>
     </div>
     <div className={styles.right}>
-      <img src="assets/photos/headSet.webp" alt="headSet image"/>
+      <div className={styles.blur}></div>
+      <img src="assets/photos/JBL_BOOMBOX_2_HERO_020_x1 (1) 1.png" alt="headSet image"/>
     </div>
     </div>
   )

@@ -28,7 +28,7 @@
 
 @media screen and (max-width:992px){
     .topHeader {
-    padding-left:215px;
+    padding-left:115px;
     }
     .topHeader {
     gap:180px;
@@ -46,9 +46,10 @@
 
 @media screen and (max-width:480px){
     .topContainer{
-    height:60px;
+    height:70px;
     }
     .topHeader {
-    padding:12px 0 0 7px;
+    padding:15px;
+    gap:10px;
     }
 }

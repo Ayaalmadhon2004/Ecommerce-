@@ -1,0 +1,116 @@
+.newArrival{
+    padding:var(--main-padding);
+}
+.rectangle{
+    background-color:var(--red);
+    width:20px;
+    height:40px;
+    border-radius:4px;
+}
+.topHeader{
+    display:flex;
+    align-items: center;
+    gap:16px;
+}
+.topHeader h3{
+    color:var(--red);
+    font-weight:600;
+    font-size:var(--text-16);
+    line-height:20px;
+}
+.mainHeader{
+    display: flex;
+    align-items: center;
+    gap:220px;
+}
+.mainContainer{
+    display:flex;
+    align-items: center;
+    gap:20px;
+}
+.mainContainer h3{
+    font-weight: 600;
+    font-size:24px;
+    line-height:24px;
+    letter-spacing:3%;
+}
+.mainContainer p{
+    font-weight: 400;
+    font-size:14px;
+    line-height:21px;
+    margin:.5rem 0 .5rem 0;
+}
+.mainContainer .btn{
+    width:81px;
+    height:24px;
+    border: none;
+    background-color:transparent;
+    color:var(--white);
+    display: flex;
+    justify-content: start;
+}
+.mainContainer .btn:after{
+    width:81px;
+    border:1px dotted var(--white);
+    
+}
+.mainHeader h2{
+    margin:1rem 0 1rem 0;
+    font-weight: 600;
+    font-size:36px;
+    line-height:48px;
+}
+.bottom{
+    display:flex;
+    align-items: center;
+    gap:20px;
+}
+.left{
+    background-image: url('../../../public/assets/photos/pc.webp');
+    width:570px;
+    height:600px;
+    border-radius:4px;
+    background-color: var(--black);
+    color:var(--white);
+    padding:480px 0 0 40px;
+}
+.subLeft{
+    background-image: url('../../../public/assets/photos/speaker.webp');
+    width:270px;
+    height:284px;
+    border-radius:4px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: var(--black);
+    color:var(--white);
+    padding:180px 0 0 20px;
+
+}
+.subRight{
+    background-image: url('../../../public/assets/photos/speaker.webp');
+    width:270px;
+    height:284px;
+    border-radius:4px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: var(--black);
+    color:var(--white);
+    padding:180px 0 0 20px;
+
+
+}
+.top{
+    background-image: url('../../../public/assets/photos/speaker.webp');
+    width:570px;
+    height:284px;
+    border-radius:4px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: var(--black);
+    margin-bottom:35px;
+    color:var(--white);
+    padding:180px 0 0 20px;
+}

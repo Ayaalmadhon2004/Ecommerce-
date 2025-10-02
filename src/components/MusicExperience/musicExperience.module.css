@@ -1,9 +1,10 @@
 .musicExperience{
-    padding:var(--main-padding);
+    padding:60px 0 60px 60px;
     display:flex;
     align-items: center;
     background-color:var(--black);
-    width:100vw;
+    width:76vw;
+    margin-left:210px;
     margin-bottom:var(--margin-bottom);
 
 }
@@ -26,6 +27,9 @@
     width:568px;
     height:330px;
     padding:37px 0 0 0px;
+    z-index:999;
+    position:relative;
+
 }
 
 .timing{
@@ -60,15 +64,58 @@
     margin:20px 0 0 10px;
     border-radius:4px;
 }
+.right{
+    position:relative;
+}
+.blur{
+    width:500px;
+    height:500px;
+    filter:blur(200px);
+    background-color:var(--white);
+    border-radius:50%;
+    position:absolute;
+}
 
-@media screen and (max-width:480px){
+@media screen and (max-width:992px){
+   .musicExperience{
+    padding:50px;
+    margin:0 105px 0 105px;
+    width:81vw;
+   } 
+   .right img{
+    width:300px;
+    }
+}
+
+@media screen and (max-width:768px){
     .musicExperience{
-    padding:var(--padding-480);
-     width:200vw;
-
+    padding:var(--padding-768);
+    margin:0 70px 0 70px;
+    width:400vw;
+    flex-direction: column; 
+    } 
+    
+    .left, .right {
+        width: 100%;
     }
     .right img{
-    width:400px;
+    width:430px;
     }
+}
+@media screen and (max-width:480px){
+    .musicExperience{
+    padding:20px 0 0 20px;
+    margin-left:10px;
+    width:400vw;
+    flex-direction: column; 
+    } 
+    
+    .left, .right {
+        width: 100%;
+    }
+    .right img{
+    width:430px;
+    }
+
 
 }

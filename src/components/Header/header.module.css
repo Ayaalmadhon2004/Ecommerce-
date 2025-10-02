@@ -47,28 +47,69 @@
   cursor: pointer;
 }
 
-
-@media screen and (max-width:1200px){
-    .container{
-      padding:40px 0 0 80px;
-      gap:35px;
-    }
-}
-
 @media screen and (max-width:992px){
     .container{
-      padding:40px 0 0 80px;
-      gap:37px;
+      padding:var(--padding-992);
+      display: flex;
+      align-items: center;
+      gap:20px;
+    }
+    .list{
+    width:367px;
+    gap:40px;
     }
 }
-
 @media screen and (max-width:768px){
     .container{
-      padding:40px 0 0 80px;
-      gap:30px;
+      padding:var(--padding-768);
+      display: flex;
+      align-items: center;
+      gap:100px;
     }
+    
+    .burger {
+    display: block;
+    font-size:20px;
+    }
+    .searching{
+    gap:10px;
+    }
+    .list {
+    display: none; /* تخفي القائمة */
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+  }
+
+  .showMenu {
+    display: flex;
+    color:var(--white);
+    z-index: 999;          /* خليها قيمة عالية */
+    position: absolute;
+  }
+
+  .showMenu {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--black);
+  color: var(--white);
+  z-index: 999;          /* خليها قيمة عالية */
+  position: absolute;    /* علشان تطلع فوق كل شيء */
+  top: 140px;             /* تنزل تحت الهيدر */
+  left: 180px;
+  width: 50%;
+  height:auto;
+  padding: 15px;
+  box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.3);
+
 }
 
+.showMenu li a {
+  color:var(--white);
+}
+
+}
 @media screen and (max-width:480px){
     .container{
       padding:40px 0 0 7px;
@@ -106,12 +147,12 @@
   color: var(--white);
   z-index: 999;          /* خليها قيمة عالية */
   position: absolute;    /* علشان تطلع فوق كل شيء */
-  top: 120px;             /* تنزل تحت الهيدر */
-  left: 350px;
+  top: 150px;             /* تنزل تحت الهيدر */
+  left: 130px;
   width: 50%;
   height:auto;
   padding: 15px;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1); /* soft shadow */
+  box-shadow: 10px 10px 4px rgba(0, 0, 0, 0.3);
 
 }
 
