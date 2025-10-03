@@ -116,7 +116,20 @@
 .stars .fa-star{
     background-color:var(--red);
 }
-
+@media screen and (max-width:1200px){
+    .sellingProducts{
+    padding:var(--padding-1200);
+    }
+    .mainContainer {
+    gap:20px; 
+    }
+    .imagContainer img{
+    width:252px;
+    }
+    .seeLove{
+     margin:-240px 0 0 220px;
+    }
+}
 @media screen and (max-width:992px){
     .sellingProducts{
     padding:var(--padding-992);
@@ -164,12 +177,19 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; 
-    gap:35px;
-    padding-left:50px;
+    gap:20px;
+    padding-left:20px;
+    width:100%;
+
+    }
+     .card {
+    flex: 1 1 calc(50% - 15px); /* كرتين في الصف مع ترك مسافة */
+    max-width: calc(50% - 15px);
+    margin: 0; /* إزالة الهوامش الثابتة */
     }
 
     .imagContainer img{
-    width:260px;
+    width:250px;
     }
 
     .seeLove{
@@ -179,6 +199,8 @@
     margin:40px 0 0 170px;
     }
 }
+
+
 
 @media screen and (max-width:480px){
     .sellingProducts{
@@ -192,15 +214,18 @@
     line-height:30px;
     }
     .mainContainer{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; 
+    padding:0 0 0 0px;
     gap:5px;
+    justify-content: start; /* يخليهم دايمًا في الوسط */
+    }
+    .card {
+    flex: 1 1 calc(50% - 100px);  /* كل كرت ياخذ نصف المساحة مع خصم الفجوة */
+    max-width: calc(50% - 0px);
     }
     .imagContainer img{
-    width:240px;
+    width:220px;
     }
     .seeLove{
-     margin:-240px 0 0 200px;
+     margin:-240px 0 0 190px;
     }
 }

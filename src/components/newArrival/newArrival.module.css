@@ -1,5 +1,6 @@
 .newArrival{
     padding:var(--main-padding);
+    margin-bottom:var(--margin-bottom);
 }
 .rectangle{
     background-color:var(--red);
@@ -99,7 +100,6 @@
     color:var(--white);
     padding:180px 0 0 20px;
 
-
 }
 .top{
     background-image: url('../../../public/assets/photos/speaker.webp');
@@ -113,4 +113,74 @@
     margin-bottom:35px;
     color:var(--white);
     padding:180px 0 0 20px;
+}
+@media screen and (max-width:1200px){
+   .newArrival{
+    padding:var(--padding-1200);
+   }
+}
+
+@media screen and (max-width:992px){
+   .newArrival{
+    padding:var(--padding-992);
+   }
+   .mainContainer{
+    display:flex;
+    flex-direction: column;
+    margin-left:-100px;
+   }
+   .subRight,.top,.subLeft{
+    padding:180px 0 0 60px;  
+    }
+    .left{
+    padding:480px 0 0 60px;
+    width:800px;
+    height:600px;
+    }
+    .subLeft,.subRight{
+    width:400px;
+    }
+    .top{
+        width:800px;
+    }
+}
+
+@media screen and (max-width:768px){
+   .newArrival{
+    padding:var(--padding-768);
+   }
+   .mainContainer{
+    display:flex;
+    flex-direction: column;
+    margin-left:-60px;
+
+   }
+   .subRight,.top,.subLeft{
+    padding:180px 0 0 100px;  
+    }
+    .left{
+    padding:480px 0 0 100px;
+    }
+}
+
+@media screen and (max-width:480px){
+   .newArrival{
+    padding:var(--padding-480);
+   }
+   .mainContainer{
+    display:flex;
+    flex-direction: column;
+   }
+   .subRight{
+    padding:180px 0 0 50px;  
+    }
+    .subLeft{
+    padding:180px 0 0 220px;  
+    }
+    .top{
+    padding:180px 0 0 230px;  
+    }
+    .left{
+    padding:480px 0 0 220px;
+    }
 }

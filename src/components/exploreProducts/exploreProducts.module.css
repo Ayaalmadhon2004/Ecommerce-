@@ -1,5 +1,6 @@
 .exploreProducts{
     padding:var(--main-padding);
+    margin-bottom:var(--margin-bottom);
 }
 .rectangle{
     background-color:var(--red);
@@ -115,4 +116,73 @@
 .stars{
     display:flex;
     gap:8px;
+}
+@media screen and (max-width:1200px){
+    .exploreProducts{
+    padding:var(--padding-1200);
+    }
+    .btn{
+    margin:40px 0 0 410px;
+    }
+    .mainHeader{
+    gap:550px;
+    }
+    .mainContainer{
+    gap:5px;
+    }
+}
+
+@media screen and (max-width:992px){
+    .exploreProducts{
+    padding:var(--padding-992);
+    }
+    .btn{
+    margin:40px 0 0 320px;
+    }
+    .mainHeader{
+    display: flex;
+    align-items: center;
+    gap:300px;
+    }
+}
+
+@media screen and (max-width:768px){
+    .exploreProducts{
+    padding:var(--padding-768);
+    }
+    .btn{
+    margin:40px 0 0 210px;
+    }
+    .mainHeader{
+    display: flex;
+    align-items: center;
+    gap:130px;
+    }
+}
+@media screen and (max-width:480px){
+    .exploreProducts{
+    padding:var(--padding-480);
+    }
+    .mainHeader{
+        gap:0;
+    }
+     .mainHeader h2{
+    font-size:30px;
+    line-height:30px;
+    }
+    .mainContainer{
+    padding:0 0 0 0px;
+    gap:5px;
+    justify-content: start; /* يخليهم دايمًا في الوسط */
+    }
+    .imagContainer img{
+    width:220px;
+    }
+    .seeLove{
+     margin:-240px 0 0 190px;
+    }
+    .btn{
+    width:200px;
+    margin:40px 0 0 120px;
+    }
 }

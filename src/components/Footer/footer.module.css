@@ -117,6 +117,9 @@
 
 
 @media screen and (max-width: 1200px) {
+  .footer{
+    padding:var(--padding-1200);
+  }
   .container {
     grid-template-columns: repeat(4, 1fr);
   }

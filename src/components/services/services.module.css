@@ -43,6 +43,15 @@
     text-align: center;
 
 }
+ @media screen and (max-width:1200px){
+    .services{
+        padding:70px 0 0 170px;
+    }
+    .container{
+    gap:70px;
+    }
+}
+
  @media screen and (max-width:992px){
     .services{
         padding:var(--padding-992);
@@ -53,19 +62,18 @@
 }
  @media screen and (max-width:768px){
     .services{
-        padding:var(--padding-768);
+    padding:var(--padding-768);
     }
     .container{
-    gap:70px;
+    gap:10px;
     }
     .service h3{
     font-size:14px;
-    padding-left:35px;
+    padding-left:3px;
     }
     .service p{
     font-size:12px;
-    padding-left:35px;
-
+    padding-left:3px;
     }
  }
 

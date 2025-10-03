@@ -25,11 +25,13 @@ html, body {
   --weight-400:400;
   --weight-500:500;
   --weight-600:600;
-  --main-padding:70px 0 0 210px;
+  --main-padding:70px 0 0 180px;
   --padding-480:40px 0 0 7px;
   --padding-768:40px 40px 0 70px;
   --padding-992:40px 0 0 100px;
+  --padding-1200:70px 0 0 70px;
   --margin-bottom:50px;
+  
 
 
 

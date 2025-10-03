@@ -160,6 +160,12 @@
 .stars .fa-star{
     background-color:var(--red);
 }
+
+@media screen and (max-width:1200px){
+    .flashSales{
+    padding:var(--padding-1200);
+    }
+}
 @media screen and (max-width:992px){
     .flashSales{
       padding:var(--padding-992);
@@ -177,32 +183,30 @@
 }
 @media screen and (max-width:768px){
     .flashSales{
-      padding:var(--padding-768);
+    padding:var(--padding-768);
     }
     .mainHeader{
-      gap:220px;
+    gap:220px;
     }
-      .mainContainer{
+    .mainContainer{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; 
     }
-      
-
-     .btn{
+    .btn{
     margin:40px 0 0 200px;
     width:200px;
     }
-   .arrows{
+    .arrows{
     display:none;
     }
-   .mainContainer{
+    .mainContainer{
     gap:60px;
     padding-left:40px;
-   }
-   .imagContainer img{
+    }
+    .imagContainer img{
     width:250px;
-   }
+    }
     .seeLove{
     margin:-240px 0 0 220px;
     }
@@ -221,45 +225,42 @@
 
 @media screen and (max-width:480px){
     .flashSales{
-      padding:var(--padding-480);
+    padding:var(--padding-480);
     }
     .mainHeader{
-      gap:50px;
+    gap:50px;
     }
-      .mainContainer{
+    .mainContainer{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap; 
+    padding-left:0px;
     }
-      
-
-     .btn{
+    .btn{
     margin:40px 0 0 120px;
-}
-.arrows{
+    }
+    .arrows{
     display:none;
-}
-.mainContainer{
+    }
+    .mainContainer{
     gap:10px;
-}
-.imagContainer img{
+    }
+    .imagContainer img{
     width:230px;
-}
-.seeLove{
-   margin:-240px 0 0 200px;
-}
-.mainHeader h2{
+    }
+    .seeLove{
+    margin:-240px 0 0 200px;
+    }
+    .mainHeader h2{
     font-size:30px;
-}
-.countdown span{
+    }
+    .countdown span{
     font-size:10px;
-}
-
-.countdown div{
+    }
+    .countdown div{
     font-weight: 600;
     font-size:20px;
     line-height:15px;
-}
-
+    }
 }
 

@@ -99,6 +99,11 @@
 .hover{
     opacity:0;
 }
+@media screen and (max-width:1200px){
+   .category{
+    padding:70px 0 0 70px;
+    }
+}
 @media screen and (max-width:992px){
     .category{
     padding:var(--padding-992);

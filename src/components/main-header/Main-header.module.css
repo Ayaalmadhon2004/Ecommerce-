@@ -66,9 +66,15 @@
 .iphone p{
     width:120px;
 }
+
+@media screen and (max-width:1200px){
+    .mainHeader{
+    gap:0px;
+    padding:var(--padding-1200);
+    }
+}
 @media screen and (max-width:992px){
    .mainHeader{
-    gap:0px;
     padding:70px 0 0 100px
    }
     .sale{
@@ -106,31 +112,27 @@
 
 }
 @media screen and (max-width:480px){
-   .mainHeader{
+  .mainHeader{
     gap:0px;
     padding:70px 0 0 7px;
-   }
- 
-   .sale{
+  }
+  .sale{
     font-size: 30px;
-   }
+  }
   .subRight {
-  position: relative; /* parent becomes a positioning context */
-}
-
-.subRight img {
+  position: relative; 
+  }
+  .subRight img {
   width:290px;
   height:110px;
-  position: absolute; /* float above content */
-  top: 0;  /* adjust as needed */
-  right: -70px; /* adjust as needed */
+  position: absolute; 
+  right: -180px;
   z-index: 999;
-}
+  }
   .iphone img{
     width:30px;
     height:30px;
   }
-  
 .right{
     display:flex;
     flex-direction: column;
@@ -140,5 +142,4 @@
 .subLeft{
     margin:20px 0 50px 0;
   }
-
 }

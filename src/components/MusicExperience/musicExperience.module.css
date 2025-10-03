@@ -75,6 +75,16 @@
     border-radius:50%;
     position:absolute;
 }
+@media screen and (max-width:1200px){
+   .musicExperience{
+    padding:50px;
+    margin:0 85px 0 85px;
+    width:86vw;
+   } 
+   .right img{
+    width:460px;
+    }
+}
 
 @media screen and (max-width:992px){
    .musicExperience{
@@ -91,7 +101,7 @@
     .musicExperience{
     padding:var(--padding-768);
     margin:0 70px 0 70px;
-    width:400vw;
+    width:80%;
     flex-direction: column; 
     } 
     
