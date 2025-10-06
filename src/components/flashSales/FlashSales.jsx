@@ -59,6 +59,7 @@ function FlashSales() {
                         <i className="fa-solid fa-heart"></i>
                         <i className="fa-solid fa-eye"></i>
                     </div>
+                    <button className={styles.addToCart}>Add To Cart</button>
                 </div>
                 <div className={styles.cardBody}>
                     <h4>{product.name}</h4>

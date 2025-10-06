@@ -1,7 +1,16 @@
 import styles from "./exploreProducts.module.css"
 import exploreProducts from "../data/exploreProducts"
+import { useState } from "react"
 
 function ExploreProducts() {
+  const [chosenColors,setChosen]=useState(true);
+
+  const handleChooseColor = (productId,color)=>{
+    setChosen((prev)=>({
+      ...prev,
+      [productId]: color,
+    }))
+  }
   return (
     <div className={styles.exploreProducts}>
         <div className={styles.topHeader}>
@@ -20,23 +29,56 @@ function ExploreProducts() {
             <div className={styles.card} key={product.id}>
                 <div className={styles.imagContainer}>
                     <img src={product.img} alt={product.name}/>
-                    <div className={styles.discount}>{product.discount}</div>
+                    {product.discount?<div className={styles.discount}>{product.discount}</div>:""}
                     <div className={styles.seeLove}>
                         <i className="fa-solid fa-heart"></i>
                         <i className="fa-solid fa-eye"></i>
                     </div>
+                    <button className={styles.addToCart}>Add To Cart</button>
                 </div>
                 <div className={styles.cardBody}>
                     <h4>{product.name}</h4>
-                    <div className={styles.prices}>
-                        <span className={styles.price}>{product.price}</span>
-                        <span className={styles.prevPrice}>{product.prevPrice}</span>
-                    </div>
                     <div className={styles.stars}>
-                            {product.stars}
-                            ({product.rate})
+                          <span className={styles.price}>{product.price}</span>
+                          {product.stars}
+                          ({product.rate})
                     </div>
-                </div>
+                   {/* Color Selection */}
+              {product.btn1?<div className={styles.setColor}>
+                <div
+                  style={{
+                    backgroundColor: product.btn1,
+                    border:
+                      chosenColors[product.id] === product.btn1
+                        ? "3px solid black"
+                        : "1px solid #ccc",
+                    borderRadius: "50%",
+                    cursor: "pointer",
+                    width: "20px",
+                    height: "20px",
+                    marginRight: "5px",
+                    transition: "all 0.2s",
+                  }}
+                  onClick={() => handleChooseColor(product.id, product.btn1)}
+                ></div>
+
+                <div
+                  style={{
+                    backgroundColor: product.btn2,
+                    border:
+                      chosenColors[product.id] === product.btn2
+                        ? "3px solid black"
+                        : "1px solid #ccc",
+                    borderRadius: "50%",
+                    cursor: "pointer",
+                    width: "20px",
+                    height: "20px",
+                    transition: "all 0.2s",
+                  }}
+                  onClick={() => handleChooseColor(product.id, product.btn2)}
+                ></div>
+              </div>:""}
+            </div>
             </div>
          ))}
         </div>

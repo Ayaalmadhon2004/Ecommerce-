@@ -46,6 +46,13 @@
   font-size: 24px;
   cursor: pointer;
 }
+.header hr{
+  border:.5px solid var(--black);
+  width:100vw;
+  opacity:30%;
+  margin-top:20px;
+}
+
 @media screen and (max-width:1200px){
     .container{
       padding:30px 0 0 70px;

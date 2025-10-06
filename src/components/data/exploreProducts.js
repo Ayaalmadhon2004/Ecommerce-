@@ -78,6 +78,9 @@ const exploreProducts=[
             <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
             </>
         ),
+        discount:"NEW",
+        btn1:"red",
+        btn2:"black",
     },
      {
         id:5,
@@ -94,6 +97,8 @@ const exploreProducts=[
             <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
             </>
         ),
+         btn1:"yellow",
+        btn2:"black",
     },
      {
         id:6,
@@ -110,6 +115,9 @@ const exploreProducts=[
             <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
             </>
         ),
+        discount:"NEW",
+        btn1:"red",
+        btn2:"black",
     },
      {
         id:7,
@@ -126,6 +134,8 @@ const exploreProducts=[
             <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
             </>
         ),
+        btn1:"red",
+        btn2:"black",
     },
     
     

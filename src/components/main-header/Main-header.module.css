@@ -4,6 +4,7 @@
     gap:80px;
     padding:70px 0 0 210px;
     margin-bottom:var(--margin-bottom);
+    margin-top:15px;
 }
 
 .list li {
@@ -66,6 +67,7 @@
 .iphone p{
     width:120px;
 }
+
 
 @media screen and (max-width:1200px){
     .mainHeader{

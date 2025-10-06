@@ -84,12 +84,13 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-color: var(--black);
+    background-position-x: center;
     color:var(--white);
     padding:180px 0 0 20px;
 
 }
 .subRight{
-    background-image: url('../../../public/assets/photos/speaker.webp');
+    background-image: url('../../../public/assets/photos/Frame 706.png');
     width:270px;
     height:284px;
     border-radius:4px;

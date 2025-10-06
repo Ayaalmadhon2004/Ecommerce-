@@ -32,6 +32,7 @@ function Header() {
            <i class="fa-solid fa-cart-shopping"></i>
         </div>
       </div>
+      <hr/>
     </div>
   )
 }

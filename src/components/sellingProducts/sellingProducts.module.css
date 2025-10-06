@@ -116,6 +116,14 @@
 .stars .fa-star{
     background-color:var(--red);
 }
+
+.seeLove i{
+    background-color:var(--white);
+    padding:.5rem;
+    border-radius: 50%;
+    width:auto;
+    height:auto;
+}
 @media screen and (max-width:1200px){
     .sellingProducts{
     padding:var(--padding-1200);
