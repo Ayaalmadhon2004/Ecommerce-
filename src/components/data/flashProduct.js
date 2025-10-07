@@ -16,6 +16,7 @@ const flashProducts=[
             </>
         ),
         discount:"-40%",
+        description:"PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.",
     },
     {
         id:1,
@@ -34,6 +35,7 @@ const flashProducts=[
             </>
         ),
         discount:"-35%",
+        description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quibusdam temporibus atque totam. Voluptatibus, ipsum! Voluptatum possimus quidem ipsum voluptas dolore exercitationem architecto. Doloribus vero aut est veritatis, tempore repudiandae.",
     },
     {
         id:2,
@@ -52,6 +54,8 @@ const flashProducts=[
             </>
         ),
         discount:"-30%",
+        description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quibusdam temporibus atque totam. Voluptatibus, ipsum! Voluptatum possimus quidem ipsum voluptas dolore exercitationem architecto. Doloribus vero aut est veritatis, tempore repudiandae.",
+
     },
     {
         id:3,
@@ -70,6 +74,8 @@ const flashProducts=[
             </>
         ),
         discount:"-25%",
+        description:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus quibusdam temporibus atque totam. Voluptatibus, ipsum! Voluptatum possimus quidem ipsum voluptas dolore exercitationem architecto. Doloribus vero aut est veritatis, tempore repudiandae.",
+
     }
 ];
 

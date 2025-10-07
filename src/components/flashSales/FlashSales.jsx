@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Countdown from "react-countdown";
 import styles from "./FlashSales.module.css";
 import flashProducts from "../data/flashProduct";
 
 function FlashSales() {
+  const[clickedId,setClickedId]=useState(null);
   const renderer = ({ days, hours, minutes, seconds }) => {
+    const handleClick = (productId) => {
+     if (clickedId === productId) {
+    setClickedId(null); // إذا ضغطنا على نفس المنتج مرة ثانية، نخفيه
+    } else {
+    setClickedId(productId); // إظهار المنتج المضغوط عليه
+    }
+    };
+
     return (
       <div className={styles.flashSales}>
         <div className={styles.topHeader}>
@@ -57,7 +66,7 @@ function FlashSales() {
                     <div className={styles.discount}>{product.discount}</div>
                     <div className={styles.seeLove}>
                         <i className="fa-solid fa-heart"></i>
-                        <i className="fa-solid fa-eye"></i>
+                        <i className="fa-solid fa-eye" onClick={()=>handleClick(product.id)}></i>
                     </div>
                     <button className={styles.addToCart}>Add To Cart</button>
                 </div>
@@ -72,12 +81,34 @@ function FlashSales() {
                             ({product.rate})
                     </div>
                 </div>
+                {clickedId === product.id && (
+                  <div className={styles.cart}>
+                    <div className={styles.leftCart}>
+                      <img src={product.img} alt={product.name}/>
+                    </div>
+                    <div className={styles.rightCart}>
+                      <div className={styles.hedding}>
+                        <h4>{product.name}</h4>
+                        <i class="fa-solid fa-xmark" onClick={() => setClickedId(null)}></i>
+                      </div>
+                        <div className={styles.stars}>
+                            {product.stars}
+                            ({product.rate})
+                        </div>
+                      <span className={styles.price}>{product.price}</span>
+                      <p>{product.description}</p>
+                      <button className={styles.btn}>Buy Now</button>
+                    </div>
+                  </div>
+                )}
             </div>
+            
          ))}
         </div>
         <button className={styles.btn}>
             View All Products
         </button>
+
       </div>
     );
   };
