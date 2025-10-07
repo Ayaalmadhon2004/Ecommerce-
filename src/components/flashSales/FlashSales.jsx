@@ -2,17 +2,22 @@ import React, { useState } from "react";
 import Countdown from "react-countdown";
 import styles from "./FlashSales.module.css";
 import flashProducts from "../data/flashProduct";
+import Header from "../Header/Header";
 
-function FlashSales() {
+function FlashSales({liked,handleLike}) {
   const[clickedId,setClickedId]=useState(null);
+
+
   const renderer = ({ days, hours, minutes, seconds }) => {
+
     const handleClick = (productId) => {
      if (clickedId === productId) {
-    setClickedId(null); // إذا ضغطنا على نفس المنتج مرة ثانية، نخفيه
+    setClickedId(null); 
     } else {
-    setClickedId(productId); // إظهار المنتج المضغوط عليه
+    setClickedId(productId); 
     }
     };
+
 
     return (
       <div className={styles.flashSales}>
@@ -57,7 +62,6 @@ function FlashSales() {
             <i class="fa-solid fa-arrow-right"></i>
           </div>
         </div>
-
         <div className={styles.mainContainer}>
          {flashProducts.map((product)=>(
             <div className={styles.card} key={product.id}>
@@ -65,7 +69,11 @@ function FlashSales() {
                     <img src={product.img} alt={product.name}/>
                     <div className={styles.discount}>{product.discount}</div>
                     <div className={styles.seeLove}>
-                        <i className="fa-solid fa-heart"></i>
+
+                        <i className={`fa-solid fa-heart ${
+                          liked.includes(product.id) ? styles.liked : styles.notLiked
+                        }`} onClick={()=>handleLike(product.id)}></i>
+
                         <i className="fa-solid fa-eye" onClick={()=>handleClick(product.id)}></i>
                     </div>
                     <button className={styles.addToCart}>Add To Cart</button>

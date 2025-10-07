@@ -1,7 +1,7 @@
 import { useState } from "react"
 import styles from "./header.module.css"
 
-function Header() {
+function Header({likedCount}) {
   const [menuOpen,setMenuOpen]=useState(false);
   return (
     <div className={styles.header}>
@@ -28,7 +28,12 @@ function Header() {
 
         <div className={styles.searching}>
            <input className={styles.search} type="text" placeholder="What are you looking for?"></input><i class="fa-solid fa-magnifying-glass"></i>
-           <i class="fa-solid fa-heart"></i>
+            <div className={styles.loveIcon}>
+            <i className="fa-solid fa-heart"></i>
+             {likedCount > 0 && (
+               <span className={styles.badge}>{likedCount}</span>
+             )}
+            </div>
            <i class="fa-solid fa-cart-shopping"></i>
         </div>
       </div>

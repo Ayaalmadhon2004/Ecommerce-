@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
@@ -12,12 +13,22 @@ import SellingProducts from './components/sellingProducts/SellingProducts';
 import Services from './components/services/Services';
 
 function App() {
+   const [liked, setLiked] = useState([]); // الحالة المشتركة
+
+  const handleLike = (productId) => {
+    setLiked((prev) =>
+      prev.includes(productId)
+        ? prev.filter((id) => id !== productId)
+        : [...prev, productId]
+    );
+  };
+
   return (
     <div className="App">
       <TopHeader/>
-      <Header/>
+      <Header likedCount={liked.length}/>
       <MainHeader/>
-      <FlashSales/>
+      <FlashSales liked={liked} handleLike={handleLike}/>
       <Categories/>
       <SellingProducts/>
       <MusicExperience/>
