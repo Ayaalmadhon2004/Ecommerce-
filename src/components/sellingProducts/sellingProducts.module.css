@@ -24,7 +24,7 @@
 .mainHeader{
     display: flex;
     align-items: center;
-    gap:220px;
+    gap:290px;
 }
 
 .mainHeader h2{

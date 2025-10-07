@@ -8,6 +8,8 @@ html, body {
     width: 100%;
     height:auto;
     overflow-x: hidden; 
+    font-family: "Inter", sans-serif;
+
   }
 
 :root{

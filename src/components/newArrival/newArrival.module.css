@@ -139,49 +139,79 @@
     height:600px;
     }
     .subLeft,.subRight{
-    width:400px;
+    width:385px;
+    margin-left:7px;
     }
     .top{
         width:800px;
+        margin-left:7px;
     }
 }
 
 @media screen and (max-width:768px){
-   .newArrival{
+    .newArrival{
     padding:var(--padding-768);
-   }
-   .mainContainer{
+    }
+
+    .mainContainer{
     display:flex;
     flex-direction: column;
-    margin-left:-60px;
-
-   }
-   .subRight,.top,.subLeft{
-    padding:180px 0 0 100px;  
+    margin-left:-50px;
     }
+
     .left{
-    padding:480px 0 0 100px;
+    padding:480px 0 0 50px;
+    width:85%;
+    }
+    .subLeft{
+        margin-left:00px;
+        width:290px;
+        padding:180px 0 0 50px;  
+
+    }
+    .subRight{
+        width:290px;
+        padding:180px 0 0 50px;  
+    }
+    .top{
+    width:600px;
+    margin-left:0px;
+    padding:180px 0 0 50px;  
     }
 }
 
 @media screen and (max-width:480px){
-   .newArrival{
+    .newArrival{
     padding:var(--padding-480);
-   }
-   .mainContainer{
+    }
+
+    .mainContainer{
     display:flex;
     flex-direction: column;
-   }
-   .subRight{
-    padding:180px 0 0 50px;  
+    margin-left:-50px;
+    }
+    
+    .left{
+    padding:480px 0 0 10px;
+    width:420px;
     }
     .subLeft{
-    padding:180px 0 0 220px;  
+    margin-left:0px;
+    width:205px;
+    padding:180px 0 0 10px;  
+    }
+    .subRight{
+    width:205px;
+    padding:180px 0 0 10px;  
     }
     .top{
-    padding:180px 0 0 230px;  
+    width:420px;
+    margin-left:10px;
+    padding:180px 0 0 10px;  
     }
-    .left{
-    padding:480px 0 0 220px;
+    .bottom{
+    gap:10px;
+    margin-left:10px;
+
     }
 }
