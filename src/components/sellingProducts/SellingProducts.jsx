@@ -1,7 +1,7 @@
 import styles from "./sellingProducts.module.css"
 import sellingProducts from "../data/sellingProducts";
 
-function SellingProducts() {
+function SellingProducts({liked,handleLike}) {
   return (
     <div className={styles.sellingProducts}>
          <div className={styles.topHeader}>
@@ -21,7 +21,9 @@ function SellingProducts() {
                     <img src={product.img} alt={product.name}/>
                     <div className={styles.discount}>{product.discount}</div>
                     <div className={styles.seeLove}>
-                        <i className="fa-solid fa-heart"></i>
+                        <i className={`fa-solid fa-heart ${
+                          liked.includes(product.id) ? styles.liked : styles.notLiked
+                        }`} onClick={()=>handleLike(product.id)}></i>
                         <i className="fa-solid fa-eye"></i>
                     </div>
                 </div>

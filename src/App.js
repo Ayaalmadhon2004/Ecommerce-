@@ -13,7 +13,9 @@ import SellingProducts from './components/sellingProducts/SellingProducts';
 import Services from './components/services/Services';
 
 function App() {
-   const [liked, setLiked] = useState([]); // الحالة المشتركة
+  const [liked, setLiked] = useState([]); // الحالة المشتركة
+  const [likeSelling,setLikeSelling]=useState([]);
+  const [likeExploreing,setLikeExploring]=useState([]);
 
   const handleLike = (productId) => {
     setLiked((prev) =>
@@ -23,16 +25,27 @@ function App() {
     );
   };
 
+  const handleLikeSelling = (productId) =>{
+    setLikeSelling((prev)=>
+    prev.includes(productId) ? 
+  prev.filter((id)=> id !==productId) : [...prev,productId]);
+  };
+
+  const handleLikeExploring = (productId)=>{
+    setLikeExploring((prev)=>
+    prev.includes(productId) ? prev.filter((id)=>id!==productId) : [...prev,productId]);
+  }
+
   return (
     <div className="App">
       <TopHeader/>
-      <Header likedCount={liked.length}/>
+      <Header likedCount={liked.length + likeSelling.length +likeExploreing.length}/>
       <MainHeader/>
       <FlashSales liked={liked} handleLike={handleLike}/>
       <Categories/>
-      <SellingProducts/>
+      <SellingProducts  liked={likeSelling} handleLike={handleLikeSelling} />
       <MusicExperience/>
-      <ExploreProducts/>
+      <ExploreProducts liked={likeExploreing} handleLike={handleLikeExploring}/>
       <NewArrival/>
       <Services/>
       <Footer/>

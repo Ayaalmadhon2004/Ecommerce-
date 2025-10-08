@@ -2,7 +2,7 @@ import styles from "./exploreProducts.module.css"
 import exploreProducts from "../data/exploreProducts"
 import { useState } from "react"
 
-function ExploreProducts() {
+function ExploreProducts({liked,handleLike}) {
   const [chosenColors,setChosen]=useState(true);
 
   const handleChooseColor = (productId,color)=>{
@@ -31,7 +31,7 @@ function ExploreProducts() {
                     <img src={product.img} alt={product.name}/>
                     {product.discount?<div className={styles.discount}>{product.discount}</div>:""}
                     <div className={styles.seeLove}>
-                        <i className="fa-solid fa-heart"></i>
+                        <i className={`fa-solid fa-heart ${liked.includes(product.id)?styles.liked:styles.notLike}`} onClick={()=>handleLike(product.id)}></i>
                         <i className="fa-solid fa-eye"></i>
                     </div>
                     <button className={styles.addToCart}>Add To Cart</button>

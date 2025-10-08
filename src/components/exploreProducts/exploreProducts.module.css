@@ -167,6 +167,15 @@
     width:auto;
     height:auto;
 }
+.liked {
+    color: red;
+    transition: 0.3s;
+}
+
+.notLiked {
+    color: #888;
+    transition: 0.3s;
+}
 
 @media screen and (max-width:1200px){
     .exploreProducts{

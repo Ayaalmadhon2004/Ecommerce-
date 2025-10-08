@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Countdown from "react-countdown";
 import styles from "./FlashSales.module.css";
 import flashProducts from "../data/flashProduct";
-import Header from "../Header/Header";
 
 function FlashSales({liked,handleLike}) {
   const[clickedId,setClickedId]=useState(null);
