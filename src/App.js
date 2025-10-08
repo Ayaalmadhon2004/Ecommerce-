@@ -13,39 +13,32 @@ import SellingProducts from './components/sellingProducts/SellingProducts';
 import Services from './components/services/Services';
 
 function App() {
-  const [liked, setLiked] = useState([]); // الحالة المشتركة
-  const [likeSelling,setLikeSelling]=useState([]);
-  const [likeExploreing,setLikeExploring]=useState([]);
+  const [likes, setLikes] = useState({
+  flash: [],
+  selling: [],
+  explore: [],
+  });
 
-  const handleLike = (productId) => {
-    setLiked((prev) =>
-      prev.includes(productId)
-        ? prev.filter((id) => id !== productId)
-        : [...prev, productId]
-    );
-  };
+  const handleLike = (section, productId) => {
+  setLikes(prev => ({
+    ...prev,
+    [section]: prev[section].includes(productId)
+      ? prev[section].filter(id => id !== productId)
+      : [...prev[section], productId]
+  }));
+};
 
-  const handleLikeSelling = (productId) =>{
-    setLikeSelling((prev)=>
-    prev.includes(productId) ? 
-  prev.filter((id)=> id !==productId) : [...prev,productId]);
-  };
-
-  const handleLikeExploring = (productId)=>{
-    setLikeExploring((prev)=>
-    prev.includes(productId) ? prev.filter((id)=>id!==productId) : [...prev,productId]);
-  }
 
   return (
     <div className="App">
       <TopHeader/>
-      <Header likedCount={liked.length + likeSelling.length +likeExploreing.length}/>
+      <Header likedCount={likes.flash.length + likes.selling.length + likes.explore.length}/>
       <MainHeader/>
-      <FlashSales liked={liked} handleLike={handleLike}/>
+      <FlashSales liked={likes.flash} handleLike={id => handleLike('flash', id)}/>
       <Categories/>
-      <SellingProducts  liked={likeSelling} handleLike={handleLikeSelling} />
+      <SellingProducts liked={likes.selling} handleLike={id => handleLike('selling', id)}/>
       <MusicExperience/>
-      <ExploreProducts liked={likeExploreing} handleLike={handleLikeExploring}/>
+      <ExploreProducts liked={likes.explore} handleLike={id => handleLike('explore', id)}/>
       <NewArrival/>
       <Services/>
       <Footer/>
