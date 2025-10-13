@@ -1,26 +1,27 @@
 import { useState } from "react"
 import styles from "./header.module.css"
+import { Link } from "react-router-dom";
 
 function Header({likedCount}) {
   const [menuOpen,setMenuOpen]=useState(false);
   return (
     <div className={styles.header}>
       <div className={styles.container}>
-        <span className={styles.logo}>Exclusive</span>
+        <span className={styles.logo}><Link to="/">Exclusive</Link></span>
 
         
         <div className={styles.menu}>
-           <div 
+          <div 
           className={styles.burger} 
           onClick={() => setMenuOpen(!menuOpen)}
-           >
+          >
          {menuOpen ? <i class="fa-solid fa-x"></i> :<i className="fa-solid fa-bars"></i> }
          </div>
         <ul className={`${styles.list} ${menuOpen ? styles.showMenu : ""}`}>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Sign Up</a></li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/contact">Contact</Link></li>
+          <li><Link to="/about">About</Link></li>
+          <li><Link to="/logIn">Sign Up</Link></li>
         </ul>
 
         </div>
@@ -34,7 +35,7 @@ function Header({likedCount}) {
                <span className={styles.badge}>{likedCount}</span>
              )}
             </div>
-           <i class="fa-solid fa-cart-shopping"></i>
+           <Link to="/cart"><i class="fa-solid fa-cart-shopping"></i></Link>
         </div>
       </div>
       <hr/>

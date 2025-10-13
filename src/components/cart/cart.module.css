@@ -1,0 +1,158 @@
+
+.cartContainer {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.cartTable {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 30px;
+}
+
+.cartTable th,
+.cartTable td {
+  padding: 15px 20px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.cartTable th {
+  background-color: #f8f8f8;
+  font-weight: 600;
+}
+
+.productInfo {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.productImg {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.quantitySelect {
+  width: 60px;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.bottomSection {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.couponSection {
+  flex: 1;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.couponInput {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.applyBtn {
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cartTotalBox {
+  flex: 1;
+  max-width: 300px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.cartTotalBox h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.cartTotalRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.checkoutBtn {
+  width: 100%;
+  padding: 12px 0;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.checkoutBtn:hover,
+.applyBtn:hover {
+  opacity: 0.9;
+}
+.btns {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: transparent;
+  color:var(--black);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+  border:1px solid var(--black);
+}
+
+.btn:hover {
+  background-color: #b50000;
+  color:var(--white);
+  border:none;
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(0);
+  background-color: #b50000;
+}
+
+
+@media (max-width: 768px) {
+  .bottomSection {
+    flex-direction: column;
+  }
+
+  .cartTotalBox {
+    max-width: 100%;
+  }
+}

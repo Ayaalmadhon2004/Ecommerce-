@@ -1,0 +1,59 @@
+.logInContainer{
+    margin:5rem 0;
+    display:flex;
+    align-items: center;
+    gap:100px;
+}
+.right h3{
+    font-weight: 500;
+    font-size:36px;
+    line-height:30px;
+    letter-spacing:4%;
+    padding-bottom:24px;
+
+}
+
+.right p{
+    font-weight: 400;
+    font-size:16px;
+    line-height:24px;
+    padding-bottom:48px;
+
+}
+
+.form input {
+    width:370px;
+    height:32px;
+    gap:8px;
+    margin-bottom:30px;
+    color:var(--gray);
+    border:none;
+    border-bottom:1px solid var(--black);
+}
+
+.btns{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn1{
+    width:143px;
+    height:56px;
+    padding:16px 48px 16px 48px;
+    border-radius:4px;
+    background-color: var(--red);
+    color:var(--white);
+    border:none;
+}
+
+.btn2{
+    font-weight: 400;
+    font-size:16px;
+    line-height:24px;
+    width:141px;
+    height:25px;
+    color:var(--red);
+    background-color: transparent;
+    border:none;
+}

@@ -3,14 +3,14 @@ import Countdown from "react-countdown";
 import styles from "./FlashSales.module.css";
 import flashProducts from "../data/flashProduct";
 
-function FlashSales({liked,handleLike}) {
+function FlashSales({liked,handleLike,handleCart}) {
   const[clickedId,setClickedId]=useState(null);
 
 
   const renderer = ({ days, hours, minutes, seconds }) => {
 
     const handleClick = (productId) => {
-     if (clickedId === productId) {
+    if (clickedId === productId) {
     setClickedId(null); 
     } else {
     setClickedId(productId); 
@@ -75,7 +75,7 @@ function FlashSales({liked,handleLike}) {
 
                         <i className="fa-solid fa-eye" onClick={()=>handleClick(product.id)}></i>
                     </div>
-                    <button className={styles.addToCart}>Add To Cart</button>
+                    <button className={styles.addToCart} onClick={()=>handleCart(product)}>Add To Cart</button>
                 </div>
                 <div className={styles.cardBody}>
                     <h4>{product.name}</h4>
