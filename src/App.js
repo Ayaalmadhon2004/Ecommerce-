@@ -15,6 +15,7 @@ import SellingProducts from './components/sellingProducts/SellingProducts';
 import Services from './components/services/Services';
 import Cart from './components/cart/Cart';
 import Login from './components/login/Login';
+import Checkout from './components/checkout/Checkout';
 
 function App() {
     const [cart, setCart] = useState(() => {
@@ -85,7 +86,9 @@ function App() {
           {/* صفحة السلة */}
           <Route path="/cart" element={<Cart cart={cart} />} />
           <Route path="/logIn" element={<Login/>}/>
+          <Route path="/checkout" element={<Checkout cart={cart}/>}/>
           <Route path="/" element={App}></Route>
+
         </Routes>
 
         <Footer/>
