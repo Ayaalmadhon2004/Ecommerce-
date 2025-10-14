@@ -1,59 +1,95 @@
-.logInContainer{
-    margin:5rem 0;
-    display:flex;
-    align-items: center;
-    gap:100px;
-}
-.right h3{
-    font-weight: 500;
-    font-size:36px;
-    line-height:30px;
-    letter-spacing:4%;
-    padding-bottom:24px;
-
+.logInContainer {
+  margin: 5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  flex-wrap: wrap;
 }
 
-.right p{
-    font-weight: 400;
-    font-size:16px;
-    line-height:24px;
-    padding-bottom:48px;
+.left img {
+  max-width: 100%;
+  height: auto;
+}
 
+.right h3 {
+  font-weight: 500;
+  font-size: 36px;
+  line-height: 42px;
+  letter-spacing: 0.04em;
+  margin-bottom: 24px;
+}
+
+.right p {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  margin-bottom: 48px;
 }
 
 .form input {
-    width:370px;
-    height:32px;
-    gap:8px;
-    margin-bottom:30px;
-    color:var(--gray);
-    border:none;
-    border-bottom:1px solid var(--black);
+  width: 100%;
+  max-width: 370px;
+  height: 40px;
+  margin-bottom: 30px;
+  padding: 0 8px;
+  color: var(--gray);
+  border: none;
+  border-bottom: 1px solid var(--black);
+  font-size: 16px;
 }
 
-.btns{
-    display:flex;
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.btn1 {
+  width: 143px;
+  height: 56px;
+  border-radius: 4px;
+  background-color: var(--red);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+}
+
+.btn1:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btn2 {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--red);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logInContainer {
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-}
+    gap: 2rem;
+  }
 
-.btn1{
-    width:143px;
-    height:56px;
-    padding:16px 48px 16px 48px;
-    border-radius:4px;
-    background-color: var(--red);
-    color:var(--white);
-    border:none;
-}
+  .form input {
+    max-width: 100%;
+  }
 
-.btn2{
-    font-weight: 400;
-    font-size:16px;
-    line-height:24px;
-    width:141px;
-    height:25px;
-    color:var(--red);
-    background-color: transparent;
-    border:none;
+  .btns {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
 }

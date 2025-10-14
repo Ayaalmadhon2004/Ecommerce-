@@ -5,15 +5,36 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [loading,setLoading]=useState(false);
 
     const handleSubmit = async (e)=>{
     e.preventDefault();
-    if (email === "test@example.com" && password === "123456") {
-    alert("✅ Login successful!");
     setError("");
-    } else {
-    setError("❌ Invalid email or password");
-    }
+    setLoading(true);
+
+    try {
+  const response = await fetch("https://fakestoreapi.com/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: email,
+      password: password,
+    }),
+  });
+
+  const data = await response.json();
+
+  if (response.ok) {
+    alert("Login successful");
+    localStorage.setItem("token", data.token);
+  } else {
+    setError(data.message || "Invalid email or password");
+  }
+} catch (err) {
+  setError("Server error, please try again later.");
+} finally {
+  setLoading(false);
+}
     }
   return (
     <div className={styles.logInContainer}>
@@ -41,8 +62,10 @@ export default function Login() {
 
 
             <div className={styles.btns}>
-                <button className={styles.btn1}>Log In</button>
-                <button className={styles.btn2}>Forget Password?</button>
+            <button className={styles.btn1} disabled={loading}>
+              {loading ? "Logging in..." : "Log In"}
+            </button>
+            <button className={styles.btn2}>Forget Password?</button>
             </div>
 
             {error && <p className={styles.error}>{error}</p>}
