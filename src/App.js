@@ -75,12 +75,14 @@ export default function App() {
                 liked={likes.flash} 
                 handleLike={id => handleLike('flash', id)} 
                 handleCart={handleCart}
+                handleProductDetails={handleProductDetails} 
               />
               <Categories />
               <SellingProducts 
                 liked={likes.selling} 
                 handleLike={id => handleLike('selling', id)} 
-                handleProductDetails={handleProductDetails}
+                handleCart={handleCart}
+                handleProductDetails={handleProductDetails} 
               />
               <MusicExperience />
               <ExploreProducts 

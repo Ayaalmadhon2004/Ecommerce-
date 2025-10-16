@@ -1,7 +1,17 @@
 import styles from "./sellingProducts.module.css"
 import sellingProducts from "../data/sellingProducts";
+import { useEffect, useState } from "react";
 
-function SellingProducts({liked,handleLike}) {
+function SellingProducts({liked,handleLike,handleCart,handleProductDetails}) {
+  const [products,setProducts]=useState([]);
+
+  useEffect(()=>{
+    fetch("https://fakestoreapi.com/products")
+    .then((res)=>res.json())
+    .then((data)=>setProducts(data))
+    .catch((err)=>console.error("Error fetching products",err));
+  },[]);
+
   return (
     <div className={styles.sellingProducts}>
          <div className={styles.topHeader}>
@@ -15,10 +25,10 @@ function SellingProducts({liked,handleLike}) {
           </button>
         </div>
          <div className={styles.mainContainer}>
-         {sellingProducts.map((product)=>(
-            <div className={styles.card} key={product.id}>
+         {products.map((product)=>(
+            <div className={styles.card} key={product.id} onClick={() => handleProductDetails(product)}>
                 <div className={styles.imagContainer}>
-                    <img src={product.img} alt={product.name}/>
+                    <img src={product.image} alt={product.title}/>
                     <div className={styles.discount}>{product.discount}</div>
                     <div className={styles.seeLove}>
                         <i className={`fa-solid fa-heart ${
@@ -26,16 +36,21 @@ function SellingProducts({liked,handleLike}) {
                         }`} onClick={()=>handleLike(product.id)}></i>
                         <i className="fa-solid fa-eye"></i>
                     </div>
+                    <button
+                        className={styles.addToCart}
+                        onClick={() => handleCart(product)}
+                        >
+                        Add To Cart
+                    </button>
                 </div>
                 <div className={styles.cardBody}>
-                    <h4>{product.name}</h4>
+                    <h4>{product.title}</h4>
                     <div className={styles.prices}>
                         <span className={styles.price}>{product.price}</span>
                         <span className={styles.prevPrice}>{product.prevPrice}</span>
                     </div>
                     <div className={styles.stars}>
-                            {product.stars}
-                            ({product.rate})
+                            ( {product.category} )
                     </div>
                 </div>
             </div>

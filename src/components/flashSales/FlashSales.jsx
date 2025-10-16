@@ -129,11 +129,11 @@ function FlashSales({liked,handleLike,handleCart}) {
 }
 
 export default FlashSales;*/
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect  } from "react";
 import Countdown from "react-countdown";
 import styles from "./FlashSales.module.css";
 
-function FlashSales({ liked, handleLike, handleCart }) {
+function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
   const [clickedId, setClickedId] = useState(null);
   const [flashProducts, setFlashProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -170,7 +170,7 @@ function FlashSales({ liked, handleLike, handleCart }) {
     if (loading) return <p>Loading Flash Sales...</p>;
 
     return (
-      <div className={styles.flashSales}>
+      <div className={styles.flashSales} >
         <div className={styles.topHeader}>
           <div className={styles.rectangle}></div>
           <h3>Today's</h3>
@@ -215,7 +215,7 @@ function FlashSales({ liked, handleLike, handleCart }) {
 
         <div className={styles.mainContainer}>
           {flashProducts.map((product) => (
-            <div className={styles.card} key={product.id}>
+            <div className={styles.card} key={product.id} onClick={() => handleProductDetails(product)}>
               <div className={styles.imagContainer}>
                 <img src={product.image} alt={product.title} />
                 <div className={styles.discount}>{product.discount}</div>

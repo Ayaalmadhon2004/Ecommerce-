@@ -125,13 +125,36 @@
     height:auto;
 }
 .liked {
-  color: red;
-  transition: 0.3s;
+color: red;
+transition: 0.3s;
 }
 
 .notLiked {
-  color: #888;
-  transition: 0.3s;
+color: #888;
+transition: 0.3s;
+}
+.imagContainer{
+    position:relative;
+}
+.addToCart {
+  position: absolute;
+  width:auto;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  opacity: 0;
+  z-index:999;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.imagContainer:hover .addToCart {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-10px); /* حركة بسيطة للأعلى */
 }
 
 @media screen and (max-width:1200px){

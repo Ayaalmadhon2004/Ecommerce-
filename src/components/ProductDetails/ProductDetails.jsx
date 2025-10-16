@@ -1,24 +1,18 @@
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
 import styles from "./productDetails.module.css";
 
 export default function ProductDetails() {
   const { state } = useLocation();
   const product = state?.product;
-
-  const [chosenColor, setChosenColor] = useState("#000"); // default color
-
   if (!product) return <p>No product selected.</p>;
 
   return (
     <div className={styles.productPage}>
       <div className={styles.productContainer}>
-        {/* Main Image */}
         <div className={styles.mainImage}>
           <img src={product.image} alt={product.title} />
         </div>
 
-        {/* Product Details */}
         <div className={styles.details}>
           <h2>{product.title}</h2>
           <p className={styles.reviews}>
