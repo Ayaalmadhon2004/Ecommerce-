@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import './App.css';
 
 import Footer from './components/Footer/Footer';
@@ -16,22 +16,25 @@ import Services from './components/services/Services';
 import Cart from './components/cart/Cart';
 import Login from './components/login/Login';
 import Checkout from './components/checkout/Checkout';
+import ProductDetails from './components/ProductDetails/ProductDetails';
 
-function App() {
-    const [cart, setCart] = useState(() => {
+export default function App() {
+  const navigate = useNavigate();
+
+  const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem('cart');
     return savedCart ? JSON.parse(savedCart) : [];
-    }); 
-    
-    const [likes, setLikes] = useState({
+  });
+
+  const [likes, setLikes] = useState({
     flash: [],
     selling: [],
     explore: [],
-   });
+  });
 
-     useEffect(() => {
+  useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
+  }, [cart]);
 
   const handleLike = (section, productId) => {
     setLikes(prev => ({
@@ -42,59 +45,61 @@ function App() {
     }));
   };
 
- const handleCart = (product) => {
-  const exists = cart.find(item => item.id === product.id);
+  const handleProductDetails = (product) => {
+    navigate('/productDetails', { state: { product } });
+  };
 
-  if (exists) {
-    // لو المنتج موجود مسبقاً، نزود العدد بدل الإضافة مرة تانية
-    setCart(cart.map(item => 
-      item.id === product.id ? {...item, quantity: item.quantity + 1} : item
-    ));
-  } else {
-    setCart([...cart, {...product, quantity: 1}]);
-  }
-};
-
-
-
-  console.log(cart);
+  const handleCart = (product) => {
+    const exists = cart.find(item => item.id === product.id);
+    if (exists) {
+      setCart(cart.map(item => 
+        item.id === product.id ? {...item, quantity: item.quantity + 1} : item
+      ));
+    } else {
+      setCart([...cart, {...product, quantity: 1}]);
+    }
+  };
 
   return (
-    <Router>
-      <div className="App">
-        <TopHeader />
-        <Header likedCount={likes.flash.length + likes.selling.length + likes.explore.length} />
+    <div className="App">
+      <TopHeader />
+      <Header likedCount={likes.flash.length + likes.selling.length + likes.explore.length} />
 
-        <Routes>
-          {/* الصفحة الرئيسية */}
-          <Route
-            path="/"
-            element={
-              <>
-                <MainHeader />
-                <FlashSales liked={likes.flash} handleLike={id => handleLike('flash', id)} handleCart={handleCart} />
-                <Categories />
-                <SellingProducts liked={likes.selling} handleLike={id => handleLike('selling', id)} />
-                <MusicExperience />
-                <ExploreProducts liked={likes.explore} handleLike={id => handleLike('explore', id)} />
-                <NewArrival />
-                <Services />
-              </>
-            }
-          />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <MainHeader />
+              <FlashSales 
+                liked={likes.flash} 
+                handleLike={id => handleLike('flash', id)} 
+                handleCart={handleCart}
+              />
+              <Categories />
+              <SellingProducts 
+                liked={likes.selling} 
+                handleLike={id => handleLike('selling', id)} 
+                handleProductDetails={handleProductDetails}
+              />
+              <MusicExperience />
+              <ExploreProducts 
+                liked={likes.explore} 
+                handleLike={id => handleLike('explore', id)} 
+                handleProductDetails={handleProductDetails} 
+              />
+              <NewArrival />
+              <Services />
+            </>
+          }
+        />
+        <Route path="/cart" element={<Cart cart={cart} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/checkout" element={<Checkout cart={cart} />} />
+        <Route path="/productDetails" element={<ProductDetails />} />
+      </Routes>
 
-          {/* صفحة السلة */}
-          <Route path="/cart" element={<Cart cart={cart} />} />
-          <Route path="/logIn" element={<Login/>}/>
-          <Route path="/checkout" element={<Checkout cart={cart}/>}/>
-          <Route path="/" element={App}></Route>
-
-        </Routes>
-
-        <Footer/>
-      </div>
-    </Router>
+      <Footer />
+    </div>
   );
 }
-
-export default App;

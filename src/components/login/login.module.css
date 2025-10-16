@@ -75,7 +75,6 @@
   margin-top: 8px;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .logInContainer {
     flex-direction: column;
