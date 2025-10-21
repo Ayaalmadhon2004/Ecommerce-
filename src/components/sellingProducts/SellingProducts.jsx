@@ -2,7 +2,7 @@ import styles from "./sellingProducts.module.css"
 import sellingProducts from "../data/sellingProducts";
 import { useEffect, useState } from "react";
 
-function SellingProducts({liked,handleLike,handleCart,handleProductDetails}) {
+function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varient}) {
   const [products,setProducts]=useState([]);
 
   useEffect(()=>{
@@ -16,13 +16,11 @@ function SellingProducts({liked,handleLike,handleCart,handleProductDetails}) {
     <div className={styles.sellingProducts}>
          <div className={styles.topHeader}>
           <div className={styles.rectangle}></div>
-          <h3>This Month</h3>
+          <h3>{varient==='related'?"Related Item":"This month"}</h3>
         </div>
         <div className={styles.mainHeader}>
-          <h2>Best Selling Products</h2>
-          <button className={styles.btn}>
-            View All
-          </button>
+          <h2>{varient==="related"?" " :"Best Selling Products"}</h2>
+           {varient === "related" ? (null) : <button className={styles.btn}>View All</button> }
         </div>
          <div className={styles.mainContainer}>
          {products.map((product)=>(
@@ -50,7 +48,7 @@ function SellingProducts({liked,handleLike,handleCart,handleProductDetails}) {
                         <span className={styles.prevPrice}>{product.prevPrice}</span>
                     </div>
                     <div className={styles.stars}>
-                            ( {product.category} )
+                        ( {product.category} )
                     </div>
                 </div>
             </div>

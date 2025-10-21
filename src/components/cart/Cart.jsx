@@ -1,44 +1,19 @@
-import { useEffect, useState } from "react";
+// src/components/cart/Cart.jsx
+import { useApp } from "../../context/AppContext";
 import styles from "./cart.module.css";
 
-function Cart({ cart: initialCart }) {
+export default function Cart() {
+  const { cart, updateQuantity, clearCart } = useApp();
 
-  const [cart, setCart] = useState(() =>
-    initialCart.map(item => ({
-      ...item,
-      // Ensure price is a string with $ if needed
-      price:
-        typeof item.price === "number"
-          ? `$${item.price}`
-          : item.price || "$0",
-      quantity: item.quantity || 1,
-    }))
-  );
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  const handleQuantityChange = (id, qty) => {
-    setCart(prev =>
-      prev.map(item =>
-        item.id === id ? { ...item, quantity: qty } : item
-      )
-    );
-  };
-
-  // Calculate subtotal safely
   const subtotal = cart.reduce((acc, item) => {
-    const price = parseFloat(
-      (item.price != null ? item.price.toString() : "0").replace("$", "")
-    ) || 0;
+    const price =
+      parseFloat(item.price?.toString().replace("$", "") || "0") || 0;
     return acc + price * item.quantity;
   }, 0);
 
-  const filteredCart = cart.filter(item => {
-    const price = parseFloat(
-      (item.price != null ? item.price.toString() : "0").replace("$", "")
-    ) || 0;
+  const filteredCart = cart.filter((item) => {
+    const price =
+      parseFloat(item.price?.toString().replace("$", "") || "0") || 0;
     return price > 0;
   });
 
@@ -59,19 +34,16 @@ function Cart({ cart: initialCart }) {
               <td colSpan="4">Your cart is empty</td>
             </tr>
           ) : (
-            filteredCart.map(item => {
-              const price = parseFloat(
-                (item.price != null ? item.price.toString() : "0").replace(
-                  "$",
-                  ""
-                )
-              ) || 0;
+            filteredCart.map((item) => {
+              const price =
+                parseFloat(item.price?.toString().replace("$", "") || "0") ||
+                0;
               return (
                 <tr key={item.id}>
                   <td className={styles.productInfo}>
                     <img
-                      src={item.image|| "/assets/default.png"}
-                      alt={item.title}
+                      src={item.image || "/assets/default.png"}
+                      alt={item.name}
                       className={styles.productImg}
                     />
                     <span>{item.name}</span>
@@ -81,14 +53,14 @@ function Cart({ cart: initialCart }) {
                     <select
                       value={item.quantity}
                       className={styles.quantitySelect}
-                      onChange={e =>
-                        handleQuantityChange(item.id, parseInt(e.target.value))
+                      onChange={(e) =>
+                        updateQuantity(item.id, parseInt(e.target.value))
                       }
                     >
-                      {Array.from({ length: 20 }, (_, i) => i + 1).map(q => (
-                      <option key={q} value={q}>
-                      {q.toString().padStart(2, "0")}
-                      </option>
+                      {Array.from({ length: 20 }, (_, i) => i + 1).map((q) => (
+                        <option key={q} value={q}>
+                          {q.toString().padStart(2, "0")}
+                        </option>
                       ))}
                     </select>
                   </td>
@@ -101,14 +73,11 @@ function Cart({ cart: initialCart }) {
       </table>
 
       <div className={styles.btns}>
+        <button className={styles.btn} onClick={clearCart}>
+          Clear Cart
+        </button>
         <button className={styles.btn}>Back to shop</button>
         <button className={styles.btn}>Update Cart</button>
-        <button className={styles.btn} onClick={() => { setCart([]);               // تحديث الـ state وإفراغ الكارت
-      localStorage.removeItem("cart"); // حذف من localStorage
-      }}
-      >
-      Clear Cart
-      </button>
       </div>
 
       <div className={styles.bottomSection}>
@@ -138,9 +107,6 @@ function Cart({ cart: initialCart }) {
           <button className={styles.checkoutBtn}>Proceed to checkout</button>
         </div>
       </div>
-
     </div>
   );
 }
-
-export default Cart;
