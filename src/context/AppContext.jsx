@@ -60,5 +60,4 @@ export function AppProvider({ children }) {
   );
 }
 
-// 4️⃣ هوك مخصص للوصول إلى القيم بسهولة
 export const useApp = () => useContext(AppContext);

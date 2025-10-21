@@ -182,15 +182,15 @@ transition: 0.3s;
     padding:0 0 0 30px;
     display: flex;
     flex-wrap: wrap;
-    gap: 40px; /* مسافة ثابتة بين الكروت */
-    justify-content: center; /* يخليهم دايمًا في الوسط */
+    gap: 40px; 
+    justify-content: center;
     }
     .card {
-    flex: 1 1 calc(33.333% - 30px); /* 3 كروت في الصف */
-    max-width: calc(33.333% - 30px);
+    flex: 1 1 calc(33.333% - 30px); 
+    max-width: calc(33.333% - 3px);
     }
     .imagContainer img{
-    width:230px;
+    width:250px;
     }
     .seeLove{
      margin:-240px 0 0 200px;

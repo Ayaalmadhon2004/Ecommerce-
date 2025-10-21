@@ -10,6 +10,10 @@
     gap:90px;
 }
 
+a{
+  color:var(--black);
+}
+
 .list{
     display:flex;
     align-items: center;
@@ -154,20 +158,20 @@
     font-size:20px;
     }
     .searching{
-    gap:10px;
+    gap:5px;
     }
     .list {
-    display: none; /* تخفي القائمة */
+    display: none;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 0px;
     width: 100%;
   }
 
   .showMenu {
     display: flex;
     color:var(--white);
-    z-index: 999;          /* خليها قيمة عالية */
+    z-index: 999; 
     position: absolute;
   }
 
@@ -176,9 +180,9 @@
   flex-direction: column;
   background-color: var(--black);
   color: var(--white);
-  z-index: 999;          /* خليها قيمة عالية */
-  position: absolute;    /* علشان تطلع فوق كل شيء */
-  top: 150px;             /* تنزل تحت الهيدر */
+  z-index: 999;
+  position: absolute;    
+  top: 150px;             
   left: 130px;
   width: 50%;
   height:auto;
@@ -191,6 +195,4 @@
   color:var(--white);
 }
 
-
- 
 }

@@ -89,7 +89,9 @@
     font-weight: 500;
     font-size:16px;
     line-height:24px;
+    width:10rem;
 }
+
 .prices{
     display:flex;
     gap:12px;
@@ -131,8 +133,8 @@
 }
 
 .imagContainer:hover .addToCart {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-10px); /* حركة بسيطة للأعلى */
+opacity: 1;
+transform: translateX(-50%) translateY(-10px);
 }
 
 .discount{
@@ -341,5 +343,9 @@
     font-size:20px;
     line-height:15px;
     }
+    .cardBody{
+        margin-left:1rem;
+    }
+    
 }
 
