@@ -11,6 +11,9 @@ export default function ProductDetails() {
   const { handleCart } = useApp();
   const [selected, setSelected] = useState(0);
   const [qty, setQty] = useState(1);
+  const [postal, setPostal] = useState("");
+  const [checked, setChecked] = useState(false);
+  const [showReturn, setShowReturn] = useState(false);
   if (!product) return <p>No product selected.</p>;
 
   const cover = product.img || product.image;
@@ -54,7 +57,7 @@ export default function ProductDetails() {
               <span>{qty}</span>
               <button type="button" aria-label="Increase quantity" onClick={() => setQty((q) => q + 1)}>+</button>
             </div>
-            <button className={styles.buyBtn}>Buy Now</button>
+          <button className={styles.buyBtn}>Buy Now</button>
             <button
               type="button"
               className={styles.cartBtn}
@@ -71,11 +74,32 @@ export default function ProductDetails() {
               <img src="assets/icon-delivery (1).png" alt="Free Delivery"/>
               <p><strong>Free Delivery</strong><br/> Enter your postal code for Delivery Availability</p>
             </div>
+            <div className={styles.postal}>
+              <input
+                type="text"
+                placeholder="Postal code"
+                value={postal}
+                onChange={(e) => { setPostal(e.target.value); setChecked(false); }}
+              />
+              <button type="button" onClick={() => setChecked(true)}>Check</button>
+            </div>
+            {checked && (
+              <p className={styles.deliveryMsg}>
+                {postal.trim() ? "Delivery available" : "Please enter a postal code"}
+              </p>
+            )}
             <hr/>
             <div className={styles.container}>
               <img src="assets/Icon-return.png" alt="Return Delivery"/>
-              <p><strong>Return Delivery</strong><br/> Free 30 Days Delivery Returns. Details</p>
+              <p><strong>Return Delivery</strong><br/> Free 30 Days Delivery Returns.{" "}
+                <button type="button" className={styles.linkBtn} onClick={() => setShowReturn((v) => !v)}>Details</button>
+              </p>
             </div>
+            {showReturn && (
+              <p className={styles.returnPolicy}>
+                Items can be returned within 30 days of delivery if unused and in original packaging. Refunds are issued to the original payment method once the return is received.
+              </p>
+            )}
           </div>
         </div>
       </div>
