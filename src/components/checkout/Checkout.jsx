@@ -1,19 +1,21 @@
 import { useState } from "react";
-import { useApp } from "../../context/AppContext";
+import { useApp, COUPONS } from "../../context/AppContext";
 import styles from "./checkout.module.css";
 
 const parsePrice = value =>
   parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
 
 export default function Checkout() {
-    const { cart, clearCart } = useApp();
+    const { cart, clearCart, appliedCode, applyCoupon, clearCoupon } = useApp();
     const [paymentMethod, setPaymentMethod] = useState("bank");
     const [coupon, setCoupon] = useState("");
 
     const handleCouponChange = e => setCoupon(e.target.value);
 
+    const [couponError, setCouponError] = useState("");
+
     const handleApplyCoupon = () => {
-    alert(`Coupon applied: ${coupon}`);
+      setCouponError(applyCoupon(coupon) ? "" : "Invalid coupon code");
     };
 
     const [orderPlaced, setOrderPlaced] = useState(false);
@@ -22,6 +24,7 @@ export default function Checkout() {
       e.preventDefault();
       if (cart.length === 0) return;
       clearCart();
+      clearCoupon();
       setOrderPlaced(true);
     };
 
@@ -29,6 +32,8 @@ export default function Checkout() {
     (acc, item) => acc + parsePrice(item.price) * (item.quantity || 1),
     0
   );
+  const discount = appliedCode ? subtotal * COUPONS[appliedCode] : 0;
+  const total = subtotal - discount;
 
   if (orderPlaced) {
     return (
@@ -107,13 +112,19 @@ export default function Checkout() {
           <span>Subtotal:</span>
           <span>${subtotal.toFixed(2)}</span>
         </div>
+        {appliedCode && (
+          <div className={styles.cartTotalRow}>
+            <span>Discount ({appliedCode}):</span>
+            <span>-${discount.toFixed(2)}</span>
+          </div>
+        )}
         <div className={styles.cartTotalRow}>
           <span>Shipping:</span>
           <span>Free</span>
         </div>
         <div className={styles.cartTotalRow}>
           <span>Total:</span>
-          <span>${subtotal.toFixed(2)}</span>
+          <span>${total.toFixed(2)}</span>
         </div>
         </div>
 
@@ -159,6 +170,10 @@ export default function Checkout() {
         <button type="button" className={styles.applyBtn} onClick={handleApplyCoupon}>
           Apply Coupon
         </button>
+        {couponError && <p className={styles.couponError}>{couponError}</p>}
+        {appliedCode && (
+          <p className={styles.couponSuccess}>{appliedCode} applied</p>
+        )}
       </div>
 
       <button
