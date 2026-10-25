@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./productDetails.module.css";
 import { useApp } from "../../context/AppContext";
 import Stars from "../Stars/Stars";
@@ -7,8 +7,9 @@ import SellingProducts from "../sellingProducts/SellingProducts";
 
 export default function ProductDetails() {
   const { state } = useLocation();
+  const navigate = useNavigate();
+  const { cart, likes, handleLike, handleCart } = useApp();
   const product = state?.product;
-  const { handleCart } = useApp();
   const [selected, setSelected] = useState(0);
   const [qty, setQty] = useState(1);
   const [postal, setPostal] = useState("");
@@ -22,6 +23,16 @@ export default function ProductDetails() {
     : [cover];
   const thumbs = Array.from({ length: 4 }, (_, i) => gallery[i % gallery.length]);
   const mainSrc = thumbs[selected] || cover;
+
+  const handleBuyNow = () => {
+    if (!cart.some((item) => item.id === product.id)) handleCart(product);
+    navigate("/checkout");
+  };
+
+  const handleProductDetails = (next) => {
+    navigate("/productDetails", { state: { product: next } });
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className={styles.productPage}>
@@ -57,7 +68,7 @@ export default function ProductDetails() {
               <span>{qty}</span>
               <button type="button" aria-label="Increase quantity" onClick={() => setQty((q) => q + 1)}>+</button>
             </div>
-          <button className={styles.buyBtn}>Buy Now</button>
+            <button className={styles.buyBtn} onClick={handleBuyNow}>Buy Now</button>
             <button
               type="button"
               className={styles.cartBtn}
@@ -104,8 +115,10 @@ export default function ProductDetails() {
         </div>
       </div>
       <SellingProducts
-      liked={[]} 
-      handleLike={() => {}}
+      liked={likes.selling}
+      handleLike={(id) => handleLike("selling", id)}
+      handleCart={handleCart}
+      handleProductDetails={handleProductDetails}
       varient="related"
       />
     </div>

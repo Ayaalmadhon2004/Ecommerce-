@@ -1,7 +1,10 @@
 import category from "../data/category"
 import styles from "./category.module.css"
+import useHorizontalScroll from "../../hooks/useHorizontalScroll"
 
 export default function Categories() {
+  const { trackRef, edges, scrollTrack, updateEdges } = useHorizontalScroll()
+
   return (
     <div className={styles.category}>
         <div className={styles.topHeader}>
@@ -11,11 +14,23 @@ export default function Categories() {
         <div className={styles.mainHeader}>
             <h2>Browse By Category</h2>
             <div className={styles.arrows}>
-            <i className="fa-solid fa-arrow-left"></i>
-            <i className="fa-solid fa-arrow-right"></i>
+            <i
+              className={`fa-solid fa-arrow-left ${edges.start ? styles.arrowDisabled : ""}`}
+              role="button"
+              aria-label="Scroll left"
+              aria-disabled={edges.start}
+              onClick={() => scrollTrack(-1)}
+            ></i>
+            <i
+              className={`fa-solid fa-arrow-right ${edges.end ? styles.arrowDisabled : ""}`}
+              role="button"
+              aria-label="Scroll right"
+              aria-disabled={edges.end}
+              onClick={() => scrollTrack(1)}
+            ></i>
           </div>
         </div>
-            <div className={styles.containerCard}>
+            <div className={styles.containerCard} ref={trackRef} onScroll={updateEdges}>
               {category.map((category)=>(
                 <div className={styles.card} key={category.id}>
                    <div className={styles.img}>

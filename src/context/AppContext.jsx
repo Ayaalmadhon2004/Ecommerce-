@@ -3,6 +3,8 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 const AppContext = createContext();
 
+export const COUPONS = { SAVE10: 0.1 };
+
 export function AppProvider({ children }) {
   const [cart, setCart] = useState(() => {
     const savedCart = localStorage.getItem("cart");
@@ -61,6 +63,21 @@ export function AppProvider({ children }) {
     setCart([]);
   };
 
+  const [appliedCode, setAppliedCode] = useState(null);
+
+  // Returns true when the code is valid and applied, false otherwise.
+  const applyCoupon = (input) => {
+    const code = String(input ?? "").trim().toUpperCase();
+    if (COUPONS[code]) {
+      setAppliedCode(code);
+      return true;
+    }
+    setAppliedCode(null);
+    return false;
+  };
+
+  const clearCoupon = () => setAppliedCode(null);
+
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -73,6 +90,9 @@ export function AppProvider({ children }) {
         updateQuantity,
         removeFromCart,
         clearCart,
+        appliedCode,
+        applyCoupon,
+        clearCoupon,
       }}>
       {children}
     </AppContext.Provider>
