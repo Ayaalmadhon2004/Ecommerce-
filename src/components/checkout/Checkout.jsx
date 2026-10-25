@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useApp } from "../../context/AppContext";
 import styles from "./checkout.module.css";
 
-export default function Checkout({ cart: initialCart }) {
+const parsePrice = value =>
+  parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
+
+export default function Checkout() {
+    const { cart } = useApp();
     const [paymentMethod, setPaymentMethod] = useState("bank");
     const [coupon, setCoupon] = useState("");
 
@@ -14,34 +19,11 @@ export default function Checkout({ cart: initialCart }) {
     const handlePlaceOrder = () => {
     alert(`Order placed with payment method: ${paymentMethod}`);
     };
-    const [cart, setCart] = useState(() =>
-    (initialCart || []).map(item => ({
-      ...item,
-      price:
-        typeof item.price === "number"
-          ? `$${item.price}`
-          : item.price || "$0",
-      quantity: item.quantity || 1,
-    }))
+
+  const subtotal = cart.reduce(
+    (acc, item) => acc + parsePrice(item.price) * (item.quantity || 1),
+    0
   );
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  const subtotal = cart.reduce((acc, item) => {
-    const price = parseFloat(
-      (item.price != null ? item.price.toString() : "0").replace("$", "")
-    ) || 0;
-    return acc + price * item.quantity;
-  }, 0);
-
-  const filteredCart = cart.filter(item => {
-    const price = parseFloat(
-      (item.price != null ? item.price.toString() : "0").replace("$", "")
-    ) || 0;
-    return price > 0;
-  });
 
   return (
     <div className={styles.checkout}>
@@ -79,10 +61,10 @@ export default function Checkout({ cart: initialCart }) {
       </div>
 
       <div className={styles.right}>
-        {filteredCart.length === 0 ? (
+        {cart.length === 0 ? (
           <p>Your cart is empty</p>
         ) : (
-          filteredCart.map(item => (
+          cart.map(item => (
             <div key={item.id} className={styles.cartItem}>
               <img
                 src={item.image || "/assets/default.png"}
