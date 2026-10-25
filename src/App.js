@@ -23,6 +23,7 @@ import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
 import About from "./components/about/About.jsx";
 import Contact from "./components/contact/Contact.jsx";
 import SearchResults from "./components/search/SearchResults.jsx";
+import Wishlist from "./components/wishlist/Wishlist.jsx";
 
 
 function HeaderWithLikes() {

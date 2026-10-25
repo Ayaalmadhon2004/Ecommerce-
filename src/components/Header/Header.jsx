@@ -55,12 +55,12 @@ function Header({likedCount}) {
              style={{ cursor: "pointer" }}
              onClick={handleSearch}
            ></i>
-            <div className={styles.loveIcon}>
+            <Link to="/wishlist" className={styles.loveIcon} aria-label="Wishlist">
             <i className="fa-solid fa-heart"></i>
              {likedCount > 0 && (
                <span className={styles.badge}>{likedCount}</span>
              )}
-            </div>
+            </Link>
            <Link to="/cart" className={styles.loveIcon}>
              <i className="fa-solid fa-cart-shopping"></i>
              {cartCount > 0 && (
