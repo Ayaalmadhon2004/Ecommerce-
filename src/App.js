@@ -22,6 +22,7 @@ import Checkout from "./components/checkout/Checkout.jsx";
 import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
 import About from "./components/about/About.jsx";
 import Contact from "./components/contact/Contact.jsx";
+import SearchResults from "./components/search/SearchResults.jsx";
 
 
 function HeaderWithLikes() {
@@ -87,6 +88,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/productDetails" element={<ProductDetails />} />
+            <Route path="/search" element={<SearchResults />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
