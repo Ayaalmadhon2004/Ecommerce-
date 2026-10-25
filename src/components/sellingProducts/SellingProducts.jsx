@@ -1,8 +1,10 @@
 import styles from "./sellingProducts.module.css"
 import { useEffect, useState } from "react";
+import QuickView from "../QuickView/QuickView";
 
 function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varient}) {
   const [products,setProducts]=useState([]);
+  const [selectedProduct,setSelectedProduct]=useState(null);
 
   useEffect(()=>{
     fetch("https://fakestoreapi.com/products")
@@ -31,7 +33,7 @@ function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varie
                         <i className={`fa-solid fa-heart ${
                           liked.includes(product.id) ? styles.liked : styles.notLiked
                         }`} onClick={(e)=>{ e.stopPropagation(); handleLike(product.id); }}></i>
-                        <i className="fa-solid fa-eye" onClick={(e)=>e.stopPropagation()}></i>
+                        <i className="fa-solid fa-eye" onClick={(e)=>{ e.stopPropagation(); setSelectedProduct(product); }}></i>
                     </div>
                     <button
                         className={styles.addToCart}
@@ -53,6 +55,11 @@ function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varie
             </div>
          ))}
         </div>
+        <QuickView
+          product={selectedProduct}
+          onClose={()=>setSelectedProduct(null)}
+          handleCart={handleCart}
+        />
     </div>
   )
 }
