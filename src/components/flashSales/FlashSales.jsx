@@ -180,12 +180,6 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
         <div className={styles.mainHeader}>
           <h2>Flash Sales</h2>
           <div
-            style={{
-              display: "flex",
-              gap: "20px",
-              fontSize: "24px",
-              fontWeight: "bold",
-            }}
             className={styles.countdown}
           >
             <div>

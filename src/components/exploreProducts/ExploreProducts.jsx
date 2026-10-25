@@ -48,7 +48,7 @@ function ExploreProducts({ liked, handleLike, handleProductDetails }) {
                   className={`fa-solid fa-heart ${
                     liked.includes(product.id)
                       ? styles.liked
-                      : styles.notLike
+                      : styles.notLiked
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
