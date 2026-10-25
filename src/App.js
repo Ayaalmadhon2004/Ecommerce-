@@ -1,7 +1,9 @@
 // src/App.js
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
+import { AuthProvider } from "./context/AuthContext";
 import { useApp } from "./context/AppContext";
+import { LanguageProvider } from "./i18n/LanguageContext";
 import "./App.css";
 
 import TopHeader from "./components/TopHeaders/TopHeader.jsx";
@@ -25,6 +27,9 @@ import Contact from "./components/contact/Contact.jsx";
 import SearchResults from "./components/search/SearchResults.jsx";
 import Wishlist from "./components/wishlist/Wishlist.jsx";
 import Shop from "./components/shop/Shop.jsx";
+import InfoPage from "./components/legal/InfoPage.jsx";
+
+const LOREM = "This is placeholder content and will be replaced with the final text.";
 
 
 function HeaderWithLikes() {
@@ -80,6 +85,8 @@ function Home() {
 
 export default function App() {
   return (
+    <LanguageProvider>
+    <AuthProvider>
     <AppProvider>
       <BrowserRouter>
         <div className="App">
@@ -96,11 +103,16 @@ export default function App() {
             <Route path="/search" element={<SearchResults />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<InfoPage title="Privacy Policy" paragraphs={[LOREM, LOREM]} />} />
+            <Route path="/terms" element={<InfoPage title="Terms Of Use" paragraphs={[LOREM, LOREM]} />} />
+            <Route path="/faq" element={<InfoPage title="FAQ" paragraphs={[LOREM, LOREM]} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </div>
       </BrowserRouter>
     </AppProvider>
+    </AuthProvider>
+    </LanguageProvider>
   );
 }

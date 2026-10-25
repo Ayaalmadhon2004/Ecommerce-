@@ -80,6 +80,21 @@
   cursor: pointer;
 }
 
+.backLink {
+  font-size: var(--text-md);
+  color: var(--red);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.success {
+  color: green;
+  font-size: var(--text-sm);
+  margin-top: var(--space-2);
+}
+
 .error {
   color: var(--red);
   font-size: var(--text-sm);
@@ -108,4 +123,19 @@
     gap: var(--space-2);
     align-items: stretch;
   }
+}
+
+.switchMode {
+  margin-top: var(--space-4);
+  font-size: var(--text-md);
+}
+
+.link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--red);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
 }

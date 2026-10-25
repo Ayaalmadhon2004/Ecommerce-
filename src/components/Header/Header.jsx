@@ -2,12 +2,16 @@ import { useState } from "react"
 import styles from "./header.module.css"
 import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
+import { useAuth } from "../../context/AuthContext";
+import { useLang } from "../../i18n/LanguageContext";
 
 function Header({likedCount}) {
   const [menuOpen,setMenuOpen]=useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const { cartCount } = useApp();
+  const { t } = useLang();
   const navigate = useNavigate();
+  const { isLoggedIn, user, logout } = useAuth();
 
   const handleSearch = () => {
     const query = searchQuery.trim();
@@ -30,10 +34,24 @@ function Header({likedCount}) {
          {menuOpen ? <i className="fa-solid fa-x"></i> :<i className="fa-solid fa-bars"></i> }
          </div>
         <ul className={`${styles.list} ${menuOpen ? styles.showMenu : ""}`}>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/login">Sign Up</Link></li>
+          <li><Link to="/">{t("nav.home")}</Link></li>
+          <li><Link to="/contact">{t("nav.contact")}</Link></li>
+          <li><Link to="/about">{t("nav.about")}</Link></li>
+          {isLoggedIn ? (
+            <>
+              <li><span>{user}</span></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => { logout(); setMenuOpen(false); navigate("/"); }}
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <li><Link to="/login">{t("nav.signUp")}</Link></li>
+          )}
         </ul>
 
         </div>
@@ -43,7 +61,7 @@ function Header({likedCount}) {
            <input
              className={styles.search}
              type="text"
-             placeholder="What are you looking for?"
+             placeholder={t("search.placeholder")}
              value={searchQuery}
              onChange={(e) => setSearchQuery(e.target.value)}
              onKeyDown={(e) => e.key === "Enter" && handleSearch()}

@@ -1,10 +1,14 @@
 import styles from "./exploreProducts.module.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useHorizontalScroll from "../../hooks/useHorizontalScroll";
+import QuickView from "../QuickView/QuickView";
 
 function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }) {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const { trackRef, edges, scrollTrack, updateEdges } = useHorizontalScroll([products]);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -23,12 +27,24 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
       <div className={styles.mainHeader}>
         <h2>Explore Our Products</h2>
         <div className={styles.arrows}>
-          <i className="fa-solid fa-arrow-left"></i>
-          <i className="fa-solid fa-arrow-right"></i>
-        </div>
+          <i
+              className={`fa-solid fa-arrow-left ${edges.start ? styles.arrowDisabled : ""}`}
+              role="button"
+              aria-label="Scroll left"
+              aria-disabled={edges.start}
+              onClick={() => scrollTrack(-1)}
+            ></i>
+            <i
+              className={`fa-solid fa-arrow-right ${edges.end ? styles.arrowDisabled : ""}`}
+              role="button"
+              aria-label="Scroll right"
+              aria-disabled={edges.end}
+              onClick={() => scrollTrack(1)}
+            ></i>
+          </div>
       </div>
 
-      <div className={styles.mainContainer}>
+      <div className={styles.mainContainer} ref={trackRef} onScroll={updateEdges}>
         {products.map((product) => (
           <div
             className={styles.card}
@@ -51,7 +67,10 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
                 ></i>
                 <i
                   className="fa-solid fa-eye"
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedProduct(product);
+                  }}
                 ></i>
               </div>
               <button
@@ -76,6 +95,12 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
       </div>
 
       <button className={styles.btn} onClick={() => navigate("/shop")}>View All Products</button>
+
+      <QuickView
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        handleCart={handleCart}
+      />
     </div>
   );
 }
