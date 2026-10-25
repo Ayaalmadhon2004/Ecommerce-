@@ -6,9 +6,14 @@ import SellingProducts from "../sellingProducts/SellingProducts";
 export default function ProductDetails() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { likes, handleLike, handleCart } = useApp();
+  const { cart, likes, handleLike, handleCart } = useApp();
   const product = state?.product;
   if (!product) return <p>No product selected.</p>;
+
+  const handleBuyNow = () => {
+    if (!cart.some((item) => item.id === product.id)) handleCart(product);
+    navigate("/checkout");
+  };
 
   const handleProductDetails = (selected) => {
     navigate("/productDetails", { state: { product: selected } });
@@ -36,7 +41,7 @@ export default function ProductDetails() {
           <h3 className={styles.price}>${product.price}</h3>
           <p className={styles.description}>{product.description}</p>
 
-          <button className={styles.buyBtn}>Buy Now</button>
+          <button className={styles.buyBtn} onClick={handleBuyNow}>Buy Now</button>
 
           <div className={styles.delivery}>
             <div className={styles.container}>

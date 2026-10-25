@@ -1,9 +1,13 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Countdown from "react-countdown";
+import { useApp } from "../../context/AppContext";
 import styles from "./FlashSales.module.css";
 import Stars from "../Stars/Stars";
 
 function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
+  const { cart, handleCart: addToCart } = useApp();
+  const navigate = useNavigate();
   const [clickedId, setClickedId] = useState(null);
   const [flashProducts, setFlashProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -19,6 +23,11 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
       prev.start === start && prev.end === end ? prev : { start, end }
     );
   }, []);
+
+  const handleBuyNow = (product) => {
+    if (!cart.some((item) => item.id === product.id)) addToCart(product);
+    navigate("/checkout");
+  };
 
   const scrollTrack = (dir) => {
     const el = trackRef.current;
@@ -180,7 +189,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
                     </div>
                     <span className={styles.price}>${product.price}</span>
                     <p>{product.description}</p>
-                    <button className={styles.btn}>Buy Now</button>
+                    <button className={styles.btn} onClick={() => handleBuyNow(product)}>Buy Now</button>
                   </div>
                 </div>
               )}
