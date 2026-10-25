@@ -197,7 +197,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
           ))}
         </div>
 
-        <button className={styles.btn}>View All Products</button>
+        <button className={styles.btn} onClick={() => navigate("/shop")}>View All Products</button>
       </div>
     );
   };

@@ -1,9 +1,11 @@
 import styles from "./exploreProducts.module.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useHorizontalScroll from "../../hooks/useHorizontalScroll";
 import QuickView from "../QuickView/QuickView";
 
 function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }) {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const { trackRef, edges, scrollTrack, updateEdges } = useHorizontalScroll([products]);
@@ -92,7 +94,7 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
         ))}
       </div>
 
-      <button className={styles.btn}>View All Products</button>
+      <button className={styles.btn} onClick={() => navigate("/shop")}>View All Products</button>
 
       <QuickView
         product={selectedProduct}

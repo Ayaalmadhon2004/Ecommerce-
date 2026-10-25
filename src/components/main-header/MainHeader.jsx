@@ -1,9 +1,10 @@
+import { Link } from "react-router-dom"
 import styles from "./Main-header.module.css"
 
 const categories = [
-  { label: "Woman’s Fashion", icon: "fa-shirt" },
-  { label: "Men’s Fashion", icon: "fa-user-tie" },
-  { label: "Electronics", icon: "fa-laptop" },
+  { label: "Woman’s Fashion", category: "women's clothing", icon: "fa-shirt" },
+  { label: "Men’s Fashion", category: "men's clothing", icon: "fa-user-tie" },
+  { label: "Electronics", category: "electronics", icon: "fa-laptop" },
   { label: "Home & Lifestyle", icon: "fa-house" },
   { label: "Medicine", icon: "fa-briefcase-medical" },
   { label: "Sports & Outdoor", icon: "fa-dumbbell" },
@@ -17,12 +18,12 @@ function MainHeader() {
     <div className={styles.mainHeader}>
       <aside className={styles.left}>
         <ul className={styles.list}>
-          {categories.map(({ label, icon }) => (
+          {categories.map(({ label, icon, category }) => (
             <li key={label}>
-              <a href="#!" onClick={(e) => e.preventDefault()}>
+              <Link to={category ? `/shop?category=${encodeURIComponent(category)}` : "/shop"}>
                 <i className={`fa-solid ${icon}`}></i>
                 {label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -34,9 +35,9 @@ function MainHeader() {
              <p>iPhone 14 Series</p>
            </div>
            <h2 className={styles.sale}>Up to 10%<br/> off Voucher</h2>
-           <a href="#!" className={styles.btn} onClick={(e) => e.preventDefault()}>
+           <Link to="/shop" className={styles.btn}>
              Shop Now <i className="fa-solid fa-arrow-right"></i>
-           </a>
+           </Link>
          </div>
          <div className={styles.subRight}>
           <img src="/assets/photos/iphoneWebp.webp" alt="iPhone 14"/>

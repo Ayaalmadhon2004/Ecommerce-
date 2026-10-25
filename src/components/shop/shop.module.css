@@ -1,0 +1,19 @@
+.shop { padding: 40px 5%; }
+.title { margin-bottom: 20px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 30px; }
+.chip { padding: 8px 18px; border: 1px solid #ccc; border-radius: 20px; background: #fff; cursor: pointer; text-transform: capitalize; }
+.chip:hover { border-color: #db4444; }
+.active { background: #db4444; color: #fff; border-color: #db4444; }
+.message { text-align: center; padding: 40px 0; color: #555; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px; }
+.card { cursor: pointer; display: flex; flex-direction: column; }
+.imageBox { position: relative; background: #f5f5f5; height: 250px; display: flex; align-items: center; justify-content: center; overflow: hidden; border-radius: 4px; }
+.imageBox img { max-width: 70%; max-height: 80%; object-fit: contain; }
+.heart { position: absolute; top: 10px; right: 10px; background: #fff; border-radius: 50%; padding: 8px; color: #999; }
+.liked { color: #db4444; }
+.addToCart { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px; background: #000; color: #fff; border: none; cursor: pointer; opacity: 0; transition: opacity 0.2s; }
+.imageBox:hover .addToCart { opacity: 1; }
+.body { padding: 12px 0; display: flex; flex-direction: column; gap: 6px; }
+.body h4 { font-size: 15px; margin: 0; }
+.price { color: #db4444; font-weight: 600; }
+.category { color: #777; font-size: 13px; text-transform: capitalize; }
