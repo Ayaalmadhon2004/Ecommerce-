@@ -1,11 +1,19 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useApp } from "../../context/AppContext";
 import styles from "./productDetails.module.css";
 import SellingProducts from "../sellingProducts/SellingProducts";
 
 export default function ProductDetails() {
   const { state } = useLocation();
+  const navigate = useNavigate();
+  const { likes, handleLike, handleCart } = useApp();
   const product = state?.product;
   if (!product) return <p>No product selected.</p>;
+
+  const handleProductDetails = (selected) => {
+    navigate("/productDetails", { state: { product: selected } });
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className={styles.productPage}>
@@ -44,8 +52,10 @@ export default function ProductDetails() {
         </div>
       </div>
       <SellingProducts
-      liked={[]} 
-      handleLike={() => {}}
+      liked={likes.selling}
+      handleLike={(id) => handleLike("selling", id)}
+      handleCart={handleCart}
+      handleProductDetails={handleProductDetails}
       varient="related"
       />
     </div>
