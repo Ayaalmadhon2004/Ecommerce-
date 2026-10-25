@@ -14,5 +14,11 @@ html, body {
 
 
 a{
+  color: var(--black);
   text-decoration: none;
+}
+
+.notFound {
+  margin: var(--space-10) var(--space-4);
+  text-align: center;
 }
