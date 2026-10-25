@@ -1,7 +1,9 @@
 import styles from "./sellingProducts.module.css"
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varient}) {
+  const navigate=useNavigate();
   const [products,setProducts]=useState([]);
 
   useEffect(()=>{
@@ -19,7 +21,7 @@ function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varie
         </div>
         <div className={styles.mainHeader}>
           <h2>{varient==="related"?" " :"Best Selling Products"}</h2>
-           {varient === "related" ? (null) : <button className={styles.btn}>View All</button> }
+           {varient === "related" ? (null) : <button className={styles.btn} onClick={()=>navigate("/shop")}>View All</button> }
         </div>
          <div className={styles.mainContainer}>
          {products.map((product)=>(
