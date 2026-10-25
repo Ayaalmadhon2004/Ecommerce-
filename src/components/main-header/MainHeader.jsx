@@ -5,15 +5,15 @@ function MainHeader() {
     <div className={styles.mainHeader}>
       <div className={styles.left}>
         <ul className={styles.list}>
-          <li><a href="#">Woman’s Fashion</a></li>
-          <li><a href="#">Men’s Fashion</a></li>
-          <li><a href="#">Electronics</a></li>
-          <li><a href="#">Home & Lifestyle</a></li>
-          <li><a href="#">Medicine</a></li>
-          <li><a href="#">Sports & Outdoor</a></li>
-          <li><a href="#">Baby’s & Toys</a></li>
-          <li><a href="#">Groceries & Pets</a></li>
-          <li><a href="#">Health & Beauty</a></li>
+          <li><a href="#!" onClick={(e) => e.preventDefault()}>Woman’s Fashion</a></li>
+          <li><a href="#!" onClick={(e) => e.preventDefault()}>Men’s Fashion</a></li>
+          <li><a href="#!" onClick={(e) => e.preventDefault()}>Electronics</a></li>
+          <li><a href="#!" onClick={(e) => e.preventDefault()}>Home & Lifestyle</a></li>
+          <li><a href="#!" onClick={(e) => e.preventDefault()}>Medicine</a></li>
+          <li><a href="#!" onClick={(e) => e.preventDefault()}>Sports & Outdoor</a></li>
+          <li><a href="#!" onClick={(e) => e.preventDefault()}>Baby’s & Toys</a></li>
+          <li><a href="#!" onClick={(e) => e.preventDefault()}>Groceries & Pets</a></li>
+          <li><a href="#!" onClick={(e) => e.preventDefault()}>Health & Beauty</a></li>
         </ul>
       </div>
       <div className={styles.right}>
