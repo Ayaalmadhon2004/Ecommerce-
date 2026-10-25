@@ -5,14 +5,19 @@ import SellingProducts from "../sellingProducts/SellingProducts";
 
 export default function ProductDetails() {
   const { state } = useLocation();
-  const product = state?.product;
-  const { cart, handleCart } = useApp();
   const navigate = useNavigate();
+  const { cart, likes, handleLike, handleCart } = useApp();
+  const product = state?.product;
   if (!product) return <p>No product selected.</p>;
 
   const handleBuyNow = () => {
     if (!cart.some((item) => item.id === product.id)) handleCart(product);
     navigate("/checkout");
+  };
+
+  const handleProductDetails = (selected) => {
+    navigate("/productDetails", { state: { product: selected } });
+    window.scrollTo(0, 0);
   };
 
   return (
@@ -52,8 +57,10 @@ export default function ProductDetails() {
         </div>
       </div>
       <SellingProducts
-      liked={[]} 
-      handleLike={() => {}}
+      liked={likes.selling}
+      handleLike={(id) => handleLike("selling", id)}
+      handleCart={handleCart}
+      handleProductDetails={handleProductDetails}
       varient="related"
       />
     </div>
