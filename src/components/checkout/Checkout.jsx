@@ -6,7 +6,7 @@ const parsePrice = value =>
   parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
 
 export default function Checkout() {
-    const { cart } = useApp();
+    const { cart, clearCart } = useApp();
     const [paymentMethod, setPaymentMethod] = useState("bank");
     const [coupon, setCoupon] = useState("");
 
@@ -16,8 +16,13 @@ export default function Checkout() {
     alert(`Coupon applied: ${coupon}`);
     };
 
-    const handlePlaceOrder = () => {
-    alert(`Order placed with payment method: ${paymentMethod}`);
+    const [orderPlaced, setOrderPlaced] = useState(false);
+
+    const handlePlaceOrder = e => {
+      e.preventDefault();
+      if (cart.length === 0) return;
+      clearCart();
+      setOrderPlaced(true);
     };
 
   const subtotal = cart.reduce(
@@ -25,11 +30,25 @@ export default function Checkout() {
     0
   );
 
+  if (orderPlaced) {
+    return (
+      <div className={styles.checkout}>
+        <div className={styles.left}>
+          <h2>Thank you!</h2>
+          <p>
+            Your order has been placed ({paymentMethod === "bank" ? "Bank" : "Cash on delivery"}).
+            A confirmation will be sent to your email.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={styles.checkout}>
       <div className={styles.left}>
         <h2>Billing Details</h2>
-        <form className={styles.form}>
+        <form id="checkout-form" className={styles.form} onSubmit={handlePlaceOrder}>
           <label htmlFor="first-name">First Name</label><br/>
           <input id="first-name" type="text" name="firstName" required /><br/>
 
@@ -76,7 +95,7 @@ export default function Checkout() {
                   className={styles.img}
                 />
                 <span className={styles.name}>
-                  {name} <span className={styles.qty}>x{qty}</span>
+                  {name} <small className={styles.qty}>x{qty}</small>
                 </span>
                 <span className={styles.price}>${lineTotal.toFixed(2)}</span>
               </div>
@@ -137,12 +156,17 @@ export default function Checkout() {
           onChange={handleCouponChange}
           className={styles.couponInput}
         />
-        <button className={styles.applyBtn} onClick={handleApplyCoupon}>
+        <button type="button" className={styles.applyBtn} onClick={handleApplyCoupon}>
           Apply Coupon
         </button>
       </div>
 
-      <button className={styles.placeOrderBtn} onClick={handlePlaceOrder}>
+      <button
+        type="submit"
+        form="checkout-form"
+        className={styles.placeOrderBtn}
+        disabled={cart.length === 0}
+      >
         Place Order
       </button>
     </div>
