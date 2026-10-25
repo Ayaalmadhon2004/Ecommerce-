@@ -30,12 +30,12 @@ function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varie
                     <div className={styles.seeLove}>
                         <i className={`fa-solid fa-heart ${
                           liked.includes(product.id) ? styles.liked : styles.notLiked
-                        }`} onClick={()=>handleLike(product.id)}></i>
-                        <i className="fa-solid fa-eye"></i>
+                        }`} onClick={(e)=>{ e.stopPropagation(); handleLike(product.id); }}></i>
+                        <i className="fa-solid fa-eye" onClick={(e)=>e.stopPropagation()}></i>
                     </div>
                     <button
                         className={styles.addToCart}
-                        onClick={() => handleCart(product)}
+                        onClick={(e) => { e.stopPropagation(); handleCart?.(product); }}
                         >
                         Add To Cart
                     </button>

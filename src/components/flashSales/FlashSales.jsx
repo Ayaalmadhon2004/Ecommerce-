@@ -221,17 +221,26 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
                         ? styles.liked
                         : styles.notLiked
                     }`}
-                    onClick={() => handleLike(product.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLike(product.id);
+                    }}
                   ></i>
 
                   <i
                     className="fa-solid fa-eye"
-                    onClick={() => handleClick(product.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleClick(product.id);
+                    }}
                   ></i>
                 </div>
                 <button
                   className={styles.addToCart}
-                  onClick={() => handleCart(product)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCart(product);
+                  }}
                 >
                   Add To Cart
                 </button>
@@ -249,7 +258,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
               </div>
 
               {clickedId === product.id && (
-                <div className={styles.cart}>
+                <div className={styles.cart} onClick={(e) => e.stopPropagation()}>
                   <div className={styles.leftCart}>
                     <img src={product.image} alt={product.title} />
                   </div>
