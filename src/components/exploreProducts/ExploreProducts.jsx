@@ -1,8 +1,10 @@
 import styles from "./exploreProducts.module.css";
 import { useState, useEffect } from "react";
+import QuickView from "../QuickView/QuickView";
 
 function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }) {
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -49,7 +51,10 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
                 ></i>
                 <i
                   className="fa-solid fa-eye"
-                  onClick={(e) => e.stopPropagation()}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedProduct(product);
+                  }}
                 ></i>
               </div>
               <button
@@ -74,6 +79,12 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
       </div>
 
       <button className={styles.btn}>View All Products</button>
+
+      <QuickView
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+        handleCart={handleCart}
+      />
     </div>
   );
 }
