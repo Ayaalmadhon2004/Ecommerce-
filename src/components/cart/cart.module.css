@@ -169,3 +169,15 @@
 .removeBtn:hover {
   color: #b50000;
 }
+
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn:disabled,
+.checkoutBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}

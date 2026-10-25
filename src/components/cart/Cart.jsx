@@ -1,4 +1,5 @@
 // src/components/cart/Cart.jsx
+import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 import styles from "./cart.module.css";
 
@@ -6,6 +7,7 @@ const parsePrice = (value) =>
   parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
 
 export default function Cart() {
+  const navigate = useNavigate();
   const { cart, updateQuantity, removeFromCart, clearCart } = useApp();
 
   const items = cart
@@ -81,11 +83,16 @@ export default function Cart() {
       </table>
 
       <div className={styles.btns}>
-        <button className={styles.btn} onClick={clearCart}>
+        <button
+          className={styles.btn}
+          onClick={clearCart}
+          disabled={items.length === 0}
+        >
           Clear Cart
         </button>
-        <button className={styles.btn}>Back to shop</button>
-        <button className={styles.btn}>Update Cart</button>
+        <Link to="/" className={styles.btn}>
+          Back to shop
+        </Link>
       </div>
 
       <div className={styles.bottomSection}>
@@ -112,7 +119,13 @@ export default function Cart() {
             <span>Total:</span>
             <span>${subtotal.toFixed(2)}</span>
           </div>
-          <button className={styles.checkoutBtn}>Proceed to checkout</button>
+          <button
+            className={styles.checkoutBtn}
+            onClick={() => navigate("/checkout")}
+            disabled={items.length === 0}
+          >
+            Proceed to checkout
+          </button>
         </div>
       </div>
     </div>
