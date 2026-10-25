@@ -1,21 +1,43 @@
 // src/components/cart/Cart.jsx
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 import styles from "./cart.module.css";
 
+const COUPONS = { SAVE10: 0.1 };
+
+const parsePrice = (value) =>
+  parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
+
 export default function Cart() {
-  const { cart, updateQuantity, clearCart } = useApp();
+  const navigate = useNavigate();
+  const { cart, updateQuantity, removeFromCart, clearCart } = useApp();
 
-  const subtotal = cart.reduce((acc, item) => {
-    const price =
-      parseFloat(item.price?.toString().replace("$", "") || "0") || 0;
-    return acc + price * item.quantity;
-  }, 0);
+  const items = cart
+    .map((item) => ({ ...item, unitPrice: parsePrice(item.price) }))
+    .filter((item) => item.unitPrice > 0);
 
-  const filteredCart = cart.filter((item) => {
-    const price =
-      parseFloat(item.price?.toString().replace("$", "") || "0") || 0;
-    return price > 0;
-  });
+  const [couponInput, setCouponInput] = useState("");
+  const [appliedCode, setAppliedCode] = useState(null);
+  const [couponError, setCouponError] = useState("");
+
+  const subtotal = items.reduce(
+    (acc, item) => acc + item.unitPrice * item.quantity,
+    0
+  );
+  const discount = appliedCode ? subtotal * COUPONS[appliedCode] : 0;
+  const total = subtotal - discount;
+
+  const applyCoupon = () => {
+    const code = couponInput.trim().toUpperCase();
+    if (COUPONS[code]) {
+      setAppliedCode(code);
+      setCouponError("");
+    } else {
+      setAppliedCode(null);
+      setCouponError("Invalid coupon code");
+    }
+  };
 
   return (
     <div className={styles.cartContainer}>
@@ -26,23 +48,21 @@ export default function Cart() {
             <th>Price</th>
             <th>Quantity</th>
             <th>Subtotal</th>
+            <th aria-label="Remove"></th>
           </tr>
         </thead>
         <tbody>
-          {filteredCart.length === 0 ? (
+          {items.length === 0 ? (
             <tr>
-              <td colSpan="4">Your cart is empty</td>
+              <td colSpan="5">Your cart is empty</td>
             </tr>
           ) : (
-            filteredCart.map((item) => {
-              const price =
-                parseFloat(item.price?.toString().replace("$", "") || "0") ||
-                0;
+            items.map((item) => {
               return (
                 <tr key={item.id}>
                   <td className={styles.productInfo}>
                     <img
-                      src={item.image || "/assets/default.png"}
+                      src={item.img || item.image || "/assets/default.png"}
                       alt={item.name}
                       className={styles.productImg}
                     />
@@ -64,7 +84,17 @@ export default function Cart() {
                       ))}
                     </select>
                   </td>
-                  <td>${(price * item.quantity).toFixed(2)}</td>
+                  <td>${(item.unitPrice * item.quantity).toFixed(2)}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className={styles.removeBtn}
+                      onClick={() => removeFromCart(item.id)}
+                      aria-label={`Remove ${item.name} from cart`}
+                    >
+                      &times;
+                    </button>
+                  </td>
                 </tr>
               );
             })
@@ -73,11 +103,16 @@ export default function Cart() {
       </table>
 
       <div className={styles.btns}>
-        <button className={styles.btn} onClick={clearCart}>
+        <button
+          className={styles.btn}
+          onClick={clearCart}
+          disabled={items.length === 0}
+        >
           Clear Cart
         </button>
-        <button className={styles.btn}>Back to shop</button>
-        <button className={styles.btn}>Update Cart</button>
+        <Link to="/" className={styles.btn}>
+          Back to shop
+        </Link>
       </div>
 
       <div className={styles.bottomSection}>
@@ -85,9 +120,17 @@ export default function Cart() {
           <input
             type="text"
             placeholder="Coupon Code"
+            value={couponInput}
+            onChange={(e) => setCouponInput(e.target.value)}
             className={styles.couponInput}
           />
-          <button className={styles.applyBtn}>Apply Coupon</button>
+          <button className={styles.applyBtn} onClick={applyCoupon}>
+            Apply Coupon
+          </button>
+          {couponError && <p className={styles.couponError}>{couponError}</p>}
+          {appliedCode && (
+            <p className={styles.couponSuccess}>{appliedCode} applied</p>
+          )}
         </div>
 
         <div className={styles.cartTotalBox}>
@@ -96,15 +139,27 @@ export default function Cart() {
             <span>Subtotal:</span>
             <span>${subtotal.toFixed(2)}</span>
           </div>
+          {appliedCode && (
+            <div className={styles.cartTotalRow}>
+              <span>Discount ({appliedCode}):</span>
+              <span>-${discount.toFixed(2)}</span>
+            </div>
+          )}
           <div className={styles.cartTotalRow}>
             <span>Shipping:</span>
             <span>Free</span>
           </div>
           <div className={styles.cartTotalRow}>
             <span>Total:</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>${total.toFixed(2)}</span>
           </div>
-          <button className={styles.checkoutBtn}>Proceed to checkout</button>
+          <button
+            className={styles.checkoutBtn}
+            onClick={() => navigate("/checkout")}
+            disabled={items.length === 0}
+          >
+            Proceed to checkout
+          </button>
         </div>
       </div>
     </div>

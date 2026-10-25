@@ -58,6 +58,7 @@
 .couponSection {
   flex: 1;
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
 }
@@ -155,4 +156,44 @@
   .cartTotalBox {
     max-width: 100%;
   }
+}
+
+.removeBtn {
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.removeBtn:hover {
+  color: #b50000;
+}
+
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.btn:disabled,
+.checkoutBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.couponError,
+.couponSuccess {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 14px;
+}
+
+.couponError {
+  color: #e74c3c;
+}
+
+.couponSuccess {
+  color: #2e7d32;
 }
