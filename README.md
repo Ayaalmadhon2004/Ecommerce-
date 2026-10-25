@@ -1,4 +1,9 @@
-<<<<<<< HEAD
+# Ecommerce
+
+React e-commerce front-end ("Exclusive" template): home page sections, product details, cart, login and checkout. See `CLAUDE.md` for the project structure and Git workflow.
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -69,6 +74,3 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-=======
-# Ecommerce-
->>>>>>> 737e0b73efb8b5ff5b7e2295bb1a226f2bcad15c
