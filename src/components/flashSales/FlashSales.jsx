@@ -130,11 +130,13 @@ function FlashSales({liked,handleLike,handleCart}) {
 
 export default FlashSales;*/
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import Countdown from "react-countdown";
 import styles from "./FlashSales.module.css";
 import Stars from "../Stars/Stars";
 
 function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
+  const navigate = useNavigate();
   const [clickedId, setClickedId] = useState(null);
   const [flashProducts, setFlashProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -319,7 +321,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
           ))}
         </div>
 
-        <button className={styles.btn}>View All Products</button>
+        <button className={styles.btn} onClick={() => navigate("/shop")}>View All Products</button>
       </div>
     );
   };
