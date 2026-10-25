@@ -23,7 +23,7 @@ function MainHeader() {
              <p>iPhone 14 Series</p>
            </div>
            <p className={styles.sale}>Up to 10%<br/> off Voucher</p>
-           <button className={styles.btn}>Shop Now <i class="fa-solid fa-arrow-right"></i></button>
+           <button className={styles.btn}>Shop Now <i className="fa-solid fa-arrow-right"></i></button>
          </div>
          <div className={styles.subRight}>
           <img src="/assets/photos/iphoneWebp.webp" alt="iphone"/>

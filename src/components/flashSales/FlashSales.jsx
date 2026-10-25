@@ -57,8 +57,8 @@ function FlashSales({liked,handleLike,handleCart}) {
             </div>
           </div>
           <div className={styles.arrows}>
-            <i class="fa-solid fa-arrow-left"></i>
-            <i class="fa-solid fa-arrow-right"></i>
+            <i className="fa-solid fa-arrow-left"></i>
+            <i className="fa-solid fa-arrow-right"></i>
           </div>
         </div>
         <div className={styles.mainContainer}>
@@ -96,7 +96,7 @@ function FlashSales({liked,handleLike,handleCart}) {
                     <div className={styles.rightCart}>
                       <div className={styles.hedding}>
                         <h4>{product.name}</h4>
-                        <i class="fa-solid fa-xmark" onClick={() => setClickedId(null)}></i>
+                        <i className="fa-solid fa-xmark" onClick={() => setClickedId(null)}></i>
                       </div>
                         <div className={styles.stars}>
                             {product.stars}
