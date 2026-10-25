@@ -108,6 +108,15 @@
   font-size: var(--text-lg);
 }
 
+.socials a,
+.storeBtns a {
+  color: inherit;
+}
+
+.storeBtns a {
+  display: block;
+}
+
 .socials img {
   width: 22px;
   height: 22px;

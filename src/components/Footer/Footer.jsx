@@ -75,16 +75,16 @@ export default function Footer() {
           <div className={styles.appBox}>
             <img src="/assets/photos/Qrcode 1.png" alt="QR Code" className={styles.qr} />
             <div className={styles.storeBtns}>
-              <img src="/assets/photos/png-transparent-google-play-store-logo-google-play-app-store-android-wallets-text-label-logo.png" alt="Google Play" />
-              <img src="/assets/photos/AppStore.png" alt="App Store" />
+              <a href="https://play.google.com" target="_blank" rel="noopener noreferrer"><img src="/assets/photos/png-transparent-google-play-store-logo-google-play-app-store-android-wallets-text-label-logo.png" alt="Google Play" /></a>
+              <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer"><img src="/assets/photos/AppStore.png" alt="App Store" /></a>
             </div>
           </div>
           <div className={styles.socials}>
-             <i className="fa-brands fa-facebook-f"></i>
-             <i className="fa-brands fa-instagram"></i>
-             <i className="fa-brands fa-twitter"></i>  
-             <i className="fa-brands fa-linkedin-in"></i>
-          </div>      
+             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fa-brands fa-facebook-f"></i></a>
+             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="fa-brands fa-instagram"></i></a>
+             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i className="fa-brands fa-twitter"></i></a>
+             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fa-brands fa-linkedin-in"></i></a>
+             </div>      
         </div>
 
       </div>
