@@ -1,7 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useApp } from "../../context/AppContext";
 import styles from "./checkout.module.css";
 
-export default function Checkout({ cart: initialCart }) {
+const parsePrice = value =>
+  parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
+
+export default function Checkout() {
+    const { cart, clearCart } = useApp();
     const [paymentMethod, setPaymentMethod] = useState("bank");
     const [coupon, setCoupon] = useState("");
 
@@ -11,43 +16,39 @@ export default function Checkout({ cart: initialCart }) {
     alert(`Coupon applied: ${coupon}`);
     };
 
-    const handlePlaceOrder = () => {
-    alert(`Order placed with payment method: ${paymentMethod}`);
+    const [orderPlaced, setOrderPlaced] = useState(false);
+
+    const handlePlaceOrder = e => {
+      e.preventDefault();
+      if (cart.length === 0) return;
+      clearCart();
+      setOrderPlaced(true);
     };
-    const [cart, setCart] = useState(() =>
-    (initialCart || []).map(item => ({
-      ...item,
-      price:
-        typeof item.price === "number"
-          ? `$${item.price}`
-          : item.price || "$0",
-      quantity: item.quantity || 1,
-    }))
+
+  const subtotal = cart.reduce(
+    (acc, item) => acc + parsePrice(item.price) * (item.quantity || 1),
+    0
   );
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
-  const subtotal = cart.reduce((acc, item) => {
-    const price = parseFloat(
-      (item.price != null ? item.price.toString() : "0").replace("$", "")
-    ) || 0;
-    return acc + price * item.quantity;
-  }, 0);
-
-  const filteredCart = cart.filter(item => {
-    const price = parseFloat(
-      (item.price != null ? item.price.toString() : "0").replace("$", "")
-    ) || 0;
-    return price > 0;
-  });
+  if (orderPlaced) {
+    return (
+      <div className={styles.checkout}>
+        <div className={styles.left}>
+          <h2>Thank you!</h2>
+          <p>
+            Your order has been placed ({paymentMethod === "bank" ? "Bank" : "Cash on delivery"}).
+            A confirmation will be sent to your email.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.checkout}>
       <div className={styles.left}>
         <h2>Billing Details</h2>
-        <form className={styles.form}>
+        <form id="checkout-form" className={styles.form} onSubmit={handlePlaceOrder}>
           <label htmlFor="first-name">First Name</label><br/>
           <input id="first-name" type="text" name="firstName" required /><br/>
 
@@ -79,20 +80,27 @@ export default function Checkout({ cart: initialCart }) {
       </div>
 
       <div className={styles.right}>
-        {filteredCart.length === 0 ? (
+        {cart.length === 0 ? (
           <p>Your cart is empty</p>
         ) : (
-          filteredCart.map(item => (
-            <div key={item.id} className={styles.cartItem}>
-              <img
-                src={item.image || "/assets/default.png"}
-                alt={item.title}
-                className={styles.img}
-              />
-              <span className={styles.name}>{item.title}</span>
-              <span className={styles.price}>{item.price}</span>
-            </div>
-          ))
+          cart.map(item => {
+            const qty = item.quantity || 1;
+            const name = item.name || item.title;
+            const lineTotal = parsePrice(item.price) * qty;
+            return (
+              <div key={item.id} className={styles.cartItem}>
+                <img
+                  src={item.img || item.image || "/assets/default.png"}
+                  alt={name}
+                  className={styles.img}
+                />
+                <span className={styles.name}>
+                  {name} <small className={styles.qty}>x{qty}</small>
+                </span>
+                <span className={styles.price}>${lineTotal.toFixed(2)}</span>
+              </div>
+            );
+          })
         )}
         <div className={styles.price}>
           <div className={styles.cartTotalRow}>
@@ -148,12 +156,17 @@ export default function Checkout({ cart: initialCart }) {
           onChange={handleCouponChange}
           className={styles.couponInput}
         />
-        <button className={styles.applyBtn} onClick={handleApplyCoupon}>
+        <button type="button" className={styles.applyBtn} onClick={handleApplyCoupon}>
           Apply Coupon
         </button>
       </div>
 
-      <button className={styles.placeOrderBtn} onClick={handlePlaceOrder}>
+      <button
+        type="submit"
+        form="checkout-form"
+        className={styles.placeOrderBtn}
+        disabled={cart.length === 0}
+      >
         Place Order
       </button>
     </div>

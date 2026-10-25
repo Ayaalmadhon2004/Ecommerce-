@@ -250,3 +250,9 @@
     max-width: 100%;
   }
 }
+
+.qty {
+  color: #666;
+  font-size: 14px;
+  margin-left: 6px;
+}
