@@ -1,0 +1,15 @@
+.contact {
+  max-width: 800px;
+  margin: 60px auto;
+  padding: 0 16px;
+  line-height: 1.7;
+}
+
+.contact h1 {
+  margin-bottom: 20px;
+}
+
+.contact ul {
+  list-style: none;
+  padding: 0;
+}
