@@ -67,6 +67,7 @@ function Home() {
       <ExploreProducts
         liked={likes.explore}
         handleLike={(id) => handleLike("explore", id)}
+        handleCart={handleCart}
         handleProductDetails={handleProductDetails}
       />
       <NewArrival />
