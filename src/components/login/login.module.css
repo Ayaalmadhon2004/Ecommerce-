@@ -80,6 +80,21 @@
   cursor: pointer;
 }
 
+.backLink {
+  font-size: var(--text-md);
+  color: var(--red);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.success {
+  color: green;
+  font-size: var(--text-sm);
+  margin-top: var(--space-2);
+}
+
 .error {
   color: var(--red);
   font-size: var(--text-sm);

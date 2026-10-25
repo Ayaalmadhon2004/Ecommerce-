@@ -1,24 +1,28 @@
 // src/components/cart/Cart.jsx
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useApp } from "../../context/AppContext";
+import { useApp, COUPONS } from "../../context/AppContext";
 import styles from "./cart.module.css";
-
-const COUPONS = { SAVE10: 0.1 };
 
 const parsePrice = (value) =>
   parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
 
 export default function Cart() {
   const navigate = useNavigate();
-  const { cart, updateQuantity, removeFromCart, clearCart } = useApp();
+  const {
+    cart,
+    updateQuantity,
+    removeFromCart,
+    clearCart,
+    appliedCode,
+    applyCoupon: applyCouponCode,
+  } = useApp();
 
   const items = cart
     .map((item) => ({ ...item, unitPrice: parsePrice(item.price) }))
     .filter((item) => item.unitPrice > 0);
 
   const [couponInput, setCouponInput] = useState("");
-  const [appliedCode, setAppliedCode] = useState(null);
   const [couponError, setCouponError] = useState("");
 
   const subtotal = items.reduce(
@@ -29,14 +33,7 @@ export default function Cart() {
   const total = subtotal - discount;
 
   const applyCoupon = () => {
-    const code = couponInput.trim().toUpperCase();
-    if (COUPONS[code]) {
-      setAppliedCode(code);
-      setCouponError("");
-    } else {
-      setAppliedCode(null);
-      setCouponError("Invalid coupon code");
-    }
+    setCouponError(applyCouponCode(couponInput) ? "" : "Invalid coupon code");
   };
 
   return (
