@@ -5,10 +5,37 @@ import styles from "./checkout.module.css";
 const parsePrice = value =>
   parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
 
+const BILLING_KEY = "billingInfo";
+const EMPTY_BILLING = {
+  firstName: "",
+  companyName: "",
+  streetName: "",
+  apartment: "",
+  townCity: "",
+  phoneNumber: "",
+  email: "",
+};
+
+const loadBilling = () => {
+  try {
+    const saved = JSON.parse(localStorage.getItem(BILLING_KEY));
+    return saved ? { ...EMPTY_BILLING, ...saved } : EMPTY_BILLING;
+  } catch {
+    return EMPTY_BILLING;
+  }
+};
+
 export default function Checkout() {
     const { cart, clearCart, appliedCode, applyCoupon, clearCoupon } = useApp();
     const [paymentMethod, setPaymentMethod] = useState("bank");
     const [coupon, setCoupon] = useState("");
+
+    const subtotal = cart.reduce(
+      (acc, item) => acc + parsePrice(item.price) * (item.quantity || 1),
+      0
+    );
+    const discount = appliedCode ? subtotal * COUPONS[appliedCode] : 0;
+    const total = subtotal - discount;
 
     const handleCouponChange = e => setCoupon(e.target.value);
 
@@ -18,22 +45,57 @@ export default function Checkout() {
       setCouponError(applyCoupon(coupon) ? "" : "Invalid coupon code");
     };
 
+    const [billing, setBilling] = useState(loadBilling);
+    const [saveInfo, setSaveInfo] = useState(() => {
+      try {
+        return localStorage.getItem(BILLING_KEY) !== null;
+      } catch {
+        return false;
+      }
+    });
     const [orderPlaced, setOrderPlaced] = useState(false);
+    const [confirmation, setConfirmation] = useState(null);
+
+    const handleBillingChange = e => {
+      const { name, value } = e.target;
+      setBilling(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleSaveInfoChange = e => {
+      const checked = e.target.checked;
+      setSaveInfo(checked);
+      if (!checked) {
+        try {
+          localStorage.removeItem(BILLING_KEY);
+        } catch {
+          /* storage unavailable */
+        }
+      }
+    };
 
     const handlePlaceOrder = e => {
       e.preventDefault();
       if (cart.length === 0) return;
+      if (saveInfo) {
+        try {
+          localStorage.setItem(BILLING_KEY, JSON.stringify(billing));
+        } catch {
+          /* storage unavailable */
+        }
+      }
+      setConfirmation({
+        firstName: billing.firstName,
+        address: [billing.streetName, billing.apartment, billing.townCity]
+          .map(part => part.trim())
+          .filter(Boolean)
+          .join(", "),
+        paymentMethod,
+        total,
+      });
       clearCart();
       clearCoupon();
       setOrderPlaced(true);
     };
-
-  const subtotal = cart.reduce(
-    (acc, item) => acc + parsePrice(item.price) * (item.quantity || 1),
-    0
-  );
-  const discount = appliedCode ? subtotal * COUPONS[appliedCode] : 0;
-  const total = subtotal - discount;
 
   if (orderPlaced) {
     return (
@@ -41,9 +103,16 @@ export default function Checkout() {
         <div className={styles.left}>
           <h2>Thank you!</h2>
           <p>
-            Your order has been placed ({paymentMethod === "bank" ? "Bank" : "Cash on delivery"}).
-            A confirmation will be sent to your email.
+            Thank you{confirmation?.firstName ? `, ${confirmation.firstName}` : ""}!
+            Your order has been placed.
           </p>
+          {confirmation?.address && <p>Shipping to: {confirmation.address}</p>}
+          <p>
+            Payment method:{" "}
+            {confirmation?.paymentMethod === "bank" ? "Bank" : "Cash on delivery"}
+          </p>
+          <p>Total: ${(confirmation?.total ?? 0).toFixed(2)}</p>
+          <p>A confirmation will be sent to your email.</p>
         </div>
       </div>
     );
@@ -55,28 +124,34 @@ export default function Checkout() {
         <h2>Billing Details</h2>
         <form id="checkout-form" className={styles.form} onSubmit={handlePlaceOrder}>
           <label htmlFor="first-name">First Name</label>
-          <input id="first-name" type="text" name="firstName" required />
+          <input id="first-name" type="text" name="firstName" value={billing.firstName} onChange={handleBillingChange} required />
 
           <label htmlFor="company-name">Company Name</label>
-          <input id="company-name" type="text" name="companyName" />
+          <input id="company-name" type="text" name="companyName" value={billing.companyName} onChange={handleBillingChange} />
 
           <label htmlFor="street-name">Street Name</label>
-          <input id="street-name" type="text" name="streetName" required />
+          <input id="street-name" type="text" name="streetName" value={billing.streetName} onChange={handleBillingChange} required />
 
           <label htmlFor="apartment">Apartment, floor, etc (optional)</label>
-          <input id="apartment" type="text" name="apartment" />
+          <input id="apartment" type="text" name="apartment" value={billing.apartment} onChange={handleBillingChange} />
 
           <label htmlFor="town-city">Town/City</label>
-          <input id="town-city" type="text" name="townCity" required />
+          <input id="town-city" type="text" name="townCity" value={billing.townCity} onChange={handleBillingChange} required />
 
           <label htmlFor="phone-number">Phone Number</label>
-          <input id="phone-number" type="tel" name="phoneNumber" required />
+          <input id="phone-number" type="tel" name="phoneNumber" value={billing.phoneNumber} onChange={handleBillingChange} required />
 
           <label htmlFor="email">Email Address</label>
-          <input id="email" type="email" name="email" required />
+          <input id="email" type="email" name="email" value={billing.email} onChange={handleBillingChange} required />
 
           <div className={styles.checkbox}>
-            <input type="checkbox" id="saveInfo" className={styles.check}/>
+            <input
+              type="checkbox"
+              id="saveInfo"
+              className={styles.check}
+              checked={saveInfo}
+              onChange={handleSaveInfoChange}
+            />
             <label htmlFor="saveInfo">
               Save this information for faster check-out next time
             </label>
