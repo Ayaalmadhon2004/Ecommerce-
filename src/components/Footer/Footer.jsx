@@ -1,6 +1,21 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import styles from "./footer.module.css";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("");
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      setStatus("Please enter your email");
+      return;
+    }
+    setStatus("Subscribed!");
+    setEmail("");
+  };
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -10,10 +25,16 @@ export default function Footer() {
           <h2>Exclusive</h2>
           <p className={styles.subtitle}>Subscribe</p>
           <p className={styles.text}>Get 10% off your first order</p>
-          <div className={styles.inputBox}>
-            <input type="email" placeholder="Enter your email" />
-            <button><i className="fa-solid fa-paper-plane"></i></button>
-          </div>
+          <form className={styles.inputBox} onSubmit={handleSubscribe}>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setStatus(""); }}
+            />
+            <button type="submit" aria-label="Subscribe"><i className="fa-solid fa-paper-plane"></i></button>
+          </form>
+          {status && <p className={styles.status} role="status">{status}</p>}
         </div>
 
         {/* Support */}
@@ -28,11 +49,11 @@ export default function Footer() {
         <div className={styles.column}>
           <h2>Account</h2>
           <ul>
-            <li>My Account</li>
-            <li>Login / Register</li>
-            <li>Cart</li>
-            <li>Wishlist</li>
-            <li>Shop</li>
+            <li><Link to="/login">My Account</Link></li>
+            <li><Link to="/login">Login / Register</Link></li>
+            <li><Link to="/cart">Cart</Link></li>
+            <li><Link to="/wishlist">Wishlist</Link></li>
+            <li><Link to="/">Shop</Link></li>
           </ul>
         </div>
 
@@ -40,10 +61,10 @@ export default function Footer() {
         <div className={styles.column}>
           <h2>Quick Link</h2>
           <ul>
-            <li>Privacy Policy</li>
-            <li>Terms Of Use</li>
-            <li>FAQ</li>
-            <li>Contact</li>
+            <li><Link to="/privacy">Privacy Policy</Link></li>
+            <li><Link to="/terms">Terms Of Use</Link></li>
+            <li><Link to="/faq">FAQ</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
           </ul>
         </div>
 
@@ -54,16 +75,16 @@ export default function Footer() {
           <div className={styles.appBox}>
             <img src="/assets/photos/Qrcode 1.png" alt="QR Code" className={styles.qr} />
             <div className={styles.storeBtns}>
-              <img src="/assets/photos/png-transparent-google-play-store-logo-google-play-app-store-android-wallets-text-label-logo.png" alt="Google Play" />
-              <img src="/assets/photos/AppStore.png" alt="App Store" />
+              <a href="https://play.google.com" target="_blank" rel="noopener noreferrer"><img src="/assets/photos/png-transparent-google-play-store-logo-google-play-app-store-android-wallets-text-label-logo.png" alt="Google Play" /></a>
+              <a href="https://apps.apple.com" target="_blank" rel="noopener noreferrer"><img src="/assets/photos/AppStore.png" alt="App Store" /></a>
             </div>
           </div>
           <div className={styles.socials}>
-             <i className="fa-brands fa-facebook-f"></i>
-             <i className="fa-brands fa-instagram"></i>
-             <i className="fa-brands fa-twitter"></i>  
-             <i className="fa-brands fa-linkedin-in"></i>
-          </div>      
+             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i className="fa-brands fa-facebook-f"></i></a>
+             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i className="fa-brands fa-instagram"></i></a>
+             <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i className="fa-brands fa-twitter"></i></a>
+             <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fa-brands fa-linkedin-in"></i></a>
+             </div>      
         </div>
 
       </div>

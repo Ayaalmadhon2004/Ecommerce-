@@ -1,0 +1,14 @@
+.page {
+  max-width: 800px;
+  margin: var(--space-6) auto;
+  padding: 0 var(--inset);
+}
+
+.title {
+  margin-bottom: var(--space-4);
+}
+
+.text {
+  margin-bottom: var(--space-3);
+  line-height: 1.6;
+}
