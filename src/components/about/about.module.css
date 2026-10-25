@@ -1,10 +1,10 @@
 .about {
   max-width: 800px;
-  margin: 60px auto;
-  padding: 0 16px;
+  margin: var(--space-9) auto;
+  padding: 0 var(--space-4);
   line-height: 1.7;
 }
 
 .about h1 {
-  margin-bottom: 20px;
+  margin-bottom: var(--space-5);
 }
