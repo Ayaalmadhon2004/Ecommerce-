@@ -1,0 +1,245 @@
+/*
+  Reusable building blocks. Components pull these in with
+  `composes: <name> from "../../styles/shared.module.css";`
+  so each pattern is defined once.
+*/
+
+/* ---------- Layout ---------- */
+
+/* Full-width block whose content is centered in --container */
+.inset {
+  padding-inline: var(--inset);
+}
+
+/* Standard page section */
+.section {
+  padding: var(--section-top) var(--inset) 0;
+  margin-bottom: var(--section-gap);
+}
+
+/* ---------- Section heading ---------- */
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.label h3 {
+  color: var(--red);
+  font-weight: var(--weight-600);
+  font-size: var(--text-md);
+  line-height: 20px;
+}
+
+.labelBar {
+  flex: none;
+  width: 20px;
+  height: 40px;
+  background-color: var(--red);
+  border-radius: var(--radius);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-4) var(--space-6);
+}
+
+.head h2 {
+  font-weight: var(--weight-600);
+  font-size: var(--text-title);
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+}
+
+.arrows {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.arrows i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-round);
+  background-color: var(--gray-bg);
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .arrows {
+    display: none;
+  }
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--btn-height);
+  padding: var(--space-4) var(--space-8);
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--red);
+  color: var(--white);
+  font-size: var(--text-md);
+  font-weight: var(--weight-500);
+  cursor: pointer;
+  transition: background-color var(--transition);
+}
+
+.btn:hover {
+  background-color: var(--red-dark);
+}
+
+/* ---------- Product grid + card ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-6) var(--space-5);
+  margin-top: var(--space-6);
+}
+
+.card {
+  position: relative;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.imageBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--card-img-height);
+  margin-bottom: var(--space-4);
+  background-color: var(--gray-bg);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.imageBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: var(--space-5);
+}
+
+.cardBody h4 {
+  font-weight: var(--weight-500);
+  font-size: var(--text-md);
+  line-height: 24px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.prices {
+  display: flex;
+  gap: var(--space-3);
+  margin: var(--space-2) 0;
+}
+
+.price {
+  font-weight: var(--weight-500);
+  font-size: var(--text-md);
+  line-height: 24px;
+  color: var(--red);
+}
+
+.prevPrice {
+  color: var(--gray);
+  text-decoration: line-through;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.discount {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius);
+  background-color: var(--red);
+  color: var(--white);
+  font-size: var(--text-xs);
+  line-height: 18px;
+}
+
+/* an absent discount renders an empty node; do not draw an empty badge */
+.discount:empty {
+  display: none;
+}
+
+.actions {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.actions i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-circle);
+  height: var(--icon-circle);
+  border-radius: var(--radius-round);
+  background-color: var(--white);
+  cursor: pointer;
+}
+
+.liked {
+  color: var(--red);
+  transition: color var(--transition);
+}
+
+.notLiked {
+  color: var(--gray);
+  transition: color var(--transition);
+}
+
+.addToCart {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-3);
+  transform: translateX(-50%);
+  padding: var(--space-3) var(--space-5);
+  border: none;
+  background-color: var(--black);
+  color: var(--white);
+  white-space: nowrap;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.imageBox:hover .addToCart {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-10px);
+}
+
+/* touch screens have no hover: always show the button */
+@media (hover: none) {
+  .addToCart {
+    opacity: 1;
+  }
+}
