@@ -57,3 +57,20 @@ test("AppContext handleCart adds a product and increments quantity", () => {
   fireEvent.click(screen.getByText("add"));
   expect(screen.getByTestId("count")).toHaveTextContent("2");
 });
+
+test("clicking the header heart opens the wishlist with liked items", async () => {
+  localStorage.setItem(
+    "likes",
+    JSON.stringify({ flash: [1], selling: [], explore: [] })
+  );
+  render(<App />);
+
+  fireEvent.click(screen.getByRole("link", { name: "Wishlist" }));
+
+  expect(
+    await screen.findByRole("heading", { name: "Wishlist (1)" })
+  ).toBeInTheDocument();
+  expect(
+    await screen.findByRole("heading", { name: "Flash Sales (1)" })
+  ).toBeInTheDocument();
+});

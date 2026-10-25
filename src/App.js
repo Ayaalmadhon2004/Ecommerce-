@@ -22,6 +22,7 @@ import Checkout from "./components/checkout/Checkout.jsx";
 import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
 import About from "./components/about/About.jsx";
 import Contact from "./components/contact/Contact.jsx";
+import Wishlist from "./components/wishlist/Wishlist.jsx";
 
 
 function HeaderWithLikes() {
@@ -84,6 +85,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/productDetails" element={<ProductDetails />} />
