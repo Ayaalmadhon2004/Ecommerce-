@@ -262,3 +262,15 @@
   font-size: var(--text-sm);
   margin-left: var(--space-1);
 }
+
+.couponError {
+  color: var(--red);
+  font-size: var(--text-sm);
+  margin: 4px 0 0;
+}
+
+.couponSuccess {
+  color: var(--success);
+  font-size: var(--text-sm);
+  margin: 4px 0 0;
+}
