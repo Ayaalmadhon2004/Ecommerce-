@@ -1,217 +1,116 @@
-.newArrival{
-    padding:var(--main-padding);
-    margin-bottom:var(--margin-bottom);
+.newArrival {
+    composes: section from "../../styles/shared.module.css";
 }
-.rectangle{
-    background-color:var(--red);
-    width:20px;
-    height:40px;
-    border-radius:4px;
+
+.topHeader {
+    composes: label from "../../styles/shared.module.css";
 }
-.topHeader{
-    display:flex;
-    align-items: center;
-    gap:16px;
+
+.rectangle {
+    composes: labelBar from "../../styles/shared.module.css";
 }
-.topHeader h3{
-    color:var(--red);
-    font-weight:600;
-    font-size:var(--text-16);
-    line-height:20px;
+
+.mainHeader {
+    composes: head from "../../styles/shared.module.css";
 }
-.mainHeader{
+
+.mainContainer {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+    color: var(--white);
+}
+
+.right {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(284px, 1fr));
+    gap: var(--space-5);
+    min-width: 0;
+}
+
+.bottom {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
+}
+
+/* the four promo tiles share one look */
+.left,
+.top,
+.subLeft,
+.subRight {
     display: flex;
-    align-items: center;
-    gap:220px;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: var(--space-2);
+    min-width: 0;
+    padding: var(--space-6);
+    border-radius: var(--radius);
+    background-color: var(--black);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    color: var(--white);
 }
-.mainContainer{
-    display:flex;
-    align-items: center;
-    gap:20px;
-}
-.mainContainer h3{
-    font-weight: 600;
-    font-size:24px;
-    line-height:24px;
-    letter-spacing:3%;
-}
-.mainContainer p{
-    font-weight: 400;
-    font-size:14px;
-    line-height:21px;
-    margin:.5rem 0 .5rem 0;
-}
-.mainContainer .btn{
-    width:81px;
-    height:24px;
-    border: none;
-    background-color:transparent;
-    color:var(--white);
-    display: flex;
-    justify-content: start;
-}
-.mainContainer .btn:after{
-    width:81px;
-    border:1px dotted var(--white);
-    
-}
-.mainHeader h2{
-    margin:1rem 0 1rem 0;
-    font-weight: 600;
-    font-size:36px;
-    line-height:48px;
-}
-.bottom{
-    display:flex;
-    align-items: center;
-    gap:20px;
-}
-.left{
+
+.left {
+    min-height: 600px;
     background-image: url('../../../public/assets/photos/pc.webp');
-    width:570px;
-    height:600px;
-    border-radius:4px;
-    background-color: var(--black);
-    color:var(--white);
-    padding:480px 0 0 40px;
 }
-.subLeft{
-    background-image: url('../../../public/assets/photos/speaker.webp');
-    width:270px;
-    height:284px;
-    border-radius:4px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: var(--black);
-    background-position-x: center;
-    color:var(--white);
-    padding:180px 0 0 20px;
 
+.top {
+    background-image: url('../../../public/assets/photos/speaker.webp');
 }
-.subRight{
+
+.subLeft {
+    background-image: url('../../../public/assets/photos/speaker.webp');
+}
+
+.subRight {
     background-image: url('../../../public/assets/photos/Frame 706.png');
-    width:270px;
-    height:284px;
-    border-radius:4px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: var(--black);
-    color:var(--white);
-    padding:180px 0 0 20px;
-
-}
-.top{
-    background-image: url('../../../public/assets/photos/speaker.webp');
-    width:570px;
-    height:284px;
-    border-radius:4px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: var(--black);
-    margin-bottom:35px;
-    color:var(--white);
-    padding:180px 0 0 20px;
-}
-@media screen and (max-width:1200px){
-   .newArrival{
-    padding:var(--padding-1200);
-   }
 }
 
-@media screen and (max-width:992px){
-   .newArrival{
-    padding:var(--padding-992);
-   }
-   .mainContainer{
-    display:flex;
-    flex-direction: column;
-    margin-left:-100px;
-   }
-   .subRight,.top,.subLeft{
-    padding:180px 0 0 60px;  
+.mainContainer h3 {
+    font-weight: var(--weight-600);
+    font-size: var(--text-xl);
+    line-height: 1.2;
+    letter-spacing: 0.03em;
+}
+
+.mainContainer p {
+    font-weight: var(--weight-400);
+    font-size: var(--text-sm);
+    line-height: 21px;
+}
+
+.mainContainer .btn {
+    padding: 0 0 var(--space-1);
+    border: none;
+    border-bottom: 1px solid var(--white);
+    background-color: transparent;
+    color: var(--white);
+    font-size: var(--text-md);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .mainContainer {
+        grid-template-columns: 1fr;
     }
-    .left{
-    padding:480px 0 0 60px;
-    width:800px;
-    height:600px;
-    }
-    .subLeft,.subRight{
-    width:385px;
-    margin-left:7px;
-    }
-    .top{
-        width:800px;
-        margin-left:7px;
+
+    .left {
+        min-height: 420px;
     }
 }
 
-@media screen and (max-width:768px){
-    .newArrival{
-    padding:var(--padding-768);
+@media screen and (max-width: 480px) {
+    .bottom {
+        grid-template-columns: 1fr;
     }
 
-    .mainContainer{
-    display:flex;
-    flex-direction: column;
-    margin-left:-50px;
-    }
-
-    .left{
-    padding:480px 0 0 50px;
-    width:85%;
-    }
-    .subLeft{
-        margin-left:00px;
-        width:290px;
-        padding:180px 0 0 50px;  
-
-    }
-    .subRight{
-        width:290px;
-        padding:180px 0 0 50px;  
-    }
-    .top{
-    width:600px;
-    margin-left:0px;
-    padding:180px 0 0 50px;  
-    }
-}
-
-@media screen and (max-width:480px){
-    .newArrival{
-    padding:var(--padding-480);
-    }
-
-    .mainContainer{
-    display:flex;
-    flex-direction: column;
-    margin-left:-50px;
-    }
-    
-    .left{
-    padding:480px 0 0 10px;
-    width:420px;
-    }
-    .subLeft{
-    margin-left:0px;
-    width:205px;
-    padding:180px 0 0 10px;  
-    }
-    .subRight{
-    width:205px;
-    padding:180px 0 0 10px;  
-    }
-    .top{
-    width:420px;
-    margin-left:10px;
-    padding:180px 0 0 10px;  
-    }
-    .bottom{
-    gap:10px;
-    margin-left:10px;
-
+    .left {
+        min-height: 360px;
     }
 }

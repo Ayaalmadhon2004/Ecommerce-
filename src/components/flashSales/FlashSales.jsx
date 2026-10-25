@@ -129,7 +129,7 @@ function FlashSales({liked,handleLike,handleCart}) {
 }
 
 export default FlashSales;*/
-import React, { useState, useEffect  } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Countdown from "react-countdown";
 import styles from "./FlashSales.module.css";
 import Stars from "../Stars/Stars";
@@ -138,6 +138,30 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
   const [clickedId, setClickedId] = useState(null);
   const [flashProducts, setFlashProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const trackRef = useRef(null);
+  const [edges, setEdges] = useState({ start: true, end: false });
+
+  const updateEdges = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const start = el.scrollLeft <= 1;
+    const end = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
+    setEdges((prev) =>
+      prev.start === start && prev.end === end ? prev : { start, end }
+    );
+  }, []);
+
+  const scrollTrack = (dir) => {
+    const el = trackRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir * el.clientWidth * 0.8, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    updateEdges();
+    window.addEventListener("resize", updateEdges);
+    return () => window.removeEventListener("resize", updateEdges);
+  }, [updateEdges, loading, flashProducts]);
 
   // جلب المنتجات من FakeStore API
   useEffect(() => {
@@ -180,12 +204,6 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
         <div className={styles.mainHeader}>
           <h2>Flash Sales</h2>
           <div
-            style={{
-              display: "flex",
-              gap: "20px",
-              fontSize: "24px",
-              fontWeight: "bold",
-            }}
             className={styles.countdown}
           >
             <div>
@@ -209,12 +227,24 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
             </div>
           </div>
           <div className={styles.arrows}>
-            <i className="fa-solid fa-arrow-left"></i>
-            <i className="fa-solid fa-arrow-right"></i>
+            <i
+              className={`fa-solid fa-arrow-left ${edges.start ? styles.arrowDisabled : ""}`}
+              role="button"
+              aria-label="Scroll left"
+              aria-disabled={edges.start}
+              onClick={() => scrollTrack(-1)}
+            ></i>
+            <i
+              className={`fa-solid fa-arrow-right ${edges.end ? styles.arrowDisabled : ""}`}
+              role="button"
+              aria-label="Scroll right"
+              aria-disabled={edges.end}
+              onClick={() => scrollTrack(1)}
+            ></i>
           </div>
         </div>
 
-        <div className={styles.mainContainer}>
+        <div className={styles.mainContainer} ref={trackRef} onScroll={updateEdges}>
           {flashProducts.map((product) => (
             <div className={styles.card} key={product.id} onClick={() => handleProductDetails(product)}>
               <div className={styles.imagContainer}>
@@ -227,17 +257,26 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
                         ? styles.liked
                         : styles.notLiked
                     }`}
-                    onClick={() => handleLike(product.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLike(product.id);
+                    }}
                   ></i>
 
                   <i
                     className="fa-solid fa-eye"
-                    onClick={() => handleClick(product.id)}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleClick(product.id);
+                    }}
                   ></i>
                 </div>
                 <button
                   className={styles.addToCart}
-                  onClick={() => handleCart(product)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCart(product);
+                  }}
                 >
                   Add To Cart
                 </button>
@@ -255,7 +294,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
               </div>
 
               {clickedId === product.id && (
-                <div className={styles.cart}>
+                <div className={styles.cart} onClick={(e) => e.stopPropagation()}>
                   <div className={styles.leftCart}>
                     <img src={product.image} alt={product.title} />
                   </div>

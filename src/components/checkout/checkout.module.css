@@ -1,10 +1,10 @@
 /* Checkout Page Container */
 .checkout {
-  margin: 5rem 0;
-  padding: var(--main-padding);
+  margin: var(--space-10) 0;
+  padding: 0 var(--inset);
   display: flex;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: var(--space-6);
   font-family: 'Arial', sans-serif;
 }
 
@@ -15,37 +15,37 @@
 
 .left h2 {
   font-weight: 600;
-  font-size: 36px;
+  font-size: var(--text-2xl);
   line-height: 1.2;
   letter-spacing: 0.05em;
-  margin-bottom: 24px;
-  color: #222;
+  margin-bottom: var(--space-5);
+  color: var(--gray-dark);
 }
 
 /* Form Elements */
 .form label {
   display: block;
   font-weight: 500;
-  font-size: 16px;
-  color: #666;
-  margin-bottom: 8px;
+  font-size: var(--text-md);
+  color: var(--gray-muted);
+  margin-bottom: var(--space-2);
 }
 
 .form input {
   width: 100%;
   max-width: 470px;
   height: 50px;
-  padding: 0 12px;
-  border-radius: 8px;
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  margin-bottom: 24px;
-  font-size: 1rem;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-lg);
+  background-color: var(--gray-bg);
+  border: 1px solid var(--gray-border);
+  margin-bottom: var(--space-5);
+  font-size: var(--text-md);
   transition: border 0.3s ease;
 }
 
 .form input:focus {
-  border-color: #0070f3;
+  border-color: var(--link);
   outline: none;
 }
 
@@ -54,66 +54,71 @@
   flex: 1 1 350px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-5);
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
 }
 
 .right img {
+  flex: none;
   width: 54px;
   height: 54px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-right: 16px;
+  border-radius: var(--radius-lg);
 }
 
 .name {
   font-weight: 500;
-  font-size: 16px;
-  color: #333;
-  margin-right:50px;
-  
-}
-.cartItem span:nth-of-type(1) {
-  width: 220px;
-  display: inline-block;
+  font-size: var(--text-md);
+  color: var(--gray-dark);
+  flex: 1;
+  min-width: 0;
 }
 
 .price {
   font-weight: 600;
-  font-size: 16px;
-  color: #111;
-}
-.cartTotalRow span:first-child{
-    width:40px;
+  font-size: var(--text-md);
+  color: var(--black);
 }
 /* Checkbox & Radio Inputs */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
 .checkbox input,
 .radioLabel input[type="radio"] {
   width: 20px;
   height: 20px;
-  margin-right: 12px;
+  margin-right: 0;
   cursor: pointer;
 }
 
 .radioLabel {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
   font-weight: 500;
   cursor: pointer;
 }
 
 .radioLabel span {
   flex: 1;
-  color: #333;
+  color: var(--gray-dark);
 }
 
 .radioLabel input[type="radio"] {
-  accent-color: #0070f3;
+  accent-color: var(--link);
 }
 
 .icons {
   display: flex;
-  gap: 5px;
+  gap: var(--space-1);
 }
 
 .icons img {
@@ -123,31 +128,32 @@
 
 /* Cart Total Box */
 .cartTotalBox {
-  background-color: #fff;
-  padding: 25px 20px;
-  border-radius: 12px;
+  background-color: var(--white);
+  padding: var(--space-5) var(--space-4);
+  border-radius: var(--radius-lg);
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-  max-width: 80px;
-  margin-top: 20px;
+  width: 100%;
+  margin-top: var(--space-4);
 }
 
 .cartTotalBox h3 {
-  font-size: 1.5rem;
-  margin-bottom: 15px;
-  color: #222;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 8px;
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-4);
+  color: var(--gray-dark);
+  border-bottom: 1px solid var(--gray-bg);
+  padding-bottom: var(--space-2);
 }
 
 .cartTotalRow {
   display: flex;
-  gap:300px;
+  justify-content: space-between;
+  gap: var(--space-4);
   align-items: center;
-  margin: 12px 0;
-  font-size: 1rem;
-  color: #555;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #eee;
+  margin: var(--space-3) 0;
+  font-size: var(--text-md);
+  color: var(--gray-dark);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--gray-bg);
 }
 
 .cartTotalRow span:first-child {
@@ -156,7 +162,7 @@
 
 .cartTotalRow span:last-child {
   font-weight: 600;
-  color: #111;
+  color: var(--black);
 }
 
 /* Buttons */
@@ -164,7 +170,7 @@
 .placeOrderBtn,
 .applyBtn {
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -172,14 +178,14 @@
 
 .checkoutBtn {
   width: 100%;
-  background-color: #0070f3;
-  color: #fff;
-  padding: 14px 0;
-  font-size: 1rem;
+  background-color: var(--link);
+  color: var(--white);
+  padding: var(--space-3) 0;
+  font-size: var(--text-md);
 }
 
 .checkoutBtn:hover {
-  background-color: #005bb5;
+  background-color: var(--link);
 }
 
 .placeOrderBtn {
@@ -187,58 +193,58 @@
   max-width: 190px;
   height: 56px;
   background-color: var(--red);
-  color: #fff;
+  color: var(--white);
 }
 
 .placeOrderBtn:hover {
-  background-color: #c9302c;
+  background-color: var(--red-dark);
 }
 
 .applyBtn {
   background-color: var(--red);
-  color: #fff;
-  padding: 10px 16px;
+  color: var(--white);
+  padding: var(--space-2) var(--space-4);
   font-weight: 500;
 }
 
 .applyBtn:hover {
-  background-color: #c9302c;
+  background-color: var(--red-dark);
 }
 
 /* Coupon Section */
 .couponSection {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: var(--space-4);
 }
 
 .couponInput {
   flex: 1;
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 0.95rem;
+  padding: var(--space-3) var(--space-3);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-border);
+  font-size: var(--text-sm);
 }
 
 /* Container & Payment Methods */
 .container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--space-4);
   max-width: 400px;
 }
 
 .paymentMethods {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 /* Responsive */
 @media (max-width: 1024px) {
   .checkout {
     flex-direction: column;
-    gap: 3rem;
+    gap: var(--space-8);
   }
 
   .left,
@@ -252,7 +258,7 @@
 }
 
 .qty {
-  color: #666;
-  font-size: 14px;
-  margin-left: 6px;
+  color: var(--gray-muted);
+  font-size: var(--text-sm);
+  margin-left: var(--space-1);
 }

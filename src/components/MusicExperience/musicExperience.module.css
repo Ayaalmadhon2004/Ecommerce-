@@ -1,131 +1,113 @@
-.musicExperience{
-    padding:60px 0 60px 60px;
-    display:flex;
+.musicExperience {
+    position: relative;
+    display: flex;
     align-items: center;
-    background-color:var(--black);
-    width:76vw;
-    margin-left:210px;
-    margin-bottom:var(--margin-bottom);
-
-}
-.left h2{
-    color:var(--green);
-    font-weight: 600;
-    font-size:16px;
-    line-height:20px;
-    margin-top:20px;
-    width:443px;
-}
-.left p{
-    font-weight: 600;
-    font-size:48px;
-    line-height:60px;
-    letter-spacing:4%;
-    color:var(--white);
-}
-.right img{
-    width:568px;
-    height:330px;
-    padding:37px 0 0 0px;
-    z-index:999;
-    position:relative;
-
+    justify-content: space-between;
+    gap: var(--space-6);
+    margin: 0 var(--inset) var(--section-gap);
+    padding: var(--space-9);
+    background-color: var(--black);
+    overflow: hidden;
 }
 
-.timing{
-    display:flex;
-    gap:24px;
-    margin-top:20px;
-
-}
-.timing li{
-    background-color:var(--white);
-    width:62px;
-    height:62px;
-    border-radius:50%;
-    padding:5px 0 0 2px;
-    text-align: center;
-    font-weight: 600;
-    font-size:16px;
+.left {
+    flex: 1 1 320px;
+    min-width: 0;
 }
 
-.timing span{
-    font-weight: 400;
-    font-size:11px;
-
+.left h2 {
+    color: var(--green);
+    font-weight: var(--weight-600);
+    font-size: var(--text-md);
+    line-height: 20px;
 }
 
-.btn{
-    background-color:var(--green);
-    width:171px;
-    height:56px;
-    padding:16px 48px 16px 48px;
-    gap:10px;
-    margin:20px 0 0 10px;
-    border-radius:4px;
-}
-.right{
-    position:relative;
-}
-.blur{
-    width:500px;
-    height:500px;
-    filter:blur(200px);
-    background-color:var(--white);
-    border-radius:50%;
-    position:absolute;
-}
-@media screen and (max-width:1200px){
-   .musicExperience{
-    padding:50px;
-    margin:0 85px 0 85px;
-    width:86vw;
-   } 
-   .right img{
-    width:460px;
-    }
+.left p {
+    margin-top: var(--space-5);
+    font-weight: var(--weight-600);
+    font-size: var(--text-hero);
+    line-height: 1.25;
+    letter-spacing: 0.04em;
+    color: var(--white);
 }
 
-@media screen and (max-width:992px){
-   .musicExperience{
-    padding:50px;
-    margin:0 105px 0 105px;
-    width:81vw;
-   } 
-   .right img{
-    width:300px;
-    }
+.timing {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-5);
+    margin-top: var(--space-5);
+    list-style: none;
 }
 
-@media screen and (max-width:768px){
-    .musicExperience{
-    padding:var(--padding-768);
-    margin:0 70px 0 70px;
-    width:80%;
-    flex-direction: column; 
-    } 
-    
-    .left, .right {
-        width: 100%;
-    }
-    .right img{
-    width:430px;
-    }
+.timing li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    height: 62px;
+    border-radius: var(--radius-round);
+    background-color: var(--white);
+    font-weight: var(--weight-600);
+    font-size: var(--text-md);
+    line-height: 1.2;
 }
-@media screen and (max-width:480px){
-    .musicExperience{
-    padding:20px 0 0 20px;
-    margin-left:10px;
-    width:400vw;
-    flex-direction: column; 
-    } 
-    
-    .left, .right {
-        width: 100%;
-    }
-    .right img{
-    width:430px;
+
+.timing span {
+    font-weight: var(--weight-400);
+    font-size: var(--text-xs);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--btn-height);
+    margin-top: var(--space-5);
+    padding: var(--space-4) var(--space-8);
+    border-radius: var(--radius);
+    background-color: var(--green);
+    color: var(--black);
+    font-weight: var(--weight-500);
+    cursor: pointer;
+}
+
+.right {
+    position: relative;
+    flex: 1 1 320px;
+    min-width: 0;
+}
+
+.right img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    max-width: 568px;
+    height: auto;
+    margin-left: auto;
+}
+
+.blur {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    height: 500px;
+    transform: translate(-50%, -50%);
+    border-radius: var(--radius-round);
+    background-color: var(--white);
+    filter: blur(200px);
+}
+
+@media screen and (max-width: 768px) {
+    .musicExperience {
+        flex-direction: column;
+        align-items: stretch;
+        padding: var(--space-6);
     }
 
-
+    .right img {
+        margin: 0 auto;
+    }
 }

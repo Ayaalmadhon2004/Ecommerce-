@@ -33,7 +33,7 @@ function HeaderWithLikes() {
 
 function NotFound() {
   return (
-    <div style={{ textAlign: "center", margin: "80px 16px" }}>
+    <div className="notFound">
       <h1>404 Not Found</h1>
       <p>The page you are looking for does not exist.</p>
     </div>
@@ -67,6 +67,7 @@ function Home() {
       <ExploreProducts
         liked={likes.explore}
         handleLike={(id) => handleLike("explore", id)}
+        handleCart={handleCart}
         handleProductDetails={handleProductDetails}
       />
       <NewArrival />
@@ -85,6 +86,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/wishlist" element={<Wishlist />} />
             <Route path="/login" element={<Login />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/productDetails" element={<ProductDetails />} />

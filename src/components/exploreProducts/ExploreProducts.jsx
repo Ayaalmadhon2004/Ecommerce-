@@ -1,7 +1,7 @@
 import styles from "./exploreProducts.module.css";
 import { useState, useEffect } from "react";
 
-function ExploreProducts({ liked, handleLike, handleProductDetails }) {
+function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }) {
   const [products, setProducts] = useState([]);
   const [chosenColors, setChosen] = useState({});
 
@@ -48,7 +48,7 @@ function ExploreProducts({ liked, handleLike, handleProductDetails }) {
                   className={`fa-solid fa-heart ${
                     liked.includes(product.id)
                       ? styles.liked
-                      : styles.notLike
+                      : styles.notLiked
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -57,11 +57,15 @@ function ExploreProducts({ liked, handleLike, handleProductDetails }) {
                 ></i>
                 <i
                   className="fa-solid fa-eye"
+                  onClick={(e) => e.stopPropagation()}
                 ></i>
               </div>
               <button
                 className={styles.addToCart}
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleCart(product);
+                }}
               >
                 Add To Cart
               </button>

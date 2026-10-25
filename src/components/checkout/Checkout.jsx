@@ -49,26 +49,26 @@ export default function Checkout() {
       <div className={styles.left}>
         <h2>Billing Details</h2>
         <form id="checkout-form" className={styles.form} onSubmit={handlePlaceOrder}>
-          <label htmlFor="first-name">First Name</label><br/>
-          <input id="first-name" type="text" name="firstName" required /><br/>
+          <label htmlFor="first-name">First Name</label>
+          <input id="first-name" type="text" name="firstName" required />
 
-          <label htmlFor="company-name">Company Name</label><br/>
-          <input id="company-name" type="text" name="companyName" /><br/>
+          <label htmlFor="company-name">Company Name</label>
+          <input id="company-name" type="text" name="companyName" />
 
-          <label htmlFor="street-name">Street Name</label><br/>
-          <input id="street-name" type="text" name="streetName" required /><br/>
+          <label htmlFor="street-name">Street Name</label>
+          <input id="street-name" type="text" name="streetName" required />
 
-          <label htmlFor="apartment">Apartment, floor, etc (optional)</label><br/>
-          <input id="apartment" type="text" name="apartment" /><br/>
+          <label htmlFor="apartment">Apartment, floor, etc (optional)</label>
+          <input id="apartment" type="text" name="apartment" />
 
-          <label htmlFor="town-city">Town/City</label><br/>
-          <input id="town-city" type="text" name="townCity" required /><br/>
+          <label htmlFor="town-city">Town/City</label>
+          <input id="town-city" type="text" name="townCity" required />
 
-          <label htmlFor="phone-number">Phone Number</label><br/>
-          <input id="phone-number" type="tel" name="phoneNumber" required /><br/>
+          <label htmlFor="phone-number">Phone Number</label>
+          <input id="phone-number" type="tel" name="phoneNumber" required />
 
-          <label htmlFor="email">Email Address</label><br/>
-          <input id="email" type="email" name="email" required /><br/>
+          <label htmlFor="email">Email Address</label>
+          <input id="email" type="email" name="email" required />
 
           <div className={styles.checkbox}>
             <input type="checkbox" id="saveInfo" className={styles.check}/>

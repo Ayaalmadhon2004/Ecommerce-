@@ -1,249 +1,78 @@
-.exploreProducts{
-    padding:var(--main-padding);
-    margin-bottom:var(--margin-bottom);
+.exploreProducts {
+    composes: section from "../../styles/shared.module.css";
 }
-.rectangle{
-    background-color:var(--red);
-    width:20px;
-    height:40px;
-    border-radius:4px;
+
+.topHeader {
+    composes: label from "../../styles/shared.module.css";
 }
-.topHeader{
-    display:flex;
-    align-items: center;
-    gap:16px;
+
+.rectangle {
+    composes: labelBar from "../../styles/shared.module.css";
 }
-.topHeader h3{
-    color:var(--red);
-    font-weight:600;
-    font-size:var(--text-16);
-    line-height:20px;
+
+.mainHeader {
+    composes: head from "../../styles/shared.module.css";
 }
-.mainHeader{
+
+.arrows {
+    composes: arrows from "../../styles/shared.module.css";
+}
+
+.btn {
+    composes: btn from "../../styles/shared.module.css";
+}
+
+/* "View All Products" sits under the grid */
+.exploreProducts > .btn {
     display: flex;
-    align-items: center;
-    gap:520px;
+    margin: var(--space-8) auto 0;
 }
 
-.arrows{
-    gap:8px;
-    display:flex;
-    align-items: center;
-    margin:auto;
-}
-.arrows i{
-    width:46px;
-    height:46px;
-    border-radius:50%;
-    background-color:var(--gray-bg);
-    padding:11px 11px 11px 11px;
+/********** cards **********/
+.mainContainer {
+    composes: grid from "../../styles/shared.module.css";
 }
 
-.mainHeader h2{
-    font-weight: 600;
-    font-size:36px;
-    line-height:48px;
-    letter-spacing: 4%;
-}
-/**********cards***********/
-.mainContainer{
-    display:flex;
-    gap:40px;
-    margin-top:2rem;
-    width:1200px;
-    flex-wrap: wrap;
-}
-.imagContainer img{
-    width:260px;
-    height:250px;
-    border-radius:4px;
-    background-color:#f5f5f5;
-
+.card {
+    composes: card from "../../styles/shared.module.css";
 }
 
-.cardBody h4{
-    font-weight: 500;
-    font-size:16px;
-    line-height:24px;
-    width:200px;
-}
-.prices{
-    display:flex;
-    gap:12px;
-    margin:8px 0 8px 0;
-}
-.price{
-    font-weight: 500;
-    font-size:16px;
-    line-height:24px;
-    color:var(--red);
-}
-.btn{
-    width:234px;
-    height:56px;
-    padding:16px 48px 16px 48px;
-    background-color:var(--red);
-    border:none;
-    border-radius:4px;
-    color:var(--white);
-    margin:40px 0 0 450px;
+.imagContainer {
+    composes: imageBox from "../../styles/shared.module.css";
 }
 
-.imagContainer{
-    position:relative;
-}
-.seeLove{
-    display:flex;
-    align-items: center;
-    flex-direction:column;
-    gap:8px;
-    position:absolute;
-    margin:-240px 0 0 210px;
+.cardBody {
+    composes: cardBody from "../../styles/shared.module.css";
 }
 
-.seeLove .fa-heart{
-    width:34px;
-    height:34px;
-    padding:5px 0 0 5px;
-    border-radius:50%;
-    background-color:var(--white);
+.price {
+    composes: price from "../../styles/shared.module.css";
 }
 
-.prevPrice{
-    color:var(--gray);
-    text-decoration:line-through;
+.stars {
+    composes: stars from "../../styles/shared.module.css";
+    margin: var(--space-2) 0;
 }
 
-.stars{
-    display:flex;
-    gap:8px;
+.seeLove {
+    composes: actions from "../../styles/shared.module.css";
 }
 
 .addToCart {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: black;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+    composes: addToCart from "../../styles/shared.module.css";
 }
 
-.imagContainer:hover .addToCart {
-  opacity: 1;
-  transform: translateX(-50%) translateY(-10px); /* حركة بسيطة للأعلى */
-}
-
-.discount{
-    width:55px;
-    height:26px;
-    display:flex;
-    position:absolute;
-    margin:-240px 0 0px 12px;
-    border-radius:4px;
-    gap:10px;
-    background-color:var(--green);
-    color:var(--white);
-    padding-left:10px;
-}
-
-
-.setColor{
-    display:flex;
-    align-items: center;
-    gap:10px;
-}
-.stars{
-    display:flex;
-    margin:10px 0;
-}
-.seeLove i{
-    background-color:var(--white);
-    padding:.5rem;
-    border-radius: 50%;
-    width:auto;
-    height:auto;
-}
 .liked {
-    color: red;
-    transition: 0.3s;
+    composes: liked from "../../styles/shared.module.css";
 }
 
 .notLiked {
-    color: #888;
-    transition: 0.3s;
+    composes: notLiked from "../../styles/shared.module.css";
 }
 
-@media screen and (max-width:1200px){
-    .exploreProducts{
-    padding:var(--padding-1200);
-    }
-    .btn{
-    margin:40px 0 0 410px;
-    }
-    .mainHeader{
-    gap:550px;
-    }
-    .mainContainer{
-    gap:5px;
-    }
-}
-
-@media screen and (max-width:992px){
-    .exploreProducts{
-    padding:var(--padding-992);
-    }
-    .btn{
-    margin:40px 0 0 320px;
-    }
-    .mainHeader{
-    display: flex;
-    align-items: center;
-    gap:300px;
-    }
-}
-
-@media screen and (max-width:768px){
-    .exploreProducts{
-    padding:var(--padding-768);
-    }
-    .btn{
-    margin:40px 0 0 210px;
-    }
-    .mainHeader{
-    display: flex;
-    align-items: center;
-    gap:130px;
-    }
-}
-@media screen and (max-width:480px){
-    .exploreProducts{
-    padding:var(--padding-480);
-    }
-    .mainHeader{
-        gap:0;
-    }
-     .mainHeader h2{
-    font-size:30px;
-    line-height:30px;
-    }
-    .mainContainer{
-    padding:0 0 0 0px;
-    gap:5px;
-    justify-content: start; /* يخليهم دايمًا في الوسط */
-    }
-    .imagContainer img{
-    width:220px;
-    }
-    .seeLove{
-     margin:-240px 0 0 190px;
-    }
-    .btn{
-    width:200px;
-    margin:40px 0 0 120px;
+@media screen and (max-width: 480px) {
+    .mainContainer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-5) var(--space-3);
     }
 }

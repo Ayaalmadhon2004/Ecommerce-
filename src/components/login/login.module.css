@@ -1,54 +1,65 @@
 .logInContainer {
-  margin: 5rem 0;
+  padding-inline: var(--inset);
+  margin: var(--space-10) 0;
   display: flex;
   align-items: center;
-  gap: 100px;
-  flex-wrap: wrap;
+  gap: var(--space-9);
+}
+
+.left {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .left img {
-  max-width: 100%;
+  display: block;
+  width: 100%;
   height: auto;
+}
+
+.right {
+  flex: 0 1 371px;
+  min-width: 0;
 }
 
 .right h3 {
   font-weight: 500;
-  font-size: 36px;
+  font-size: var(--text-2xl);
   line-height: 42px;
   letter-spacing: 0.04em;
-  margin-bottom: 24px;
+  margin-bottom: var(--space-5);
 }
 
 .right p {
   font-weight: 400;
-  font-size: 16px;
+  font-size: var(--text-md);
   line-height: 24px;
-  margin-bottom: 48px;
+  margin-bottom: var(--space-8);
 }
 
 .form input {
   width: 100%;
   max-width: 370px;
   height: 40px;
-  margin-bottom: 30px;
-  padding: 0 8px;
+  margin-bottom: var(--space-6);
+  padding: 0 var(--space-2);
   color: var(--gray);
   border: none;
   border-bottom: 1px solid var(--black);
-  font-size: 16px;
+  font-size: var(--text-md);
 }
 
 .btns {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 16px;
+  margin-bottom: var(--space-4);
 }
 
 .btn1 {
   width: 143px;
   height: 56px;
-  border-radius: 4px;
+  border-radius: var(--radius);
   background-color: var(--red);
   color: var(--white);
   border: none;
@@ -62,7 +73,7 @@
 
 .btn2 {
   font-weight: 400;
-  font-size: 16px;
+  font-size: var(--text-md);
   color: var(--red);
   background-color: transparent;
   border: none;
@@ -70,16 +81,22 @@
 }
 
 .error {
-  color: red;
-  font-size: 14px;
-  margin-top: 8px;
+  color: var(--red);
+  font-size: var(--text-sm);
+  margin-top: var(--space-2);
 }
 
 @media (max-width: 768px) {
+  .left,
+  .right {
+    flex: none;
+    width: 100%;
+  }
+
   .logInContainer {
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: var(--space-6);
   }
 
   .form input {
@@ -88,7 +105,7 @@
 
   .btns {
     flex-direction: column;
-    gap: 10px;
+    gap: var(--space-2);
     align-items: stretch;
   }
 }

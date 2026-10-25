@@ -1,81 +1,83 @@
 .footer {
-  background-color: #000;
-  color: #fff;
-  padding:70px 0 0 210px;
-  font-family: Arial, sans-serif;
+  padding: var(--section-top) var(--inset) var(--space-4);
+  background-color: var(--black);
+  color: var(--white);
 }
 
 .container {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  border-bottom: 1px solid #333;
-  padding-bottom: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-6);
+  padding-bottom: var(--space-7);
+  border-bottom: 1px solid var(--gray-dark);
 }
 
 .column h2 {
-  font-size: 18px;
-  margin-bottom: 15px;
-  font-weight: 600;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-600);
 }
 
 .subtitle {
-  font-weight: 500;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
+  font-weight: var(--weight-500);
 }
 
 .text {
-  color: #aaa;
-  font-size: 14px;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
+  color: var(--gray-light);
+  font-size: var(--text-sm);
   line-height: 1.5;
 }
 
 .column ul {
   list-style: none;
-  padding: 0;
 }
 
 .column ul li {
-  color: #aaa;
-  font-size: 14px;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
+  color: var(--gray-light);
+  font-size: var(--text-sm);
   cursor: pointer;
 }
 
 .column ul li:hover {
-  color: #fff;
+  color: var(--white);
 }
 
 .inputBox {
   display: flex;
   align-items: center;
-  border: 1px solid #555;
-  border-radius: 4px;
+  width: 100%;
+  max-width: 220px;
+  margin-top: var(--space-3);
+  border: 1px solid var(--gray-muted);
+  border-radius: var(--radius);
   overflow: hidden;
-  margin-top: 10px;
-  width:220px;
 }
 
 .inputBox input {
-  padding: 8px;
-  background: transparent;
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-2);
   border: none;
   outline: none;
-  color: #fff;
+  background: transparent;
+  color: var(--white);
 }
 
 .inputBox button {
-  background: transparent;
+  padding: var(--space-2) var(--space-3);
   border: none;
-  color: #fff;
-  padding: 8px 12px;
+  background: transparent;
+  color: var(--white);
   cursor: pointer;
 }
 
 .appBox {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 .qr {
@@ -85,23 +87,23 @@
 
 .storeBtns img {
   width: 120px;
-  margin-bottom: 8px;
+  margin-bottom: var(--space-2);
   cursor: pointer;
 }
 
 .socials {
   display: flex;
-  gap: 12px;
-  font-size: 18px;
-  margin-top: 15px;
+  gap: var(--space-4);
+  margin-top: var(--space-4);
+  font-size: var(--text-lg);
 }
 
 .socials img {
   width: 22px;
   height: 22px;
-  filter: invert(100%); /* make icons white */
+  filter: invert(100%);
   cursor: pointer;
-  transition: 0.3s;
+  transition: var(--transition);
 }
 
 .socials img:hover {
@@ -109,53 +111,13 @@
 }
 
 .bottom {
+  margin-top: var(--space-5);
+  color: var(--gray-muted);
+  font-size: var(--text-sm);
   text-align: center;
-  color: #777;
-  font-size: 13px;
-  margin-top: 25px;
-}
-
-
-@media screen and (max-width: 1200px) {
-  .footer{
-    padding:var(--padding-1200);
-  }
-  .container {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-
-@media screen and (max-width: 992px) {
-  .footer{
-    padding:var(--padding-992);
-  }
-  .container {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-  }
-}
-
-
-@media screen and (max-width: 768px) {
-  .footer{
-    padding:var(--padding-768);
-  }
-  .container {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
 }
 
 @media screen and (max-width: 480px) {
-  .footer{
-    padding:40px 0 0 40px;
-  }
-  .container {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-
   .appBox {
     flex-direction: column;
     align-items: flex-start;
