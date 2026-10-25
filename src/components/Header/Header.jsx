@@ -13,6 +13,7 @@ function Header({likedCount}) {
     const query = searchQuery.trim();
     if (!query) return;
     navigate(`/search?q=${encodeURIComponent(query)}`);
+    setSearchQuery("");
     setMenuOpen(false);
   };
   return (
