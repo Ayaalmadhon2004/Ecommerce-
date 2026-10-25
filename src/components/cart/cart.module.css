@@ -58,6 +58,7 @@
 .couponSection {
   flex: 1;
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
 }
@@ -180,4 +181,19 @@ a.btn {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
+}
+
+.couponError,
+.couponSuccess {
+  flex-basis: 100%;
+  margin: 0;
+  font-size: 14px;
+}
+
+.couponError {
+  color: #e74c3c;
+}
+
+.couponSuccess {
+  color: #2e7d32;
 }

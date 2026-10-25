@@ -1,7 +1,10 @@
 // src/components/cart/Cart.jsx
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 import styles from "./cart.module.css";
+
+const COUPONS = { SAVE10: 0.1 };
 
 const parsePrice = (value) =>
   parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
@@ -14,10 +17,27 @@ export default function Cart() {
     .map((item) => ({ ...item, unitPrice: parsePrice(item.price) }))
     .filter((item) => item.unitPrice > 0);
 
+  const [couponInput, setCouponInput] = useState("");
+  const [appliedCode, setAppliedCode] = useState(null);
+  const [couponError, setCouponError] = useState("");
+
   const subtotal = items.reduce(
     (acc, item) => acc + item.unitPrice * item.quantity,
     0
   );
+  const discount = appliedCode ? subtotal * COUPONS[appliedCode] : 0;
+  const total = subtotal - discount;
+
+  const applyCoupon = () => {
+    const code = couponInput.trim().toUpperCase();
+    if (COUPONS[code]) {
+      setAppliedCode(code);
+      setCouponError("");
+    } else {
+      setAppliedCode(null);
+      setCouponError("Invalid coupon code");
+    }
+  };
 
   return (
     <div className={styles.cartContainer}>
@@ -100,9 +120,17 @@ export default function Cart() {
           <input
             type="text"
             placeholder="Coupon Code"
+            value={couponInput}
+            onChange={(e) => setCouponInput(e.target.value)}
             className={styles.couponInput}
           />
-          <button className={styles.applyBtn}>Apply Coupon</button>
+          <button className={styles.applyBtn} onClick={applyCoupon}>
+            Apply Coupon
+          </button>
+          {couponError && <p className={styles.couponError}>{couponError}</p>}
+          {appliedCode && (
+            <p className={styles.couponSuccess}>{appliedCode} applied</p>
+          )}
         </div>
 
         <div className={styles.cartTotalBox}>
@@ -111,13 +139,19 @@ export default function Cart() {
             <span>Subtotal:</span>
             <span>${subtotal.toFixed(2)}</span>
           </div>
+          {appliedCode && (
+            <div className={styles.cartTotalRow}>
+              <span>Discount ({appliedCode}):</span>
+              <span>-${discount.toFixed(2)}</span>
+            </div>
+          )}
           <div className={styles.cartTotalRow}>
             <span>Shipping:</span>
             <span>Free</span>
           </div>
           <div className={styles.cartTotalRow}>
             <span>Total:</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>${total.toFixed(2)}</span>
           </div>
           <button
             className={styles.checkoutBtn}
