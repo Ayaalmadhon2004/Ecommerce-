@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./productDetails.module.css";
+import Stars from "../Stars/Stars";
 import SellingProducts from "../sellingProducts/SellingProducts";
 
 export default function ProductDetails() {
@@ -38,7 +39,8 @@ export default function ProductDetails() {
         <div className={styles.details}>
           <h2>{product.title}</h2>
           <p className={styles.reviews}>
-            ⭐⭐⭐⭐⭐ <span>(0 Reviews)</span> | <span>In Stock</span>
+            <Stars count={product.rating?.rate ?? 0} />{" "}
+            <span>({product.rating?.count ?? 0} Reviews)</span> | <span>In Stock</span>
           </p>
           <h3 className={styles.price}>${product.price}</h3>
           <p className={styles.description}>{product.description}</p>
