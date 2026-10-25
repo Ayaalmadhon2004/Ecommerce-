@@ -57,8 +57,8 @@ function FlashSales({liked,handleLike,handleCart}) {
             </div>
           </div>
           <div className={styles.arrows}>
-            <i class="fa-solid fa-arrow-left"></i>
-            <i class="fa-solid fa-arrow-right"></i>
+            <i className="fa-solid fa-arrow-left"></i>
+            <i className="fa-solid fa-arrow-right"></i>
           </div>
         </div>
         <div className={styles.mainContainer}>
@@ -84,7 +84,7 @@ function FlashSales({liked,handleLike,handleCart}) {
                         <span className={styles.prevPrice}>{product.prevPrice}</span>
                     </div>
                     <div className={styles.stars}>
-                            {product.stars}
+                            <Stars count={product.stars} />
                             ({product.rate})
                     </div>
                 </div>
@@ -96,10 +96,10 @@ function FlashSales({liked,handleLike,handleCart}) {
                     <div className={styles.rightCart}>
                       <div className={styles.hedding}>
                         <h4>{product.name}</h4>
-                        <i class="fa-solid fa-xmark" onClick={() => setClickedId(null)}></i>
+                        <i className="fa-solid fa-xmark" onClick={() => setClickedId(null)}></i>
                       </div>
                         <div className={styles.stars}>
-                            {product.stars}
+                            <Stars count={product.stars} />
                             ({product.rate})
                         </div>
                       <span className={styles.price}>{product.price}</span>
@@ -132,6 +132,7 @@ export default FlashSales;*/
 import React, { useState, useEffect  } from "react";
 import Countdown from "react-countdown";
 import styles from "./FlashSales.module.css";
+import Stars from "../Stars/Stars";
 
 function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
   const [clickedId, setClickedId] = useState(null);
@@ -148,7 +149,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
           ...product,
           discount: `${Math.floor(Math.random() * 50) + 10}% OFF`,
           prevPrice: `$${(product.price * 1.2).toFixed(2)}`,
-          stars: "⭐️⭐️⭐️⭐️",
+          stars: 4,
           rate: product.rating?.rate || 4,
           description: product.description,
         }));
@@ -249,7 +250,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
                   <span className={styles.prevPrice}>{product.prevPrice}</span>
                 </div>
                 <div className={styles.stars}>
-                  {product.stars} ({product.rate})
+                  <Stars count={product.stars} /> ({product.rate})
                 </div>
               </div>
 
@@ -267,7 +268,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
                       ></i>
                     </div>
                     <div className={styles.stars}>
-                      {product.stars} ({product.rate})
+                      <Stars count={product.stars} /> ({product.rate})
                     </div>
                     <span className={styles.price}>${product.price}</span>
                     <p>{product.description}</p>

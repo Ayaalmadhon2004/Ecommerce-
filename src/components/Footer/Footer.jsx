@@ -12,7 +12,7 @@ export default function Footer() {
           <p className={styles.text}>Get 10% off your first order</p>
           <div className={styles.inputBox}>
             <input type="email" placeholder="Enter your email" />
-            <button><i class="fa-solid fa-paper-plane"></i></button>
+            <button><i className="fa-solid fa-paper-plane"></i></button>
           </div>
         </div>
 
@@ -59,10 +59,10 @@ export default function Footer() {
             </div>
           </div>
           <div className={styles.socials}>
-             <i class="fa-brands fa-facebook-f"></i>
-             <i class="fa-brands fa-instagram"></i>
-             <i class="fa-brands fa-twitter"></i>  
-             <i class="fa-brands fa-linkedin-in"></i>
+             <i className="fa-brands fa-facebook-f"></i>
+             <i className="fa-brands fa-instagram"></i>
+             <i className="fa-brands fa-twitter"></i>  
+             <i className="fa-brands fa-linkedin-in"></i>
           </div>      
         </div>
 

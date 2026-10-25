@@ -1,5 +1,4 @@
 import styles from "./sellingProducts.module.css"
-import sellingProducts from "../data/sellingProducts";
 import { useEffect, useState } from "react";
 
 function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varient}) {

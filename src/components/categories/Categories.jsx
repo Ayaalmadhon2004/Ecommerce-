@@ -11,8 +11,8 @@ export default function Categories() {
         <div className={styles.mainHeader}>
             <h2>Browse By Category</h2>
             <div className={styles.arrows}>
-            <i class="fa-solid fa-arrow-left"></i>
-            <i class="fa-solid fa-arrow-right"></i>
+            <i className="fa-solid fa-arrow-left"></i>
+            <i className="fa-solid fa-arrow-right"></i>
           </div>
         </div>
             <div className={styles.containerCard}>

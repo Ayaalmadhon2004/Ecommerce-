@@ -6,15 +6,7 @@ const sellingProducts = [
         price:"$260",
         prevPrice:"$360",
         rate:((65)),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
     },
      {
         id:1,
@@ -23,15 +15,7 @@ const sellingProducts = [
         price:"$960",
         prevPrice:"$1160",
         rate:((65)),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
     },
      {
         id:2,
@@ -40,15 +24,7 @@ const sellingProducts = [
         price:"$160",
         prevPrice:"$170",
         rate:((65)),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
     },
      {
         id:3,
@@ -57,15 +33,7 @@ const sellingProducts = [
         price:"$360",
         prevPrice:"$160",
         rate:((99)),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
     },
 ];
 
