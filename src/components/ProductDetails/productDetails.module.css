@@ -144,6 +144,44 @@
   font-weight: 600;
 }
 
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.qty button {
+  border: none;
+  background: var(--white);
+  padding: var(--space-3) var(--space-4);
+  cursor: pointer;
+}
+
+.qty span {
+  min-width: 40px;
+  text-align: center;
+}
+
+.cartBtn {
+  margin-top: var(--space-2);
+  background: var(--white);
+  color: var(--red);
+  border: 1px solid var(--red);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  font-weight: 600;
+}
+
 .delivery {
   margin-top: var(--space-4);
   background: var(--gray-bg);

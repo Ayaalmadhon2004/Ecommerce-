@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./productDetails.module.css";
+import { useApp } from "../../context/AppContext";
 import Stars from "../Stars/Stars";
 import SellingProducts from "../sellingProducts/SellingProducts";
 
 export default function ProductDetails() {
   const { state } = useLocation();
   const product = state?.product;
+  const { handleCart } = useApp();
   const [selected, setSelected] = useState(0);
+  const [qty, setQty] = useState(1);
   if (!product) return <p>No product selected.</p>;
 
   const cover = product.img || product.image;
@@ -45,7 +48,23 @@ export default function ProductDetails() {
           <h3 className={styles.price}>${product.price}</h3>
           <p className={styles.description}>{product.description}</p>
 
-          <button className={styles.buyBtn}>Buy Now</button>
+          <div className={styles.actions}>
+            <div className={styles.qty}>
+              <button type="button" aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))}>-</button>
+              <span>{qty}</span>
+              <button type="button" aria-label="Increase quantity" onClick={() => setQty((q) => q + 1)}>+</button>
+            </div>
+            <button className={styles.buyBtn}>Buy Now</button>
+            <button
+              type="button"
+              className={styles.cartBtn}
+              onClick={() => {
+                for (let i = 0; i < qty; i++) handleCart(product);
+              }}
+            >
+              Add To Cart
+            </button>
+          </div>
 
           <div className={styles.delivery}>
             <div className={styles.container}>
