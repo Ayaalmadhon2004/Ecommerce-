@@ -50,7 +50,7 @@
 
 .bottomSection {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: wrap;
   gap: var(--space-6);
 }
@@ -149,8 +149,19 @@
 
 
 @media (max-width: 768px) {
+  .cartTable {
+    display: block;
+    overflow-x: auto;
+  }
+
+  .cartTable th,
+  .cartTable td {
+    padding: var(--space-3);
+  }
+
   .bottomSection {
     flex-direction: column;
+    align-items: stretch;
   }
 
   .cartTotalBox {

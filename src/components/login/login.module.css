@@ -3,13 +3,23 @@
   margin: var(--space-10) 0;
   display: flex;
   align-items: center;
-  gap: var(--space-10);
-  flex-wrap: wrap;
+  gap: var(--space-9);
+}
+
+.left {
+  flex: 1 1 0;
+  min-width: 0;
 }
 
 .left img {
-  max-width: 100%;
+  display: block;
+  width: 100%;
   height: auto;
+}
+
+.right {
+  flex: 0 1 371px;
+  min-width: 0;
 }
 
 .right h3 {
@@ -77,6 +87,12 @@
 }
 
 @media (max-width: 768px) {
+  .left,
+  .right {
+    flex: none;
+    width: 100%;
+  }
+
   .logInContainer {
     flex-direction: column;
     align-items: center;
