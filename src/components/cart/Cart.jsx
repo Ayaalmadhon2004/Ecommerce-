@@ -39,7 +39,7 @@ export default function Cart() {
                 <tr key={item.id}>
                   <td className={styles.productInfo}>
                     <img
-                      src={item.image || "/assets/default.png"}
+                      src={item.img || item.image || "/assets/default.png"}
                       alt={item.name}
                       className={styles.productImg}
                     />
