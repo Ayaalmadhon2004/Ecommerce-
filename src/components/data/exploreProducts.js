@@ -5,15 +5,7 @@ const exploreProducts=[
         name:"Breed Dry Dog Food",
         price:"$100",
         rate:(88),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
     },
      {
         id:1,
@@ -21,15 +13,7 @@ const exploreProducts=[
         name:"CANON EOS DSLR Camera",
         price:"$360",
         rate:(88),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
     },
      {
         id:2,
@@ -37,15 +21,7 @@ const exploreProducts=[
         name:"ASUS FHD Gaming Laptop",
         price:"$700",
         rate:(88),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
     },
      {
         id:3,
@@ -53,15 +29,7 @@ const exploreProducts=[
         name:"Curology Product Set ",
         price:"500$",
         rate:(88),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
     },
      {
         id:4,
@@ -69,15 +37,7 @@ const exploreProducts=[
         name:"Kids Electric Car",
         price:"600$",
         rate:(88),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
         discount:"NEW",
         btn1:"red",
         btn2:"black",
@@ -88,15 +48,7 @@ const exploreProducts=[
         name:"Jr. Zoom Soccer Cleats",
         price:"300$",
         rate:(88),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
          btn1:"yellow",
         btn2:"black",
     },
@@ -106,15 +58,7 @@ const exploreProducts=[
         name:"GP11 Shooter USB Gamepad",
         price:"120$",
         rate:(88),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
         discount:"NEW",
         btn1:"red",
         btn2:"black",
@@ -125,15 +69,7 @@ const exploreProducts=[
         name:"Quilted Satin Jacket",
         price:"100$",
         rate:(88),
-        stars:(
-            <>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            <i class="fa-solid fa-star" style={{ color: "gold" }}></i>
-            </>
-        ),
+        stars:5,
         btn1:"red",
         btn2:"black",
     },
