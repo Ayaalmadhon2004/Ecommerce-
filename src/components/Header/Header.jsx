@@ -31,12 +31,12 @@ function Header({likedCount}) {
 
         <div className={styles.searching}>
            <input className={styles.search} type="text" placeholder="What are you looking for?"></input><i className="fa-solid fa-magnifying-glass"></i>
-            <div className={styles.loveIcon}>
-            <i className="fa-solid fa-heart"></i>
-             {likedCount > 0 && (
-               <span className={styles.badge}>{likedCount}</span>
-             )}
-            </div>
+            <Link to="/wishlist" className={styles.loveIcon} aria-label="Wishlist">
+              <i className="fa-solid fa-heart"></i>
+              {likedCount > 0 && (
+                <span className={styles.badge}>{likedCount}</span>
+              )}
+            </Link>
            <Link to="/cart" className={styles.loveIcon}>
              <i className="fa-solid fa-cart-shopping"></i>
              {cartCount > 0 && (
