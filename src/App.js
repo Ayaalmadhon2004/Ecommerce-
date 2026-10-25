@@ -1,6 +1,7 @@
 // src/App.js
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
+import { AuthProvider } from "./context/AuthContext";
 import { useApp } from "./context/AppContext";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import "./App.css";
@@ -84,6 +85,7 @@ function Home() {
 export default function App() {
   return (
     <LanguageProvider>
+    <AuthProvider>
     <AppProvider>
       <BrowserRouter>
         <div className="App">
@@ -108,6 +110,7 @@ export default function App() {
         </div>
       </BrowserRouter>
     </AppProvider>
+    </AuthProvider>
     </LanguageProvider>
   );
 }

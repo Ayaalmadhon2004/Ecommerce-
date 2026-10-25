@@ -2,6 +2,7 @@ import { useState } from "react"
 import styles from "./header.module.css"
 import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
+import { useAuth } from "../../context/AuthContext";
 import { useLang } from "../../i18n/LanguageContext";
 
 function Header({likedCount}) {
@@ -10,6 +11,7 @@ function Header({likedCount}) {
   const { cartCount } = useApp();
   const { t } = useLang();
   const navigate = useNavigate();
+  const { isLoggedIn, user, logout } = useAuth();
 
   const handleSearch = () => {
     const query = searchQuery.trim();
@@ -35,7 +37,21 @@ function Header({likedCount}) {
           <li><Link to="/">{t("nav.home")}</Link></li>
           <li><Link to="/contact">{t("nav.contact")}</Link></li>
           <li><Link to="/about">{t("nav.about")}</Link></li>
-          <li><Link to="/login">{t("nav.signUp")}</Link></li>
+          {isLoggedIn ? (
+            <>
+              <li><span>{user}</span></li>
+              <li>
+                <button
+                  type="button"
+                  onClick={() => { logout(); setMenuOpen(false); navigate("/"); }}
+                >
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <li><Link to="/login">{t("nav.signUp")}</Link></li>
+          )}
         </ul>
 
         </div>
