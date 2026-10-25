@@ -64,17 +64,24 @@ export default function Checkout() {
         {cart.length === 0 ? (
           <p>Your cart is empty</p>
         ) : (
-          cart.map(item => (
-            <div key={item.id} className={styles.cartItem}>
-              <img
-                src={item.image || "/assets/default.png"}
-                alt={item.title}
-                className={styles.img}
-              />
-              <span className={styles.name}>{item.title}</span>
-              <span className={styles.price}>{item.price}</span>
-            </div>
-          ))
+          cart.map(item => {
+            const qty = item.quantity || 1;
+            const name = item.name || item.title;
+            const lineTotal = parsePrice(item.price) * qty;
+            return (
+              <div key={item.id} className={styles.cartItem}>
+                <img
+                  src={item.img || item.image || "/assets/default.png"}
+                  alt={name}
+                  className={styles.img}
+                />
+                <span className={styles.name}>
+                  {name} <span className={styles.qty}>x{qty}</span>
+                </span>
+                <span className={styles.price}>${lineTotal.toFixed(2)}</span>
+              </div>
+            );
+          })
         )}
         <div className={styles.price}>
           <div className={styles.cartTotalRow}>
