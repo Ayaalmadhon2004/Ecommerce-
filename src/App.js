@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { AppProvider } from "./context/AppContext";
 import { useApp } from "./context/AppContext";
+import { LanguageProvider } from "./i18n/LanguageContext";
 import "./App.css";
 
 import TopHeader from "./components/TopHeaders/TopHeader.jsx";
@@ -82,6 +83,7 @@ function Home() {
 
 export default function App() {
   return (
+    <LanguageProvider>
     <AppProvider>
       <BrowserRouter>
         <div className="App">
@@ -106,5 +108,6 @@ export default function App() {
         </div>
       </BrowserRouter>
     </AppProvider>
+    </LanguageProvider>
   );
 }
