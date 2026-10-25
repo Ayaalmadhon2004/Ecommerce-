@@ -1,6 +1,8 @@
 import styles from "./footer.module.css";
+import { useLang } from "../../i18n/LanguageContext";
 
 export default function Footer() {
+  const { t } = useLang();
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -8,7 +10,7 @@ export default function Footer() {
         {/* Exclusive */}
         <div className={styles.column}>
           <h2>Exclusive</h2>
-          <p className={styles.subtitle}>Subscribe</p>
+          <p className={styles.subtitle}>{t("footer.subscribe")}</p>
           <p className={styles.text}>Get 10% off your first order</p>
           <div className={styles.inputBox}>
             <input type="email" placeholder="Enter your email" />
@@ -18,7 +20,7 @@ export default function Footer() {
 
         {/* Support */}
         <div className={styles.column}>
-          <h2>Support</h2>
+          <h2>{t("footer.support")}</h2>
           <p className={styles.text}>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
           <p className={styles.text}>exclusive@gmail.com</p>
           <p className={styles.text}>+88015-88888-9999</p>
@@ -26,7 +28,7 @@ export default function Footer() {
 
         {/* Account */}
         <div className={styles.column}>
-          <h2>Account</h2>
+          <h2>{t("footer.account")}</h2>
           <ul>
             <li>My Account</li>
             <li>Login / Register</li>
@@ -38,7 +40,7 @@ export default function Footer() {
 
         {/* Quick Link */}
         <div className={styles.column}>
-          <h2>Quick Link</h2>
+          <h2>{t("footer.quickLink")}</h2>
           <ul>
             <li>Privacy Policy</li>
             <li>Terms Of Use</li>
@@ -49,7 +51,7 @@ export default function Footer() {
 
         {/* Download App */}
         <div className={styles.column}>
-          <h2>Download App</h2>
+          <h2>{t("footer.downloadApp")}</h2>
           <p className={styles.text}>Save $3 with App New User Only</p>
           <div className={styles.appBox}>
             <img src="/assets/photos/Qrcode 1.png" alt="QR Code" className={styles.qr} />
@@ -68,7 +70,7 @@ export default function Footer() {
 
       </div>
       <div className={styles.bottom}>
-        © Copyright aya almadhon . All right reserved
+        {t("footer.copyright")}
       </div>
     </footer>
   );
