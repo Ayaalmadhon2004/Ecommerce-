@@ -59,6 +59,9 @@
 }
 
 .btn {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
     display: inline-flex;
     align-items: center;
     justify-content: center;

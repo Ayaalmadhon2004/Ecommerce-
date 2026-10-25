@@ -25,6 +25,9 @@ import About from "./components/about/About.jsx";
 import Contact from "./components/contact/Contact.jsx";
 import SearchResults from "./components/search/SearchResults.jsx";
 import Wishlist from "./components/wishlist/Wishlist.jsx";
+import InfoPage from "./components/legal/InfoPage.jsx";
+
+const LOREM = "This is placeholder content and will be replaced with the final text.";
 
 
 function HeaderWithLikes() {
@@ -96,6 +99,9 @@ export default function App() {
             <Route path="/search" element={<SearchResults />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy" element={<InfoPage title="Privacy Policy" paragraphs={[LOREM, LOREM]} />} />
+            <Route path="/terms" element={<InfoPage title="Terms Of Use" paragraphs={[LOREM, LOREM]} />} />
+            <Route path="/faq" element={<InfoPage title="FAQ" paragraphs={[LOREM, LOREM]} />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />

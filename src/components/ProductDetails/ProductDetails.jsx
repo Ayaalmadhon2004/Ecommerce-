@@ -1,11 +1,24 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useApp } from "../../context/AppContext";
 import styles from "./productDetails.module.css";
 import SellingProducts from "../sellingProducts/SellingProducts";
 
 export default function ProductDetails() {
   const { state } = useLocation();
+  const navigate = useNavigate();
+  const { cart, likes, handleLike, handleCart } = useApp();
   const product = state?.product;
   if (!product) return <p>No product selected.</p>;
+
+  const handleBuyNow = () => {
+    if (!cart.some((item) => item.id === product.id)) handleCart(product);
+    navigate("/checkout");
+  };
+
+  const handleProductDetails = (selected) => {
+    navigate("/productDetails", { state: { product: selected } });
+    window.scrollTo(0, 0);
+  };
 
   return (
     <div className={styles.productPage}>
@@ -28,7 +41,7 @@ export default function ProductDetails() {
           <h3 className={styles.price}>${product.price}</h3>
           <p className={styles.description}>{product.description}</p>
 
-          <button className={styles.buyBtn}>Buy Now</button>
+          <button className={styles.buyBtn} onClick={handleBuyNow}>Buy Now</button>
 
           <div className={styles.delivery}>
             <div className={styles.container}>
@@ -44,8 +57,10 @@ export default function ProductDetails() {
         </div>
       </div>
       <SellingProducts
-      liked={[]} 
-      handleLike={() => {}}
+      liked={likes.selling}
+      handleLike={(id) => handleLike("selling", id)}
+      handleCart={handleCart}
+      handleProductDetails={handleProductDetails}
       varient="related"
       />
     </div>

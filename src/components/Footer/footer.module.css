@@ -41,6 +41,11 @@
   cursor: pointer;
 }
 
+.column ul li a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .column ul li:hover {
   color: var(--white);
 }
@@ -74,6 +79,11 @@
   cursor: pointer;
 }
 
+.status {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+}
+
 .appBox {
   display: flex;
   align-items: center;
@@ -96,6 +106,15 @@
   gap: var(--space-4);
   margin-top: var(--space-4);
   font-size: var(--text-lg);
+}
+
+.socials a,
+.storeBtns a {
+  color: inherit;
+}
+
+.storeBtns a {
+  display: block;
 }
 
 .socials img {
