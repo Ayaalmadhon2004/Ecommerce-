@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import styles from "./productDetails.module.css";
 import SellingProducts from "../sellingProducts/SellingProducts";
@@ -5,19 +6,33 @@ import SellingProducts from "../sellingProducts/SellingProducts";
 export default function ProductDetails() {
   const { state } = useLocation();
   const product = state?.product;
+  const [selected, setSelected] = useState(0);
   if (!product) return <p>No product selected.</p>;
+
+  const cover = product.img || product.image;
+  const gallery = Array.isArray(product.images) && product.images.length
+    ? product.images
+    : [cover];
+  const thumbs = Array.from({ length: 4 }, (_, i) => gallery[i % gallery.length]);
+  const mainSrc = thumbs[selected] || cover;
 
   return (
     <div className={styles.productPage}>
       <div className={styles.productContainer}>
         <div className={styles.mainImage}>
           <div className={styles.subImages}>
-            <img src={product.image} alt={product.title} />
-            <img src={product.image} alt={product.title} />
-            <img src={product.image} alt={product.title} />
-            <img src={product.image} alt={product.title} />
+            {thumbs.map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`${product.title} view ${i + 1}`}
+                className={i === selected ? styles.thumbActive : ""}
+                aria-current={i === selected}
+                onClick={() => setSelected(i)}
+              />
+            ))}
           </div>
-          <img src={product.image} alt={product.title} />
+          <img src={mainSrc} alt={product.title} />
         </div>
 
         <div className={styles.details}>
