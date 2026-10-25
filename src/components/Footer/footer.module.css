@@ -79,6 +79,11 @@
   cursor: pointer;
 }
 
+.status {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+}
+
 .appBox {
   display: flex;
   align-items: center;

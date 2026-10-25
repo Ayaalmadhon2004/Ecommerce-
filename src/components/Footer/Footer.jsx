@@ -1,7 +1,21 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./footer.module.css";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("");
+
+  const handleSubscribe = (e) => {
+    e.preventDefault();
+    if (!email.trim()) {
+      setStatus("Please enter your email");
+      return;
+    }
+    setStatus("Subscribed!");
+    setEmail("");
+  };
+
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
@@ -11,10 +25,16 @@ export default function Footer() {
           <h2>Exclusive</h2>
           <p className={styles.subtitle}>Subscribe</p>
           <p className={styles.text}>Get 10% off your first order</p>
-          <div className={styles.inputBox}>
-            <input type="email" placeholder="Enter your email" />
-            <button><i className="fa-solid fa-paper-plane"></i></button>
-          </div>
+          <form className={styles.inputBox} onSubmit={handleSubscribe}>
+            <input
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={(e) => { setEmail(e.target.value); setStatus(""); }}
+            />
+            <button type="submit" aria-label="Subscribe"><i className="fa-solid fa-paper-plane"></i></button>
+          </form>
+          {status && <p className={styles.status} role="status">{status}</p>}
         </div>
 
         {/* Support */}
