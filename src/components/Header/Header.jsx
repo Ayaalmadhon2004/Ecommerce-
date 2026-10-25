@@ -1,11 +1,21 @@
 import { useState } from "react"
 import styles from "./header.module.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 
 function Header({likedCount}) {
   const [menuOpen,setMenuOpen]=useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { cartCount } = useApp();
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    const query = searchQuery.trim();
+    if (!query) return;
+    navigate(`/search?q=${encodeURIComponent(query)}`);
+    setSearchQuery("");
+    setMenuOpen(false);
+  };
   return (
     <div className={styles.header}>
       <div className={styles.container}>
@@ -30,13 +40,27 @@ function Header({likedCount}) {
 
 
         <div className={styles.searching}>
-           <input className={styles.search} type="text" placeholder="What are you looking for?"></input><i className="fa-solid fa-magnifying-glass"></i>
-            <Link to="/wishlist" className={styles.loveIcon} aria-label="Wishlist">
-              <i className="fa-solid fa-heart"></i>
-              {likedCount > 0 && (
-                <span className={styles.badge}>{likedCount}</span>
-              )}
-            </Link>
+           <input
+             className={styles.search}
+             type="text"
+             placeholder="What are you looking for?"
+             value={searchQuery}
+             onChange={(e) => setSearchQuery(e.target.value)}
+             onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+           />
+           <i
+             className="fa-solid fa-magnifying-glass"
+             role="button"
+             aria-label="Search"
+             style={{ cursor: "pointer" }}
+             onClick={handleSearch}
+           ></i>
+            <div className={styles.loveIcon}>
+            <i className="fa-solid fa-heart"></i>
+             {likedCount > 0 && (
+               <span className={styles.badge}>{likedCount}</span>
+             )}
+            </div>
            <Link to="/cart" className={styles.loveIcon}>
              <i className="fa-solid fa-cart-shopping"></i>
              {cartCount > 0 && (
