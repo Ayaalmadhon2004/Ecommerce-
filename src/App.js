@@ -20,6 +20,8 @@ import Cart from "./components/cart/Cart.jsx";
 import Login from "./components/login/Login.jsx";
 import Checkout from "./components/checkout/Checkout.jsx";
 import ProductDetails from "./components/ProductDetails/ProductDetails.jsx";
+import About from "./components/about/About.jsx";
+import Contact from "./components/contact/Contact.jsx";
 
 
 function HeaderWithLikes() {
@@ -27,6 +29,15 @@ function HeaderWithLikes() {
   const likedCount = likes.flash.length + likes.selling.length + likes.explore.length;
   return <Header likedCount={likedCount} />;
 } 
+
+function NotFound() {
+  return (
+    <div style={{ textAlign: "center", margin: "80px 16px" }}>
+      <h1>404 Not Found</h1>
+      <p>The page you are looking for does not exist.</p>
+    </div>
+  );
+}
 
 function Home() {
   const navigate = useNavigate();
@@ -76,6 +87,9 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/productDetails" element={<ProductDetails />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </div>
