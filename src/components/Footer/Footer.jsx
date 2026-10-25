@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./footer.module.css";
 
 export default function Footer() {
@@ -28,11 +29,11 @@ export default function Footer() {
         <div className={styles.column}>
           <h2>Account</h2>
           <ul>
-            <li>My Account</li>
-            <li>Login / Register</li>
-            <li>Cart</li>
-            <li>Wishlist</li>
-            <li>Shop</li>
+            <li><Link to="/login">My Account</Link></li>
+            <li><Link to="/login">Login / Register</Link></li>
+            <li><Link to="/cart">Cart</Link></li>
+            <li><Link to="/wishlist">Wishlist</Link></li>
+            <li><Link to="/">Shop</Link></li>
           </ul>
         </div>
 
@@ -40,10 +41,10 @@ export default function Footer() {
         <div className={styles.column}>
           <h2>Quick Link</h2>
           <ul>
-            <li>Privacy Policy</li>
-            <li>Terms Of Use</li>
-            <li>FAQ</li>
-            <li>Contact</li>
+            <li><Link to="/privacy">Privacy Policy</Link></li>
+            <li><Link to="/terms">Terms Of Use</Link></li>
+            <li><Link to="/faq">FAQ</Link></li>
+            <li><Link to="/contact">Contact</Link></li>
           </ul>
         </div>
 

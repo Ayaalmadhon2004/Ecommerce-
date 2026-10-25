@@ -41,6 +41,11 @@
   cursor: pointer;
 }
 
+.column ul li a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .column ul li:hover {
   color: var(--white);
 }
