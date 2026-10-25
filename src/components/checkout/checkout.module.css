@@ -57,24 +57,26 @@
   gap: var(--space-5);
 }
 
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
 .right img {
+  flex: none;
   width: 54px;
   height: 54px;
   object-fit: cover;
   border-radius: var(--radius-lg);
-  margin-right: var(--space-4);
 }
 
 .name {
   font-weight: 500;
   font-size: var(--text-md);
   color: var(--gray-dark);
-  margin-right:var(--space-8);
-  
-}
-.cartItem span:nth-of-type(1) {
-  width: 220px;
-  display: inline-block;
+  flex: 1;
+  min-width: 0;
 }
 
 .price {
@@ -83,11 +85,17 @@
   color: var(--black);
 }
 /* Checkbox & Radio Inputs */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
 .checkbox input,
 .radioLabel input[type="radio"] {
   width: 20px;
   height: 20px;
-  margin-right: var(--space-3);
+  margin-right: 0;
   cursor: pointer;
 }
 
