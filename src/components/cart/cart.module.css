@@ -1,50 +1,50 @@
 
 .cartContainer {
   max-width: 1200px;
-  margin: 50px auto;
-  padding: 20px;
+  margin: var(--space-8) auto;
+  padding: var(--space-4);
   font-family: Arial, sans-serif;
 }
 
 .cartTable {
   width: 100%;
   border-collapse: collapse;
-  background-color: #fff;
+  background-color: var(--white);
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   overflow: hidden;
-  margin-bottom: 30px;
+  margin-bottom: var(--space-6);
 }
 
 .cartTable th,
 .cartTable td {
-  padding: 15px 20px;
+  padding: var(--space-4) var(--space-4);
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--gray-bg);
 }
 
 .cartTable th {
-  background-color: #f8f8f8;
+  background-color: var(--gray-bg);
   font-weight: 600;
 }
 
 .productInfo {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: var(--space-4);
 }
 
 .productImg {
   width: 60px;
   height: 60px;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: var(--radius-lg);
 }
 
 .quantitySelect {
   width: 60px;
-  padding: 5px;
-  font-size: 14px;
+  padding: var(--space-1);
+  font-size: var(--text-sm);
   text-align: center;
 }
 
@@ -52,30 +52,30 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 30px;
+  gap: var(--space-6);
 }
 
 .couponSection {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
 }
 
 .couponInput {
   flex: 1;
-  padding: 10px 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
 }
 
 .applyBtn {
-  background-color: #e74c3c;
-  color: #fff;
+  background-color: var(--red);
+  color: var(--white);
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius);
   cursor: pointer;
   font-weight: 600;
 }
@@ -83,33 +83,33 @@
 .cartTotalBox {
   flex: 1;
   max-width: 300px;
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 6px;
+  border: 1px solid var(--gray-border);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
 }
 
 .cartTotalBox h3 {
-  margin-bottom: 15px;
-  font-size: 18px;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-md);
 }
 
 .cartTotalRow {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  margin-bottom: var(--space-2);
   font-weight: 500;
 }
 
 .checkoutBtn {
   width: 100%;
-  padding: 12px 0;
-  background-color: #e74c3c;
-  color: #fff;
+  padding: var(--space-3) 0;
+  background-color: var(--red);
+  color: var(--white);
   border: none;
-  border-radius: 4px;
+  border-radius: var(--radius);
   font-weight: 600;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: var(--space-2);
 }
 
 .checkoutBtn:hover,
@@ -119,14 +119,14 @@
 .btns {
   display: flex;
   justify-content: space-between;
-  gap: 10px;
-  margin: 20px 0;
+  gap: var(--space-2);
+  margin: var(--space-4) 0;
 }
 
 .btn {
-  padding: 10px 20px;
+  padding: var(--space-2) var(--space-4);
   border: none;
-  border-radius: 5px;
+  border-radius: var(--radius);
   background-color: transparent;
   color:var(--black);
   font-weight: 500;
@@ -136,7 +136,7 @@
 }
 
 .btn:hover {
-  background-color: #b50000;
+  background-color: var(--red-dark);
   color:var(--white);
   border:none;
   transform: translateY(-2px);
@@ -144,7 +144,7 @@
 
 .btn:active {
   transform: translateY(0);
-  background-color: #b50000;
+  background-color: var(--red-dark);
 }
 
 
@@ -161,14 +161,14 @@
 .removeBtn {
   background: transparent;
   border: none;
-  color: #e74c3c;
-  font-size: 22px;
+  color: var(--red);
+  font-size: var(--text-lg);
   line-height: 1;
   cursor: pointer;
 }
 
 .removeBtn:hover {
-  color: #b50000;
+  color: var(--red-dark);
 }
 
 a.btn {
@@ -187,13 +187,13 @@ a.btn {
 .couponSuccess {
   flex-basis: 100%;
   margin: 0;
-  font-size: 14px;
+  font-size: var(--text-sm);
 }
 
 .couponError {
-  color: #e74c3c;
+  color: var(--red);
 }
 
 .couponSuccess {
-  color: #2e7d32;
+  color: var(--success);
 }

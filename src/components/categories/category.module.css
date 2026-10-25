@@ -1,186 +1,93 @@
-.category{
-    padding:var(--main-padding);
-    margin-bottom:var(--margin-bottom);
+.category {
+    composes: section from "../../styles/shared.module.css";
+}
 
+.topHeader {
+    composes: label from "../../styles/shared.module.css";
 }
-.topHeader{
-    display:flex;
-    align-items: center;
-    gap:16px;
-}
-.topHeader h3{
-    color:var(--red);
-    font-weight:600;
-    font-size:var(--text-16);
-    line-height:20px;
 
+.rectangle {
+    composes: labelBar from "../../styles/shared.module.css";
 }
-.rectangle{
-    background-color:var(--red);
-    width:20px;
-    height:40px;
-    border-radius:4px;
+
+.mainHeader {
+    composes: head from "../../styles/shared.module.css";
 }
-.mainHeader h2{
-    font-weight: 600;
-    font-size:36px;
-    line-height:48px;
-    letter-spacing: 4%;
-    margin:1rem 0 1rem 0;
+
+.arrows {
+    composes: arrows from "../../styles/shared.module.css";
 }
-.mainHeader{
-    display:flex;
+
+.containerCard {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+}
+
+.card {
+    display: flex;
     align-items: center;
-    gap:600px;
+    justify-content: center;
+    min-height: 145px;
+    padding: var(--space-4);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: var(--radius);
+    transition: background-color var(--transition), color var(--transition);
 }
-.arrows{
-    gap:8px;
-    display:flex;
-    align-items: center;
-    margin:auto;
+
+.card:hover {
+    background-color: var(--red);
+    color: var(--white);
+    cursor: pointer;
 }
-.arrows i{
-    width:46px;
-    height:46px;
-    border-radius:50%;
-    background-color:var(--gray-bg);
-    padding:11px 11px 11px 11px;
-}
-.containerCard{
-    display:flex;
-    align-items: center;
-    gap:30px;
-    flex-wrap: wrap;
-    
-}
-.card{
-    width:170px;
-    height:145px;
-    border-radius:4px;
-    border:1px dotted var(--black);
-    position:relative;
-}
-.card:hover{
-    background-color:var(--red);
-    color:var(--white);
-    cursor:pointer;
-}
+
 .img {
-    position:relative;
-    display: flex;          /* enables flex layout */
-    flex-direction: column; /* stack children vertically */
-    align-items: center;    /* horizontal centering */
-    justify-content: center;/* vertical centering if div has height */
-    text-align: center; 
-}
-.containerCard{
-    margin-bottom:2rem;
-
-}
-.img img{
-    position:absolute;
-}
-
-.img h2{
-    font-weight: 400;
-    font-size:16px;
-    line-height:24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-3);
     text-align: center;
-    padding-top:100px;
-    
 }
-.card:hover .nonHoverd{
-    opacity:0;
-    position:absolute;
+
+.img img {
+    width: auto;
+    height: 56px;
+    max-width: 100%;
+    object-fit: contain;
 }
-.card:hover .hover{
-    opacity:1;
+
+.img h2 {
+    font-weight: var(--weight-400);
+    font-size: var(--text-md);
+    line-height: 24px;
 }
-.hover{
-    opacity:0;
+
+.hover {
+    display: none;
 }
-@media screen and (max-width:1200px){
-   .category{
-    padding:70px 0 0 70px;
+
+.card:hover .nonHoverd {
+    display: none;
+}
+
+.card:hover .hover {
+    display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .containerCard {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--space-3);
     }
-}
-@media screen and (max-width:992px){
-    .category{
-    padding:var(--padding-992);
-    }
-    .mainHeader{
-    gap:300px;
+
+    .card {
+        min-height: 120px;
     }
 }
 
-@media screen and (max-width:768px){
-    .category{
-    padding:var(--padding-768);
-    }
-    .containerCard{
-    gap:5px; 
-    }
-
-    .mainHeader{
-    gap:500px;
-    }
-    .mainHeader h2{
-        width:0px;
-    }
-    .mainHeader h2{
-        display:inline-block;
-        margin-bottom:1rem;
-        font-size:30px;
-        width:100%;
-    }
-    .img{
-        width:120px;
-        margin-bottom:1rem;
-    }
-    .containerCard{
-        margin-bottom:1rem;
-    }
-     .card {
-        width: calc(33.333% - 10px); /* 3 كروت في الصف */
-        height: auto;
-    }
-    .arrows{
-        display:none;
-    }
-}
-
-@media screen and (max-width:480px){
-    .category{
-    padding:var(--padding-480);
-    }
-    .containerCard{
-    gap:5px; 
-    }
-
-    .mainHeader{
-    gap:500px;
-    }
-    .mainHeader h2{
-        width:0px;
-    }
-    .mainHeader h2{
-        display:inline-block;
-        margin-bottom:1rem;
-        font-size:30px;
-        width:100%;
-    }
-    .img{
-        width:120px;
-        margin-bottom:1rem;
-    }
-    .containerCard{
-        margin-bottom:1rem;
-    }
-     .card {
-        width: calc(33.333% - 10px); /* 3 كروت في الصف */
-        height: auto;
-    }
-    .arrows{
-        display:none;
+@media screen and (max-width: 480px) {
+    .containerCard {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
