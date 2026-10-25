@@ -109,3 +109,18 @@
     align-items: stretch;
   }
 }
+
+.switchMode {
+  margin-top: var(--space-4);
+  font-size: var(--text-md);
+}
+
+.link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--red);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
