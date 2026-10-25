@@ -156,3 +156,16 @@
     max-width: 100%;
   }
 }
+
+.removeBtn {
+  background: transparent;
+  border: none;
+  color: #e74c3c;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.removeBtn:hover {
+  color: #b50000;
+}

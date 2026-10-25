@@ -6,7 +6,7 @@ const parsePrice = (value) =>
   parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
 
 export default function Cart() {
-  const { cart, updateQuantity, clearCart } = useApp();
+  const { cart, updateQuantity, removeFromCart, clearCart } = useApp();
 
   const items = cart
     .map((item) => ({ ...item, unitPrice: parsePrice(item.price) }))
@@ -26,12 +26,13 @@ export default function Cart() {
             <th>Price</th>
             <th>Quantity</th>
             <th>Subtotal</th>
+            <th aria-label="Remove"></th>
           </tr>
         </thead>
         <tbody>
           {items.length === 0 ? (
             <tr>
-              <td colSpan="4">Your cart is empty</td>
+              <td colSpan="5">Your cart is empty</td>
             </tr>
           ) : (
             items.map((item) => {
@@ -62,6 +63,16 @@ export default function Cart() {
                     </select>
                   </td>
                   <td>${(item.unitPrice * item.quantity).toFixed(2)}</td>
+                  <td>
+                    <button
+                      type="button"
+                      className={styles.removeBtn}
+                      onClick={() => removeFromCart(item.id)}
+                      aria-label={`Remove ${item.name} from cart`}
+                    >
+                      &times;
+                    </button>
+                  </td>
                 </tr>
               );
             })
