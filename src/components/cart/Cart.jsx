@@ -2,20 +2,20 @@
 import { useApp } from "../../context/AppContext";
 import styles from "./cart.module.css";
 
+const parsePrice = (value) =>
+  parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
+
 export default function Cart() {
   const { cart, updateQuantity, clearCart } = useApp();
 
-  const subtotal = cart.reduce((acc, item) => {
-    const price =
-      parseFloat(item.price?.toString().replace("$", "") || "0") || 0;
-    return acc + price * item.quantity;
-  }, 0);
+  const items = cart
+    .map((item) => ({ ...item, unitPrice: parsePrice(item.price) }))
+    .filter((item) => item.unitPrice > 0);
 
-  const filteredCart = cart.filter((item) => {
-    const price =
-      parseFloat(item.price?.toString().replace("$", "") || "0") || 0;
-    return price > 0;
-  });
+  const subtotal = items.reduce(
+    (acc, item) => acc + item.unitPrice * item.quantity,
+    0
+  );
 
   return (
     <div className={styles.cartContainer}>
@@ -29,15 +29,12 @@ export default function Cart() {
           </tr>
         </thead>
         <tbody>
-          {filteredCart.length === 0 ? (
+          {items.length === 0 ? (
             <tr>
               <td colSpan="4">Your cart is empty</td>
             </tr>
           ) : (
-            filteredCart.map((item) => {
-              const price =
-                parseFloat(item.price?.toString().replace("$", "") || "0") ||
-                0;
+            items.map((item) => {
               return (
                 <tr key={item.id}>
                   <td className={styles.productInfo}>
@@ -64,7 +61,7 @@ export default function Cart() {
                       ))}
                     </select>
                   </td>
-                  <td>${(price * item.quantity).toFixed(2)}</td>
+                  <td>${(item.unitPrice * item.quantity).toFixed(2)}</td>
                 </tr>
               );
             })
