@@ -1,7 +1,9 @@
 import styles from "./exploreProducts.module.css";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }) {
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -73,7 +75,7 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
         ))}
       </div>
 
-      <button className={styles.btn}>View All Products</button>
+      <button className={styles.btn} onClick={() => navigate("/shop")}>View All Products</button>
     </div>
   );
 }
