@@ -45,7 +45,27 @@
 
 /********** cards **********/
 .mainContainer {
-    composes: grid from "../../styles/shared.module.css";
+    display: flex;
+    gap: var(--space-5);
+    margin-top: var(--space-6);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+}
+
+.mainContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.mainContainer > .card {
+    flex: 0 0 min(270px, 70%);
+    scroll-snap-align: start;
+}
+
+.arrows .arrowDisabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
 }
 
 .card {
@@ -183,7 +203,6 @@
 
 @media screen and (max-width: 480px) {
     .mainContainer {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: var(--space-5) var(--space-3);
+        gap: var(--space-3);
     }
 }
