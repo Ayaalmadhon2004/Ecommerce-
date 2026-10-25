@@ -1,9 +1,11 @@
 import { useState } from "react"
 import styles from "./header.module.css"
 import { Link } from "react-router-dom";
+import { useApp } from "../../context/AppContext";
 
 function Header({likedCount}) {
   const [menuOpen,setMenuOpen]=useState(false);
+  const { cartCount } = useApp();
   return (
     <div className={styles.header}>
       <div className={styles.container}>
@@ -35,7 +37,12 @@ function Header({likedCount}) {
                <span className={styles.badge}>{likedCount}</span>
              )}
             </div>
-           <Link to="/cart"><i className="fa-solid fa-cart-shopping"></i></Link>
+           <Link to="/cart" className={styles.loveIcon}>
+             <i className="fa-solid fa-cart-shopping"></i>
+             {cartCount > 0 && (
+               <span className={styles.badge}>{cartCount}</span>
+             )}
+           </Link>
         </div>
       </div>
       <hr/>
