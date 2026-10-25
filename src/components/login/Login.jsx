@@ -39,7 +39,7 @@ export default function Login() {
   return (
     <div className={styles.logInContainer}>
         <div className={styles.left}>
-        <img src="/assets/photos/Side Image.png" alt="phone photo"/>
+        <img src="/assets/photos/Side Image.png" alt="Smartphone and shopping bags"/>
         </div>
         <div className={styles.right}>
           <h3>Log in to Exclusive</h3>

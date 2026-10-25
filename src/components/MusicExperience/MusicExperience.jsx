@@ -16,7 +16,7 @@ function MusicExperience() {
     </div>
     <div className={styles.right}>
       <div className={styles.blur}></div>
-      <img src="assets/photos/JBL_BOOMBOX_2_HERO_020_x1 (1) 1.png" alt="headSet image"/>
+      <img src="assets/photos/JBL_BOOMBOX_2_HERO_020_x1 (1) 1.png" alt="JBL speaker"/>
     </div>
     </div>
   )

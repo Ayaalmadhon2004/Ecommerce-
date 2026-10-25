@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }) {
   const [products, setProducts] = useState([]);
-  const [chosenColors, setChosen] = useState({});
 
   useEffect(() => {
     fetch("https://fakestoreapi.com/products")
@@ -11,13 +10,6 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
       .then((data) => setProducts(data))
       .catch((err) => console.error(err));
   }, []);
-
-  const handleChooseColor = (productId, color) => {
-    setChosen((prev) => ({
-      ...prev,
-      [productId]: color,
-    }));
-  };
 
   return (
     <div className={styles.exploreProducts}>
