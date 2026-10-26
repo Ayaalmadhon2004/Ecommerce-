@@ -30,3 +30,22 @@ export const staggerContainer = (stagger = 0.1, delay = 0) => ({
   hidden: {},
   visible: { transition: { staggerChildren: stagger, delayChildren: delay } },
 });
+
+// Product / category cards: staggered reveal (pass `custom={index}`) plus a
+// hover lift. Children can opt into the hover with `cardImageVariants`.
+export const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: easeOut, delay: Math.min(i, 6) * 0.07 },
+  }),
+  hover: { y: -6, transition: { duration: 0.25, ease: easeOut } },
+};
+
+export const cardImageVariants = {
+  hover: { scale: 1.08, transition: { duration: 0.35, ease: easeOut } },
+};
+
+// Wrap a card's `viewport` so it reveals once when scrolled into view.
+export const cardViewport = { once: true, amount: 0.15 };

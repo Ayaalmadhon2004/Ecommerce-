@@ -3,6 +3,10 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useHorizontalScroll from "../../hooks/useHorizontalScroll";
 import QuickView from "../QuickView/QuickView";
+import { motion } from "framer-motion";
+import Reveal from "../animations/Reveal";
+import MotionHeart from "../animations/MotionHeart";
+import { cardVariants, cardImageVariants, cardViewport } from "../animations/variants";
 
 function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }) {
   const navigate = useNavigate();
@@ -19,12 +23,12 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
 
   return (
     <div className={styles.exploreProducts}>
-      <div className={styles.topHeader}>
+      <Reveal className={styles.topHeader}>
         <div className={styles.rectangle}></div>
         <h3>Our Products</h3>
-      </div>
+      </Reveal>
 
-      <div className={styles.mainHeader}>
+      <Reveal className={styles.mainHeader}>
         <h2>Explore Our Products</h2>
         <div className={styles.arrows}>
           <i
@@ -42,29 +46,28 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
               onClick={() => scrollTrack(1)}
             ></i>
           </div>
-      </div>
+      </Reveal>
 
       <div className={styles.mainContainer} ref={trackRef} onScroll={updateEdges}>
-        {products.map((product) => (
-          <div
+        {products.map((product, index) => (
+          <motion.div
             className={styles.card}
             key={product.id}
             onClick={() => handleProductDetails(product)}
+            variants={cardVariants}
+            custom={index}
+            initial="hidden"
+            whileInView="visible"
+            whileHover="hover"
+            viewport={cardViewport}
           >
             <div className={styles.imagContainer}>
-              <img src={product.image} alt={product.title} />
+              <motion.img variants={cardImageVariants} src={product.image} alt={product.title} />
               <div className={styles.seeLove}>
-                <i
-                  className={`fa-solid fa-heart ${
-                    liked.includes(product.id)
-                      ? styles.liked
-                      : styles.notLiked
-                  }`}
-                  onClick={(e) => {
+                <MotionHeart isLiked={liked.includes(product.id)} likedClass={styles.liked} notLikedClass={styles.notLiked} onClick={(e) => {
                     e.stopPropagation();
                     handleLike(product.id);
-                  }}
-                ></i>
+                  }} />
                 <i
                   className="fa-solid fa-eye"
                   onClick={(e) => {
@@ -90,7 +93,7 @@ function ExploreProducts({ liked, handleLike, handleCart, handleProductDetails }
                 <span className={styles.price}>${product.price}</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
 

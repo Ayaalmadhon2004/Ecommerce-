@@ -1,6 +1,6 @@
 // src/App.js
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, MotionConfig } from "framer-motion";
 import { AppProvider } from "./context/AppContext";
 import { AuthProvider } from "./context/AuthContext";
 import { useApp } from "./context/AppContext";
@@ -117,12 +117,14 @@ export default function App() {
     <AuthProvider>
     <AppProvider>
       <BrowserRouter>
+        <MotionConfig reducedMotion="user">
         <div className="App">
           <TopHeader />
           <HeaderWithLikes />
           <AnimatedRoutes />
           <Footer />
         </div>
+        </MotionConfig>
       </BrowserRouter>
     </AppProvider>
     </AuthProvider>
