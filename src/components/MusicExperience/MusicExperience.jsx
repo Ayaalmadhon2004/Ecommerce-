@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useApp } from "../../context/AppContext"
+import { motion, useReducedMotion } from "framer-motion"
 import styles from "./musicExperience.module.css"
+import { fadeUp, scaleIn, slideLeft, staggerContainer } from "../animations/variants"
 
 const pad = (n) => String(n).padStart(2, "0");
 
@@ -33,6 +35,7 @@ function MusicExperience() {
   const { cart, handleCart } = useApp()
   const navigate = useNavigate()
   const { days, hours, minutes, seconds } = useCountdown(5);
+  const reduce = useReducedMotion();
 
   const handleBuyNow = () => {
     if (!cart.some((item) => item.id === jblSpeaker.id)) handleCart(jblSpeaker)
@@ -41,21 +44,47 @@ function MusicExperience() {
 
   return (
     <div className={styles.musicExperience}>
-    <div className={styles.left}>
-       <h2>Categories</h2>
-       <p>Enhance Your<br/> Music Experience</p>
-       <ul className={styles.timing}>
-        <li>{pad(hours)}<br/><span>Hours</span></li>
-        <li>{pad(days)}<br/><span>Days</span></li>
-        <li>{pad(minutes)}<br/><span>minutes</span></li>
-        <li>{pad(seconds)}<br/><span>seconds</span></li>
-       </ul>
-       <button type="button" className={styles.btn} onClick={handleBuyNow}>Buy Now !</button>
-    </div>
-    <div className={styles.right}>
+    <motion.div
+      className={styles.left}
+      variants={staggerContainer(0.12)}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+    >
+       <motion.h2 variants={fadeUp}>Categories</motion.h2>
+       <motion.p variants={fadeUp}>Enhance Your<br/> Music Experience</motion.p>
+       <motion.ul className={styles.timing} variants={staggerContainer(0.1)}>
+        <motion.li variants={scaleIn}>{pad(hours)}<br/><span>Hours</span></motion.li>
+        <motion.li variants={scaleIn}>{pad(days)}<br/><span>Days</span></motion.li>
+        <motion.li variants={scaleIn}>{pad(minutes)}<br/><span>minutes</span></motion.li>
+        <motion.li variants={scaleIn}>{pad(seconds)}<br/><span>seconds</span></motion.li>
+       </motion.ul>
+       <motion.button
+         type="button"
+         className={styles.btn}
+         onClick={handleBuyNow}
+         variants={fadeUp}
+         whileHover={{ scale: 1.06 }}
+         whileTap={{ scale: 0.95 }}
+       >
+         Buy Now !
+       </motion.button>
+    </motion.div>
+    <motion.div
+      className={styles.right}
+      variants={slideLeft}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.3 }}
+    >
       <div className={styles.blur}></div>
-      <img src="assets/photos/JBL_BOOMBOX_2_HERO_020_x1 (1) 1.png" alt="JBL speaker"/>
-    </div>
+      <motion.img
+        src="assets/photos/JBL_BOOMBOX_2_HERO_020_x1 (1) 1.png"
+        alt="JBL speaker"
+        animate={reduce ? undefined : { y: [0, -12, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+    </motion.div>
     </div>
   )
 }
