@@ -1,5 +1,6 @@
 // src/App.js
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import { AppProvider } from "./context/AppContext";
 import { AuthProvider } from "./context/AuthContext";
 import { useApp } from "./context/AppContext";
@@ -26,6 +27,7 @@ import About from "./components/about/About.jsx";
 import Contact from "./components/contact/Contact.jsx";
 import SearchResults from "./components/search/SearchResults.jsx";
 import Wishlist from "./components/wishlist/Wishlist.jsx";
+import PageTransition from "./components/animations/PageTransition.jsx";
 import Shop from "./components/shop/Shop.jsx";
 import InfoPage from "./components/legal/InfoPage.jsx";
 
@@ -83,6 +85,32 @@ function Home() {
   );
 }
 
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <PageTransition key={location.pathname}>
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/wishlist" element={<Wishlist />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/productDetails" element={<ProductDetails />} />
+          <Route path="/search" element={<SearchResults />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/privacy" element={<InfoPage title="Privacy Policy" paragraphs={[LOREM, LOREM]} />} />
+          <Route path="/terms" element={<InfoPage title="Terms Of Use" paragraphs={[LOREM, LOREM]} />} />
+          <Route path="/faq" element={<InfoPage title="FAQ" paragraphs={[LOREM, LOREM]} />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </PageTransition>
+    </AnimatePresence>
+  );
+}
+
 export default function App() {
   return (
     <LanguageProvider>
@@ -92,22 +120,7 @@ export default function App() {
         <div className="App">
           <TopHeader />
           <HeaderWithLikes />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/shop" element={<Shop />} />
-            <Route path="/wishlist" element={<Wishlist />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/productDetails" element={<ProductDetails />} />
-            <Route path="/search" element={<SearchResults />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/privacy" element={<InfoPage title="Privacy Policy" paragraphs={[LOREM, LOREM]} />} />
-            <Route path="/terms" element={<InfoPage title="Terms Of Use" paragraphs={[LOREM, LOREM]} />} />
-            <Route path="/faq" element={<InfoPage title="FAQ" paragraphs={[LOREM, LOREM]} />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AnimatedRoutes />
           <Footer />
         </div>
       </BrowserRouter>
