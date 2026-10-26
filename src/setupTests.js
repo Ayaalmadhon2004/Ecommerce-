@@ -8,3 +8,11 @@ import '@testing-library/jest-dom';
 import { TextEncoder, TextDecoder } from 'util';
 
 Object.assign(global, { TextEncoder, TextDecoder });
+
+// jsdom has no IntersectionObserver; framer-motion's whileInView needs one.
+class MockIntersectionObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+global.IntersectionObserver = MockIntersectionObserver;
