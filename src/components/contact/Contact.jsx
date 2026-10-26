@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import Reveal from "../animations/Reveal";
+import { fadeUp, slideLeft, slideRight, staggerContainer } from "../animations/variants";
 
 const EMPTY_FORM = { name: "", email: "", phone: "", message: "" };
 
@@ -54,16 +57,16 @@ function Contact() {
         <span className="text-gray-900">Contact</span>
       </p>
 
-      <header className="mb-10">
+      <Reveal as="header" className="mb-10">
         <h1 className="text-3xl font-semibold text-gray-900">Contact Us</h1>
         <p className="mt-2 text-gray-500">We would love to hear from you.</p>
-      </header>
+      </Reveal>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        <aside className="h-fit rounded-xl bg-gray-50 p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
-          <ul className="m-0 list-none divide-y divide-gray-200 p-0">
+        <Reveal as="aside" variants={slideRight} className="h-fit rounded-xl bg-gray-50 p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
+          <motion.ul variants={staggerContainer(0.12, 0.2)} className="m-0 list-none divide-y divide-gray-200 p-0">
             {INFO.map((item) => (
-              <li key={item.title} className="flex gap-4 py-6 first:pt-0 last:pb-0">
+              <motion.li key={item.title} variants={fadeUp} className="flex gap-4 py-6 first:pt-0 last:pb-0">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand text-white">
                   <i className={item.icon}></i>
                 </span>
@@ -78,12 +81,16 @@ function Contact() {
                     <span className="text-sm font-medium text-gray-900">{item.label}</span>
                   )}
                 </div>
-              </li>
+              </motion.li>
             ))}
-          </ul>
-        </aside>
+          </motion.ul>
+        </Reveal>
 
-        <form
+        <motion.form
+          variants={slideLeft}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
           onSubmit={handleSubmit}
           className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8 lg:col-span-2"
         >
@@ -113,19 +120,29 @@ function Contact() {
           </div>
 
           <div className="mt-6 flex flex-wrap items-center justify-end gap-4">
+            <AnimatePresence>
             {sent && (
-              <p role="status" className="m-0 mr-auto text-sm font-medium text-green-600">
+              <motion.p
+                role="status"
+                className="m-0 mr-auto text-sm font-medium text-green-600"
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0 }}
+              >
                 <i className="fa-solid fa-circle-check"></i> Thanks! Your message has been sent.
-              </p>
+              </motion.p>
             )}
-            <button
+            </AnimatePresence>
+            <motion.button
               type="submit"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.95 }}
               className="cursor-pointer rounded-lg border-0 bg-brand px-8 py-3 text-sm font-medium text-white shadow-sm transition hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-brand/40 focus:ring-offset-2"
             >
               Send Message
-            </button>
+            </motion.button>
           </div>
-        </form>
+        </motion.form>
       </div>
     </main>
   );

@@ -1,6 +1,6 @@
 // src/App.js
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { AnimatePresence, MotionConfig } from "framer-motion";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { AppProvider } from "./context/AppContext";
 import { AuthProvider } from "./context/AuthContext";
 import { useApp } from "./context/AppContext";
@@ -42,10 +42,20 @@ function HeaderWithLikes() {
 
 function NotFound() {
   return (
-    <div className="notFound">
-      <h1>404 Not Found</h1>
+    <motion.div
+      className="notFound"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ type: "spring", stiffness: 200, damping: 18 }}
+    >
+      <motion.h1
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+      >
+        404 Not Found
+      </motion.h1>
       <p>The page you are looking for does not exist.</p>
-    </div>
+    </motion.div>
   );
 }
 

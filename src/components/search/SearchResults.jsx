@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
+import { motion } from "framer-motion";
 import styles from "./searchResults.module.css";
+import Reveal from "../animations/Reveal";
+import { cardVariants, cardViewport } from "../animations/variants";
 
 export default function SearchResults() {
   const [params] = useSearchParams();
@@ -27,17 +30,23 @@ export default function SearchResults() {
 
   return (
     <div className={styles.search}>
-      <h2>Search results for "{params.get("q")}"</h2>
+      <Reveal as="h2">Search results for "{params.get("q")}"</Reveal>
       {loading ? (
         <p>Loading...</p>
       ) : results.length === 0 ? (
         <p>No products found.</p>
       ) : (
         <div className={styles.grid}>
-          {results.map((product) => (
-            <div
+          {results.map((product, index) => (
+            <motion.div
               key={product.id}
               className={styles.card}
+              variants={cardVariants}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
+              viewport={cardViewport}
               onClick={() => navigate("/productDetails", { state: { product } })}
             >
               <img src={product.image} alt={product.title} />
@@ -51,7 +60,7 @@ export default function SearchResults() {
               >
                 Add To Cart
               </button>
-            </div>
+            </motion.div>
           ))}
         </div>
       )}
