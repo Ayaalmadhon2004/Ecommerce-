@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { useApp, COUPONS } from "../../context/AppContext";
+import { motion, AnimatePresence } from "framer-motion";
 import styles from "./checkout.module.css";
+import AnimatedNumber from "../animations/AnimatedNumber";
+import { fadeUp, scaleIn, slideLeft, slideRight } from "../animations/variants";
+
+const money = (n) => `$${n.toFixed(2)}`;
 
 const parsePrice = value =>
   parseFloat(String(value ?? "0").replace(/[^0-9.]/g, "")) || 0;
@@ -100,7 +105,12 @@ export default function Checkout() {
   if (orderPlaced) {
     return (
       <div className={styles.checkout}>
-        <div className={styles.left}>
+        <motion.div
+          className={styles.left}
+          variants={scaleIn}
+          initial="hidden"
+          animate="visible"
+        >
           <h2>Thank you!</h2>
           <p>
             Thank you{confirmation?.firstName ? `, ${confirmation.firstName}` : ""}!
@@ -113,14 +123,19 @@ export default function Checkout() {
           </p>
           <p>Total: ${(confirmation?.total ?? 0).toFixed(2)}</p>
           <p>A confirmation will be sent to your email.</p>
-        </div>
+        </motion.div>
       </div>
     );
   }
 
   return (
     <div className={styles.checkout}>
-      <div className={styles.left}>
+      <motion.div
+        className={styles.left}
+        variants={slideRight}
+        initial="hidden"
+        animate="visible"
+      >
         <h2>Billing Details</h2>
         <form id="checkout-form" className={styles.form} onSubmit={handlePlaceOrder}>
           <label htmlFor="first-name">First Name</label>
@@ -157,9 +172,14 @@ export default function Checkout() {
             </label>
           </div>
         </form>
-      </div>
+      </motion.div>
 
-      <div className={styles.right}>
+      <motion.div
+        className={styles.right}
+        variants={slideLeft}
+        initial="hidden"
+        animate="visible"
+      >
         {cart.length === 0 ? (
           <p>Your cart is empty</p>
         ) : (
@@ -168,7 +188,7 @@ export default function Checkout() {
             const name = item.name || item.title;
             const lineTotal = parsePrice(item.price) * qty;
             return (
-              <div key={item.id} className={styles.cartItem}>
+              <motion.div key={item.id} className={styles.cartItem} variants={fadeUp} initial="hidden" animate="visible">
                 <img
                   src={item.img || item.image || "/assets/default.png"}
                   alt={name}
@@ -178,19 +198,19 @@ export default function Checkout() {
                   {name} <small className={styles.qty}>x{qty}</small>
                 </span>
                 <span className={styles.price}>${lineTotal.toFixed(2)}</span>
-              </div>
+              </motion.div>
             );
           })
         )}
         <div className={styles.price}>
           <div className={styles.cartTotalRow}>
           <span>Subtotal:</span>
-          <span>${subtotal.toFixed(2)}</span>
+          <span><AnimatedNumber value={subtotal} format={money} /></span>
         </div>
         {appliedCode && (
           <div className={styles.cartTotalRow}>
             <span>Discount ({appliedCode}):</span>
-            <span>-${discount.toFixed(2)}</span>
+            <span>-<AnimatedNumber value={discount} format={money} /></span>
           </div>
         )}
         <div className={styles.cartTotalRow}>
@@ -199,7 +219,7 @@ export default function Checkout() {
         </div>
         <div className={styles.cartTotalRow}>
           <span>Total:</span>
-          <span>${total.toFixed(2)}</span>
+          <span><AnimatedNumber value={total} format={money} /></span>
         </div>
         </div>
 
@@ -245,22 +265,44 @@ export default function Checkout() {
         <button type="button" className={styles.applyBtn} onClick={handleApplyCoupon}>
           Apply Coupon
         </button>
-        {couponError && <p className={styles.couponError}>{couponError}</p>}
-        {appliedCode && (
-          <p className={styles.couponSuccess}>{appliedCode} applied</p>
-        )}
+        <AnimatePresence>
+          {couponError && (
+            <motion.p
+              key="err"
+              className={styles.couponError}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+            >
+              {couponError}
+            </motion.p>
+          )}
+          {appliedCode && (
+            <motion.p
+              key="ok"
+              className={styles.couponSuccess}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              {appliedCode} applied
+            </motion.p>
+          )}
+        </AnimatePresence>
       </div>
 
-      <button
+      <motion.button
         type="submit"
         form="checkout-form"
         className={styles.placeOrderBtn}
         disabled={cart.length === 0}
+        whileHover={cart.length === 0 ? undefined : { scale: 1.03 }}
+        whileTap={cart.length === 0 ? undefined : { scale: 0.97 }}
       >
         Place Order
-      </button>
+      </motion.button>
     </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

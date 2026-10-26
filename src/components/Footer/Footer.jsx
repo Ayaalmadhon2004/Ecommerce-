@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import styles from "./footer.module.css";
+import Reveal from "../animations/Reveal";
+import { fadeUp, staggerContainer } from "../animations/variants";
 import { useLang } from "../../i18n/LanguageContext";
 
 export default function Footer() {
@@ -20,10 +23,10 @@ export default function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <div className={styles.container}>
+      <Reveal className={styles.container} variants={staggerContainer(0.1)} amount={0.1}>
         
         {/* Exclusive */}
-        <div className={styles.column}>
+        <motion.div className={styles.column} variants={fadeUp}>
           <h2>Exclusive</h2>
           <p className={styles.subtitle}>{t("footer.subscribe")}</p>
           <p className={styles.text}>Get 10% off your first order</p>
@@ -37,18 +40,18 @@ export default function Footer() {
             <button type="submit" aria-label="Subscribe"><i className="fa-solid fa-paper-plane"></i></button>
           </form>
           {status && <p className={styles.status} role="status">{status}</p>}
-        </div>
+        </motion.div>
 
         {/* Support */}
-        <div className={styles.column}>
+        <motion.div className={styles.column} variants={fadeUp}>
           <h2>{t("footer.support")}</h2>
           <p className={styles.text}>111 Bijoy sarani, Dhaka, DH 1515, Bangladesh.</p>
           <p className={styles.text}>exclusive@gmail.com</p>
           <p className={styles.text}>+88015-88888-9999</p>
-        </div>
+        </motion.div>
 
         {/* Account */}
-        <div className={styles.column}>
+        <motion.div className={styles.column} variants={fadeUp}>
           <h2>{t("footer.account")}</h2>
           <ul>
             <li><Link to="/login">My Account</Link></li>
@@ -57,10 +60,10 @@ export default function Footer() {
             <li><Link to="/wishlist">Wishlist</Link></li>
             <li><Link to="/">Shop</Link></li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Quick Link */}
-        <div className={styles.column}>
+        <motion.div className={styles.column} variants={fadeUp}>
           <h2>{t("footer.quickLink")}</h2>
           <ul>
             <li><Link to="/privacy">Privacy Policy</Link></li>
@@ -68,10 +71,10 @@ export default function Footer() {
             <li><Link to="/faq">FAQ</Link></li>
             <li><Link to="/contact">Contact</Link></li>
           </ul>
-        </div>
+        </motion.div>
 
         {/* Download App */}
-        <div className={styles.column}>
+        <motion.div className={styles.column} variants={fadeUp}>
           <h2>{t("footer.downloadApp")}</h2>
           <p className={styles.text}>Save $3 with App New User Only</p>
           <div className={styles.appBox}>
@@ -87,9 +90,9 @@ export default function Footer() {
              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i className="fa-brands fa-twitter"></i></a>
              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i className="fa-brands fa-linkedin-in"></i></a>
              </div>      
-        </div>
+        </motion.div>
 
-      </div>
+      </Reveal>
       <div className={styles.bottom}>
         {t("footer.copyright")}
       </div>

@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { motion, AnimatePresence } from "framer-motion";
 import styles from "./login.module.css"
+import { fadeUp, slideLeft, slideRight } from "../animations/variants";
+
+const messageMotion = {
+  initial: { opacity: 0, y: -6 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0 },
+};
 
 const LOCAL_USERS_KEY = "localUsers";
 
@@ -112,10 +120,10 @@ export default function Login() {
     }
   return (
     <div className={styles.logInContainer}>
-        <div className={styles.left}>
+        <motion.div className={styles.left} variants={slideRight} initial="hidden" animate="visible">
         <img src="/assets/photos/Side Image.png" alt="Smartphone and shopping bags"/>
-        </div>
-        <div className={styles.right}>
+        </motion.div>
+        <motion.div className={styles.right} variants={slideLeft} initial="hidden" animate="visible">
           {resetMode ? (
             <>
               <h3>Reset your password</h3>
@@ -133,17 +141,19 @@ export default function Login() {
                 <button type="button" className={styles.backLink} onClick={backToLogin}>Back to login</button>
                 </div>
 
-                {error && <p className={styles.error}>{error}</p>}
-                {resetSent && (
-                  <p className={styles.success}>
-                    If an account exists for {email}, a reset link has been sent.
-                  </p>
-                )}
+                <AnimatePresence>
+                  {error && <motion.p key="e" className={styles.error} {...messageMotion}>{error}</motion.p>}
+                  {resetSent && (
+                    <motion.p key="s" className={styles.success} {...messageMotion}>
+                      If an account exists for {email}, a reset link has been sent.
+                    </motion.p>
+                  )}
+                </AnimatePresence>
               </form>
             </>
           ) : (
             <>
-          <h3>{isSignUp ? "Create an account" : "Log in to Exclusive"}</h3>
+          <motion.h3 key={isSignUp ? "up" : "in"} variants={fadeUp} initial="hidden" animate="visible">{isSignUp ? "Create an account" : "Log in to Exclusive"}</motion.h3>
           <p>Enter your details below</p>
           <form className={styles.form} onSubmit={handleSubmit}>
 
@@ -180,7 +190,9 @@ export default function Login() {
             )}
             </div>
 
-            {error && <p className={styles.error}>{error}</p>}
+            <AnimatePresence>
+              {error && <motion.p key="e" className={styles.error} {...messageMotion}>{error}</motion.p>}
+            </AnimatePresence>
 
             <p className={styles.switchMode}>
               {isSignUp ? "Already have an account? " : "Don't have an account? "}
@@ -192,7 +204,7 @@ export default function Login() {
           </form>
             </>
           )}
-        </div>
+        </motion.div>
     </div>
   )
 }
