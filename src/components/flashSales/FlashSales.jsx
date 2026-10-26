@@ -4,6 +4,11 @@ import Countdown from "react-countdown";
 import { useApp } from "../../context/AppContext";
 import styles from "./FlashSales.module.css";
 import Stars from "../Stars/Stars";
+import { motion } from "framer-motion";
+import Reveal from "../animations/Reveal";
+import MotionHeart from "../animations/MotionHeart";
+import { cardVariants, cardImageVariants, cardViewport } from "../animations/variants";
+import FlipNumber from "../animations/FlipNumber";
 
 function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
   const { cart, handleCart: addToCart } = useApp();
@@ -74,33 +79,33 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
 
     return (
       <div className={styles.flashSales} >
-        <div className={styles.topHeader}>
+        <Reveal className={styles.topHeader}>
           <div className={styles.rectangle}></div>
           <h3>Today's</h3>
-        </div>
+        </Reveal>
 
-        <div className={styles.mainHeader}>
+        <Reveal className={styles.mainHeader}>
           <h2>Flash Sales</h2>
           <div
             className={styles.countdown}
           >
             <div>
-              <div>{String(days).padStart(2, "0")}</div>
+              <FlipNumber value={String(days).padStart(2, "0")} />
               <span>Days</span>
             </div>
             <div className={styles.dots}>:</div>
             <div>
-              <div>{String(hours).padStart(2, "0")}</div>
+              <FlipNumber value={String(hours).padStart(2, "0")} />
               <span>Hours</span>
             </div>
             <div className={styles.dots}>:</div>
             <div>
-              <div>{String(minutes).padStart(2, "0")}</div>
+              <FlipNumber value={String(minutes).padStart(2, "0")} />
               <span>Minutes</span>
             </div>
             <div className={styles.dots}>:</div>
             <div>
-              <div>{String(seconds).padStart(2, "0")}</div>
+              <FlipNumber value={String(seconds).padStart(2, "0")} />
               <span>Seconds</span>
             </div>
           </div>
@@ -120,26 +125,29 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
               onClick={() => scrollTrack(1)}
             ></i>
           </div>
-        </div>
+        </Reveal>
 
         <div className={styles.mainContainer} ref={trackRef} onScroll={updateEdges}>
-          {flashProducts.map((product) => (
-            <div className={styles.card} key={product.id} onClick={() => handleProductDetails(product)}>
+          {flashProducts.map((product, index) => (
+            <motion.div
+              className={styles.card}
+              key={product.id}
+              onClick={() => handleProductDetails(product)}
+              variants={cardVariants}
+              custom={index}
+              initial="hidden"
+              whileInView="visible"
+              whileHover="hover"
+              viewport={cardViewport}
+            >
               <div className={styles.imagContainer}>
-                <img src={product.image} alt={product.title} />
+                <motion.img variants={cardImageVariants} src={product.image} alt={product.title} />
                 <div className={styles.discount}>{product.discount}</div>
                 <div className={styles.seeLove}>
-                  <i
-                    className={`fa-solid fa-heart ${
-                      liked.includes(product.id)
-                        ? styles.liked
-                        : styles.notLiked
-                    }`}
-                    onClick={(e) => {
+                  <MotionHeart isLiked={liked.includes(product.id)} likedClass={styles.liked} notLikedClass={styles.notLiked} onClick={(e) => {
                       e.stopPropagation();
                       handleLike(product.id);
-                    }}
-                  ></i>
+                    }} />
 
                   <i
                     className="fa-solid fa-eye"
@@ -193,7 +201,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
                   </div>
                 </div>
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
 

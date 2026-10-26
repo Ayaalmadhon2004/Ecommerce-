@@ -2,6 +2,10 @@ import styles from "./sellingProducts.module.css"
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuickView from "../QuickView/QuickView";
+import { motion } from "framer-motion";
+import Reveal from "../animations/Reveal";
+import MotionHeart from "../animations/MotionHeart";
+import { cardVariants, cardImageVariants, cardViewport } from "../animations/variants";
 
 function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varient}) {
   const navigate=useNavigate();
@@ -17,24 +21,32 @@ function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varie
 
   return (
     <div className={styles.sellingProducts}>
-         <div className={styles.topHeader}>
+         <Reveal className={styles.topHeader}>
           <div className={styles.rectangle}></div>
           <h3>{varient==='related'?"Related Item":"This month"}</h3>
-        </div>
-        <div className={styles.mainHeader}>
+        </Reveal>
+        <Reveal className={styles.mainHeader}>
           <h2>{varient==="related"?" " :"Best Selling Products"}</h2>
            {varient === "related" ? (null) : <button className={styles.btn} onClick={()=>navigate("/shop")}>View All</button> }
-        </div>
+        </Reveal>
          <div className={styles.mainContainer}>
-         {products.map((product)=>(
-            <div className={styles.card} key={product.id} onClick={() => handleProductDetails(product)}>
+         {products.map((product,index)=>(
+            <motion.div
+            className={styles.card}
+            key={product.id}
+            onClick={() => handleProductDetails(product)}
+            variants={cardVariants}
+            custom={index}
+            initial="hidden"
+            whileInView="visible"
+            whileHover="hover"
+            viewport={cardViewport}
+          >
                 <div className={styles.imagContainer}>
-                    <img src={product.image} alt={product.title}/>
+                    <motion.img variants={cardImageVariants} src={product.image} alt={product.title}/>
                     <div className={styles.discount}>{product.discount}</div>
                     <div className={styles.seeLove}>
-                        <i className={`fa-solid fa-heart ${
-                          liked.includes(product.id) ? styles.liked : styles.notLiked
-                        }`} onClick={(e)=>{ e.stopPropagation(); handleLike(product.id); }}></i>
+                        <MotionHeart isLiked={liked.includes(product.id)} likedClass={styles.liked} notLikedClass={styles.notLiked} onClick={(e)=>{ e.stopPropagation(); handleLike(product.id); }} />
                         <i className="fa-solid fa-eye" onClick={(e)=>{ e.stopPropagation(); setSelectedProduct(product); }}></i>
                     </div>
                     <button
@@ -54,7 +66,7 @@ function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varie
                         ( {product.category} )
                     </div>
                 </div>
-            </div>
+            </motion.div>
          ))}
         </div>
         <QuickView
