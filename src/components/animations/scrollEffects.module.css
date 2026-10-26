@@ -1,0 +1,29 @@
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 1100;
+  background-color: var(--red);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+
+.toTop {
+  position: fixed;
+  right: var(--space-5);
+  bottom: var(--space-5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: var(--radius-round);
+  background-color: var(--red);
+  color: var(--white);
+  box-shadow: var(--shadow-lg);
+  cursor: pointer;
+}

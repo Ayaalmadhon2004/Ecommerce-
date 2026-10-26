@@ -28,6 +28,8 @@ import Contact from "./components/contact/Contact.jsx";
 import SearchResults from "./components/search/SearchResults.jsx";
 import Wishlist from "./components/wishlist/Wishlist.jsx";
 import PageTransition from "./components/animations/PageTransition.jsx";
+import ScrollProgress from "./components/animations/ScrollProgress.jsx";
+import ScrollToTop from "./components/animations/ScrollToTop.jsx";
 import Shop from "./components/shop/Shop.jsx";
 import InfoPage from "./components/legal/InfoPage.jsx";
 
@@ -129,10 +131,12 @@ export default function App() {
       <BrowserRouter>
         <MotionConfig reducedMotion="user">
         <div className="App">
+          <ScrollProgress />
           <TopHeader />
           <HeaderWithLikes />
           <AnimatedRoutes />
           <Footer />
+          <ScrollToTop />
         </div>
         </MotionConfig>
       </BrowserRouter>
