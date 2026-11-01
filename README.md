@@ -1,76 +1,66 @@
-# Ecommerce
+# Exclusive: E-commerce Storefront
 
-React e-commerce front-end ("Exclusive" template): home page sections, product details, cart, login and checkout. See `CLAUDE.md` for the project structure and Git workflow.
+**A responsive online shop built in React: product browsing, flash sales with a live countdown, wishlist, cart, checkout and Arabic / English with right-to-left layout.**
 
----
+**Live demo:** [ecommerce-one-teal-22.vercel.app](https://ecommerce-one-teal-22.vercel.app)
 
-# Getting Started with Create React App
+![Home page](docs/images/home.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What it is
 
-## Available Scripts
+A front-end storefront based on the "Exclusive" design. It has no backend of its own: the cart and wishlist are kept in the browser (`localStorage`), and products and sign-in come from a public demo API. I built it to practise what every real shop needs: shared state, routing, forms, animation, and a layout that works from phone to desktop.
 
-In the project directory, you can run:
+## Highlights
 
-### `npm start`
+![Flash sales](docs/images/flash-sales.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Flash sales.** A product slider with a live countdown, discount badges and "Add to cart". If the product API is down, the section falls back to local data instead of staying on "Loading..." forever.
+- **Cart and wishlist.** Add, remove and change quantities, with totals and a coupon box. Everything goes through one `AppContext`, so every page stays in sync without prop drilling, and both survive a page refresh.
+- **Shop, search and product details**, with category filters, a quick-view popup and a checkout page.
+- **Login and sign up** with form feedback and error messages (see the notes below about the demo API).
+- **Smooth animation** with Framer Motion: reveal on scroll, a flip-number countdown, an animated wishlist heart.
+- **Arabic and English.** The language switch in the header also flips the page to right-to-left. English is the fallback for any missing key (`src/i18n`).
+- **Tests** for the cart state and the wishlist flow.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+![Login](docs/images/login.png)
 
-### `npm test`
+## Tech stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+React 19 · React Router 7 · Framer Motion · react-countdown · CSS Modules · Create React App · Jest and Testing Library · deployed on Vercel.
 
-### `npm run build`
+## Run it locally
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+git clone https://github.com/Ayaalmadhon2004/Ecommerce-.git
+cd Ecommerce-
+npm install
+npm start          # http://localhost:3000
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Command | What it does |
+|---|---|
+| `npm start` | Development server |
+| `npm test` | Tests in watch mode (`npm test -- --watchAll=false` for a single run) |
+| `npm run build` | Production build in `build/` |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Project structure
 
-### `npm run eject`
+```
+src/
+├── App.js                 routes and the home page composition
+├── context/               AppContext (cart, likes) and AuthContext
+├── i18n/                  translations and the language switcher
+└── components/
+    ├── <Name>/            one folder per component: .jsx + its own CSS Module
+    └── data/              static product and category data
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Notes and known limits
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- The shop, product details and login talk to the public [FakeStore API](https://fakestoreapi.com), so they need an internet connection and are only as available as that service. Its demo accounts are the only ones that can sign in.
+- There is no payment. Checkout is a front-end flow only.
+- Branch and commit rules for contributors are in [`CLAUDE.md`](CLAUDE.md).
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Author
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Built by **Aya Almadhon**. [Portfolio](https://portfolio-of-aya.vercel.app) · [GitHub](https://github.com/Ayaalmadhon2004)
