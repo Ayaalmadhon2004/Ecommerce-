@@ -65,7 +65,8 @@ test("clicking the header heart opens the wishlist with liked items", async () =
   );
   render(<App />);
 
-  fireEvent.click(screen.getByRole("link", { name: "Wishlist" }));
+  // The header heart comes first in the DOM; the footer also has a "Wishlist" link.
+  fireEvent.click(screen.getAllByRole("link", { name: "Wishlist" })[0]);
 
   expect(
     await screen.findByRole("heading", { name: "Wishlist (1)" })
