@@ -1,7 +1,7 @@
 const sellingProducts = [
     {
         id:0,
-        img:"assets/photos/suitecase.webp",
+        img:"assets/photos/trowser.webp",
         name:"The north coat",
         price:"$260",
         prevPrice:"$360",
@@ -10,7 +10,7 @@ const sellingProducts = [
     },
      {
         id:1,
-        img:"assets/photos/trowser.webp",
+        img:"assets/photos/suitecase.webp",
         name:"Gucci duffle bag",
         price:"$960",
         prevPrice:"$1160",
@@ -19,7 +19,7 @@ const sellingProducts = [
     },
      {
         id:2,
-        img:"assets/photos/book-corner.webp",
+        img:"assets/photos/music.webp",
         name:"RGB liquid CPU Cooler",
         price:"$160",
         prevPrice:"$170",
@@ -28,7 +28,7 @@ const sellingProducts = [
     },
      {
         id:3,
-        img:"assets/photos/music.webp",
+        img:"assets/photos/book-corner.webp",
         name:"Small BookSelf",
         price:"$360",
         prevPrice:"$160",
