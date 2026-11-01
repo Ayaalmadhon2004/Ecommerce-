@@ -9,6 +9,26 @@ import Reveal from "../animations/Reveal";
 import MotionHeart from "../animations/MotionHeart";
 import { cardVariants, cardImageVariants, cardViewport } from "../animations/variants";
 import FlipNumber from "../animations/FlipNumber";
+import sellingProducts from "../data/sellingProducts";
+
+// Used when the remote product API is unreachable, so the section never stays on "Loading..." forever.
+const toFlashProduct = (p) => {
+  const price = Number(String(p.price).replace(/[^0-9.]/g, ""));
+  const prev = Number(String(p.prevPrice).replace(/[^0-9.]/g, ""));
+  const off = prev > price ? Math.round((1 - price / prev) * 100) : 0;
+  return {
+    id: p.id,
+    image: `/${p.img}`,
+    title: p.name,
+    price,
+    prevPrice: p.prevPrice,
+    stars: p.stars,
+    rate: p.rate,
+    discount: `${off}% OFF`,
+    description: "",
+  };
+};
+const FALLBACK_FLASH_PRODUCTS = sellingProducts.slice(0, 5).map(toFlashProduct);
 
 function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
   const { cart, handleCart: addToCart } = useApp();
@@ -49,7 +69,10 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
   // جلب المنتجات من FakeStore API
   useEffect(() => {
     fetch("https://fakestoreapi.com/products?limit=5") // نحدد 5 منتجات كـ flash sales
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) throw new Error(`Product API answered ${res.status}`);
+        return res.json();
+      })
       .then((data) => {
         // إضافة خصائص إضافية مثل discount و stars و prevPrice لتتناسب مع التصميم
         const updatedData = data.map((product) => ({
@@ -61,9 +84,9 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
           description: product.description,
         }));
         setFlashProducts(updatedData);
-        setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch(() => setFlashProducts(FALLBACK_FLASH_PRODUCTS))
+      .finally(() => setLoading(false));
   }, []);
 
   const renderer = ({ days, hours, minutes, seconds }) => {
