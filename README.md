@@ -1,8 +1,18 @@
+<div align="center">
+
 # Exclusive
 
-A complete online-shop front end built with React. You can browse products, filter them by category, search, like items, fill a cart, apply a coupon and go through checkout. The whole interface also switches between English and Arabic, and the Arabic version flips to right-to-left.
+**A complete online-shop front end built with React, in English and Arabic (RTL).**
 
-Live demo: [ecommerce-one-teal-22.vercel.app](https://ecommerce-one-teal-22.vercel.app)
+[![Live demo](https://img.shields.io/badge/live%20demo-vercel-000?logo=vercel)](https://ecommerce-one-teal-22.vercel.app)
+[![CI](https://github.com/Ayaalmadhon2004/Ecommerce-/actions/workflows/ci.yml/badge.svg)](https://github.com/Ayaalmadhon2004/Ecommerce-/actions/workflows/ci.yml)
+![React 19](https://img.shields.io/badge/React-19-61dafb?logo=react&logoColor=000)
+![Framer Motion](https://img.shields.io/badge/Framer%20Motion-animated-ff0055)
+![i18n](https://img.shields.io/badge/i18n-EN%20%7C%20AR-db4444)
+
+[Live demo](https://ecommerce-one-teal-22.vercel.app) · [Features](#what-you-can-do) · [Tour](#a-tour-of-the-app) · [Run it](#run-it-on-your-computer) · [Structure](#project-structure) · [Contributing](#contributing)
+
+</div>
 
 ![Home page](docs/images/home.png)
 
@@ -173,11 +183,11 @@ State that survives a refresh is stored under these `localStorage` keys: `cart`,
 - Products, product images and the demo login depend on the FakeStore API. If it is down, the shop pages show an error and the flash sale section falls back to a small set of local products.
 - Checkout, the contact form, the newsletter box and password reset have no backend. They confirm the action and nothing more.
 - The Privacy Policy, Terms and FAQ pages contain placeholder text.
-- `npm test` runs three tests. The wishlist test currently fails because the page has two links named "Wishlist" (header and footer) and the test expects one.
+- `npm test` runs three smoke tests (rendering, cart logic and the wishlist flow). They pass, but coverage is small.
 
 ## Contributing
 
-Branch names, commit style and the checks to run before pushing are described in [`CLAUDE.md`](CLAUDE.md). In short: one change per branch, small commits, and `npm run build` must pass.
+Branch names, commit style and the checks to run before pushing are in [`CONTRIBUTING.md`](CONTRIBUTING.md) (and [`CLAUDE.md`](CLAUDE.md)). In short: one change per branch, small commits, and `npm test` and `npm run build` must pass. CI runs both on every pull request.
 
 ## Author
 
