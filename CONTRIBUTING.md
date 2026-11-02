@@ -21,7 +21,7 @@ Thanks for taking a look at Exclusive. The short version:
 - Functional components and hooks, styled with CSS Modules (`*.module.css`).
 - Shared state (cart, likes, coupon) goes through `useApp()` from
   `src/context/AppContext.jsx`. Use functional updates: `setState(prev => ...)`.
-- Every visible string goes through the translation helper in `src/i18n/`, so
+- Every visible string goes through the `useLang()` hook from `src/i18n/`, so
   English and Arabic stay in sync.
 - Product image field is `img` in the data files.
 
