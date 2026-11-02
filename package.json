@@ -1,6 +1,25 @@
 {
   "name": "ecommerce-home-page",
   "version": "0.1.0",
+  "description": "Exclusive: a complete React e-commerce storefront with cart, wishlist, coupon, checkout and an English/Arabic (RTL) interface.",
+  "homepage": "https://ecommerce-one-teal-22.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ayaalmadhon2004/Ecommerce-.git"
+  },
+  "author": "Aya Almadhon",
+  "keywords": [
+    "react",
+    "ecommerce",
+    "online-shop",
+    "shopping-cart",
+    "wishlist",
+    "framer-motion",
+    "rtl",
+    "i18n",
+    "arabic",
+    "create-react-app"
+  ],
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
@@ -48,5 +67,8 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.17"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
