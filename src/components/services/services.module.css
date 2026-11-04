@@ -13,6 +13,12 @@
     text-align: center;
 }
 
+.service:hover .imgContainer {
+    background-color: var(--red);
+    transform: translateY(calc(var(--space-1) * -1));
+    box-shadow: var(--shadow-hover);
+}
+
 .imgContainer {
     display: flex;
     align-items: center;
@@ -22,6 +28,8 @@
     margin: 0 auto;
     border-radius: var(--radius-round);
     background-color: var(--gray-icon);
+    transition: background-color var(--transition), transform 0.4s var(--ease-out),
+        box-shadow 0.4s var(--ease-out);
 }
 
 .service img {
@@ -42,6 +50,16 @@
 .service p {
     font-weight: var(--weight-400);
     font-size: var(--text-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .imgContainer {
+        transition: none;
+    }
+
+    .service:hover .imgContainer {
+        transform: none;
+    }
 }
 
 @media screen and (max-width: 480px) {

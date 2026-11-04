@@ -39,6 +39,7 @@
   color: var(--gray-light);
   font-size: var(--text-sm);
   cursor: pointer;
+  transition: color var(--transition), transform 0.4s var(--ease-out);
 }
 
 .column ul li a {
@@ -47,7 +48,12 @@
 }
 
 .column ul li:hover {
-  color: var(--white);
+  color: var(--red);
+  transform: translateX(var(--space-1));
+}
+
+[dir='rtl'] .column ul li:hover {
+  transform: translateX(calc(var(--space-1) * -1));
 }
 
 .inputBox {
@@ -59,6 +65,12 @@
   border: 1px solid var(--gray-muted);
   border-radius: var(--radius);
   overflow: hidden;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.inputBox:focus-within {
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--red) 25%, transparent);
 }
 
 .inputBox input {
@@ -77,6 +89,21 @@
   background: transparent;
   color: var(--white);
   cursor: pointer;
+  transition: color var(--transition), transform 0.4s var(--ease-out);
+}
+
+.inputBox button:hover {
+  color: var(--red);
+  transform: translateX(var(--space-1));
+}
+
+[dir='rtl'] .inputBox button:hover {
+  transform: translateX(calc(var(--space-1) * -1));
+}
+
+.inputBox button:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: -2px;
 }
 
 .status {
@@ -99,6 +126,16 @@
   width: 120px;
   margin-bottom: var(--space-2);
   cursor: pointer;
+  transition: transform 0.4s var(--ease-out), opacity var(--transition);
+}
+
+.storeBtns img:hover,
+.qr:hover {
+  transform: translateY(calc(var(--space-1) * -1));
+}
+
+.qr {
+  transition: transform 0.4s var(--ease-out);
 }
 
 .socials {
@@ -122,11 +159,12 @@
   height: 22px;
   filter: invert(100%);
   cursor: pointer;
-  transition: var(--transition);
+  transition: filter var(--transition), transform 0.4s var(--ease-out);
 }
 
 .socials img:hover {
   filter: invert(60%) sepia(100%) saturate(300%) hue-rotate(200deg);
+  transform: translateY(calc(var(--space-1) * -1));
 }
 
 .bottom {
@@ -134,6 +172,27 @@
   color: var(--gray-muted);
   font-size: var(--text-sm);
   text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .column ul li,
+  .inputBox,
+  .inputBox button,
+  .storeBtns img,
+  .qr,
+  .socials img {
+    transition: none;
+  }
+
+  .column ul li:hover,
+  .inputBox button:hover,
+  .storeBtns img:hover,
+  .qr:hover,
+  .socials img:hover,
+  [dir='rtl'] .column ul li:hover,
+  [dir='rtl'] .inputBox button:hover {
+    transform: none;
+  }
 }
 
 @media screen and (max-width: 480px) {

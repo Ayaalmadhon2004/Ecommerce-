@@ -92,7 +92,7 @@
 }
 
 .btn i {
-    transition: transform 0.2s ease;
+    transition: transform 0.4s var(--ease-out);
 }
 
 .btn:hover {
@@ -102,6 +102,24 @@
 
 .btn:hover i {
     transform: translateX(6px);
+}
+
+[dir='rtl'] .btn:hover i {
+    transform: translateX(-6px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .btn i,
+    .list a,
+    .list a i {
+        transition: none;
+    }
+
+    .btn:hover i,
+    [dir='rtl'] .btn:hover i {
+        transform: none;
+    }
 }
 
 .subRight {

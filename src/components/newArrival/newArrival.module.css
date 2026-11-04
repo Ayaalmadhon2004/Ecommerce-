@@ -53,6 +53,39 @@
     background-position: center;
     background-size: cover;
     color: var(--white);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition: transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+
+/* soft scrim so the copy stays readable, deepens on hover */
+.left::before,
+.top::before,
+.subLeft::before,
+.subRight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0) 60%);
+    opacity: 0.7;
+    transition: opacity 0.5s var(--ease-out);
+}
+
+.left:hover,
+.top:hover,
+.subLeft:hover,
+.subRight:hover {
+    transform: translateY(calc(var(--space-1) * -1));
+    box-shadow: var(--shadow-hover);
+}
+
+.left:hover::before,
+.top:hover::before,
+.subLeft:hover::before,
+.subRight:hover::before {
+    opacity: 1;
 }
 
 .left {
@@ -93,6 +126,33 @@
     color: var(--white);
     font-size: var(--text-md);
     cursor: pointer;
+    transition: color var(--transition), border-color var(--transition);
+}
+
+.mainContainer .btn:hover {
+    color: var(--red);
+    border-color: var(--red);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .left,
+    .top,
+    .subLeft,
+    .subRight,
+    .left::before,
+    .top::before,
+    .subLeft::before,
+    .subRight::before,
+    .mainContainer .btn {
+        transition: none;
+    }
+
+    .left:hover,
+    .top:hover,
+    .subLeft:hover,
+    .subRight:hover {
+        transform: none;
+    }
 }
 
 @media screen and (max-width: 768px) {

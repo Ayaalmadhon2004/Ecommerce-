@@ -48,13 +48,23 @@
     padding: var(--space-4);
     border: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: var(--radius);
-    transition: background-color var(--transition), color var(--transition);
+    transition: background-color var(--transition), color var(--transition),
+        border-color var(--transition), transform 0.4s var(--ease-out),
+        box-shadow 0.4s var(--ease-out);
 }
 
 .card:hover {
     background-color: var(--red);
+    border-color: var(--red);
     color: var(--white);
     cursor: pointer;
+    transform: translateY(calc(var(--space-1) * -1));
+    box-shadow: var(--shadow-hover);
+}
+
+.card:focus-visible {
+    outline: 2px solid var(--red);
+    outline-offset: 2px;
 }
 
 .img {
@@ -88,6 +98,16 @@
 
 .card:hover .hover {
     display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        transition: none;
+    }
+
+    .card:hover {
+        transform: none;
+    }
 }
 
 @media screen and (max-width: 768px) {
