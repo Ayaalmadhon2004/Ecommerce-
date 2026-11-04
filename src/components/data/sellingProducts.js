@@ -30,6 +30,7 @@ const sellingProducts = [
         id:3,
         img:"assets/photos/book-corner.webp",
         name:"Small BookSelf",
+        model3d:"models/Duck.glb",
         price:"$360",
         prevPrice:"$160",
         rate:((99)),
