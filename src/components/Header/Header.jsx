@@ -154,7 +154,7 @@ function Header({likedCount}) {
                <Badge count={likedCount} className={styles.badge} />
              )}
             </Link>
-           <Link to="/cart" className={styles.loveIcon}>
+           <Link to="/cart" className={styles.loveIcon} data-cart-icon>
              <motion.i className="fa-solid fa-cart-shopping" whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}></motion.i>
              {cartCount > 0 && (
                <Badge count={cartCount} className={styles.badge} />

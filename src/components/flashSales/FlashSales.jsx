@@ -4,6 +4,7 @@ import Countdown from "react-countdown";
 import { useApp } from "../../context/AppContext";
 import styles from "./FlashSales.module.css";
 import Stars from "../Stars/Stars";
+import useFlyToCart from "../../hooks/useFlyToCart";
 import { motion } from "framer-motion";
 import Reveal from "../animations/Reveal";
 import MotionHeart from "../animations/MotionHeart";
@@ -32,6 +33,7 @@ const FALLBACK_FLASH_PRODUCTS = sellingProducts.slice(0, 5).map(toFlashProduct);
 
 function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
   const { cart, handleCart: addToCart } = useApp();
+  const flyToCart = useFlyToCart(handleCart);
   const navigate = useNavigate();
   const [clickedId, setClickedId] = useState(null);
   const [flashProducts, setFlashProducts] = useState([]);
@@ -153,6 +155,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
         <div className={styles.mainContainer} ref={trackRef} onScroll={updateEdges}>
           {flashProducts.map((product, index) => (
             <motion.div
+              data-product-card
               className={styles.card}
               key={product.id}
               onClick={() => handleProductDetails(product)}
@@ -164,7 +167,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
               viewport={cardViewport}
             >
               <div className={styles.imagContainer}>
-                <motion.img variants={cardImageVariants} src={product.image} alt={product.title} />
+                <motion.img variants={cardImageVariants} src={product.img || product.image} alt={product.title} />
                 <div className={styles.discount}>{product.discount}</div>
                 <div className={styles.seeLove}>
                   <MotionHeart isLiked={liked.includes(product.id)} likedClass={styles.liked} notLikedClass={styles.notLiked} onClick={(e) => {
@@ -182,10 +185,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
                 </div>
                 <button
                   className={styles.addToCart}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleCart(product);
-                  }}
+                  onClick={(e) => flyToCart(product, e)}
                 >
                   Add To Cart
                 </button>
