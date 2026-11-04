@@ -53,7 +53,7 @@ function Contact() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-12">
       <p className="mb-8 text-sm text-gray-500">
-        <Link to="/" className="hover:text-brand">Home</Link> /{" "}
+        <Link to="/" className="transition hover:text-brand">Home</Link> /{" "}
         <span className="text-gray-900">Contact</span>
       </p>
 
@@ -63,18 +63,18 @@ function Contact() {
       </Reveal>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        <Reveal as="aside" variants={slideRight} className="h-fit rounded-xl bg-gray-50 p-6 shadow-sm ring-1 ring-gray-100 sm:p-8">
+        <Reveal as="aside" variants={slideRight} className="h-fit rounded-xl bg-gray-50 p-6 shadow-sm ring-1 ring-gray-100 transition hover:shadow-md sm:p-8">
           <motion.ul variants={staggerContainer(0.12, 0.2)} className="m-0 list-none divide-y divide-gray-200 p-0">
             {INFO.map((item) => (
-              <motion.li key={item.title} variants={fadeUp} className="flex gap-4 py-6 first:pt-0 last:pb-0">
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand text-white">
+              <motion.li key={item.title} variants={fadeUp} className="group flex gap-4 py-6 first:pt-0 last:pb-0">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-brand text-white transition group-hover:scale-110 group-hover:shadow-md motion-reduce:transform-none">
                   <i className={item.icon}></i>
                 </span>
                 <div>
                   <h2 className="m-0 text-base font-semibold text-gray-900">{item.title}</h2>
                   <p className="my-1 text-sm text-gray-500">{item.text}</p>
                   {item.href ? (
-                    <a href={item.href} className="text-sm font-medium text-gray-900 hover:text-brand">
+                    <a href={item.href} className="text-sm font-medium text-gray-900 transition hover:text-brand">
                       {item.label}
                     </a>
                   ) : (
@@ -92,7 +92,7 @@ function Contact() {
           whileInView="visible"
           viewport={{ once: true, amount: 0.15 }}
           onSubmit={handleSubmit}
-          className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-100 sm:p-8 lg:col-span-2"
+          className="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-100 transition focus-within:shadow-md sm:p-8 lg:col-span-2"
         >
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
             <div>
@@ -124,7 +124,7 @@ function Contact() {
             {sent && (
               <motion.p
                 role="status"
-                className="m-0 mr-auto text-sm font-medium text-green-600"
+                className="m-0 me-auto text-sm font-medium text-green-600"
                 initial={{ opacity: 0, x: -12 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0 }}
