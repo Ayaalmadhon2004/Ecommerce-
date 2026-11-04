@@ -365,3 +365,29 @@
   height: 100%;
   border-radius: 0;
 }
+
+.colors {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0;
+}
+
+.swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 1px #999;
+  cursor: pointer;
+  padding: 0;
+}
+
+.swatchActive {
+  box-shadow: 0 0 0 2px #000;
+}
+
+.swatch:focus-visible {
+  outline: 2px solid #db4444;
+  outline-offset: 3px;
+}
