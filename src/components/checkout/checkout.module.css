@@ -41,17 +41,22 @@
   border: 1px solid var(--gray-border);
   margin-bottom: var(--space-5);
   font-size: var(--text-md);
-  transition: border 0.3s ease;
+  transition: border-color var(--transition), box-shadow var(--transition);
 }
 
-.form input:focus {
-  border-color: var(--link);
+.form input:focus,
+.couponInput:focus {
+  border-color: var(--red);
   outline: none;
+  box-shadow: 0 0 0 3px var(--light-red);
 }
 
 /* Right Side */
 .right {
   flex: 1 1 350px;
+  align-self: flex-start;
+  position: sticky;
+  top: var(--space-10);
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
@@ -95,7 +100,7 @@
 .radioLabel input[type="radio"] {
   width: 20px;
   height: 20px;
-  margin-right: 0;
+  margin-inline-end: 0;
   cursor: pointer;
 }
 
@@ -105,6 +110,19 @@
   gap: var(--space-3);
   font-weight: 500;
   cursor: pointer;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--gray-bg);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.radioLabel:hover {
+  border-color: var(--gray-border);
+}
+
+.radioLabel:has(input:checked) {
+  border-color: var(--red);
+  box-shadow: 0 0 0 1px var(--red);
 }
 
 .radioLabel span {
@@ -113,7 +131,7 @@
 }
 
 .radioLabel input[type="radio"] {
-  accent-color: var(--link);
+  accent-color: var(--red);
 }
 
 .icons {
@@ -131,7 +149,8 @@
   background-color: var(--white);
   padding: var(--space-5) var(--space-4);
   border-radius: var(--radius-lg);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--gray-bg);
+  box-shadow: var(--shadow);
   width: 100%;
   margin-top: var(--space-4);
 }
@@ -173,7 +192,8 @@
   border-radius: var(--radius-lg);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background-color var(--transition), transform 0.3s var(--ease-out),
+    box-shadow 0.3s var(--ease-out);
 }
 
 .checkoutBtn {
@@ -190,14 +210,23 @@
 
 .placeOrderBtn {
   width: 100%;
-  max-width: 190px;
-  height: 56px;
+  max-width: 240px;
+  height: var(--btn-height);
+  font-size: var(--text-md);
   background-color: var(--red);
   color: var(--white);
 }
 
 .placeOrderBtn:hover {
   background-color: var(--red-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.placeOrderBtn:focus-visible,
+.applyBtn:focus-visible {
+  outline: 3px solid var(--light-red);
+  outline-offset: 2px;
 }
 
 .applyBtn {
@@ -252,6 +281,10 @@
     width: 100%;
   }
 
+  .right {
+    position: static;
+  }
+
   .form input {
     max-width: 100%;
   }
@@ -260,7 +293,7 @@
 .qty {
   color: var(--gray-muted);
   font-size: var(--text-sm);
-  margin-left: var(--space-1);
+  margin-inline-start: var(--space-1);
 }
 
 .couponError {
@@ -273,4 +306,18 @@
   color: var(--success);
   font-size: var(--text-sm);
   margin: 4px 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form input,
+  .radioLabel,
+  .checkoutBtn,
+  .placeOrderBtn,
+  .applyBtn {
+    transition: none;
+  }
+
+  .placeOrderBtn:hover {
+    transform: none;
+  }
 }
