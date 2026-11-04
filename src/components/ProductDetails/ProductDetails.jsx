@@ -8,12 +8,13 @@ import Stars from "../Stars/Stars";
 import Product3DViewer from "../Product3DViewer/Product3DViewer";
 import Spin360Viewer from "../Spin360Viewer/Spin360Viewer";
 import SellingProducts from "../sellingProducts/SellingProducts";
+import { withModel3d } from "../data/models3d";
 
 export default function ProductDetails() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { cart, likes, handleLike, handleCart } = useApp();
-  const product = state?.product;
+  const product = withModel3d(state?.product);
   const [selected, setSelected] = useState(0);
   const [show3d, setShow3d] = useState(true);
   const [qty, setQty] = useState(1);
