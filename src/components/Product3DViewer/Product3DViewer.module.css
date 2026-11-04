@@ -1,0 +1,264 @@
+.wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  background: #f5f5f5;
+  overflow: hidden;
+}
+
+.viewer {
+  width: 100%;
+  height: 100%;
+  --poster-color: transparent;
+}
+
+.viewer:focus-visible {
+  outline: 3px solid #db4444;
+  outline-offset: -3px;
+}
+
+.poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.loadBtn {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  padding: 8px 18px;
+  border: none;
+  border-radius: 20px;
+  background: #000;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.loadBtn:focus-visible {
+  outline: 3px solid #db4444;
+  outline-offset: 2px;
+}
+
+.status {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+/* ===== Hotspots (annotations) ===== */
+.hotspot {
+  position: relative;
+  display: block;
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: #db4444;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.25s, transform 0.2s, visibility 0s;
+}
+
+/* model-viewer adds [visible] only while the hotspot is not hidden by the model.
+   Occluded dots stay discoverable: faded and smaller, still clickable. */
+.hotspot:not([visible]) {
+  opacity: 0.4;
+  transform: scale(0.85);
+}
+
+.hotspot::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid #db4444;
+  animation: hotspotPulse 1.8s ease-out infinite;
+  pointer-events: none;
+}
+
+.hotspot:hover,
+.hotspot:focus-visible,
+.hotspotActive {
+  transform: scale(1.15);
+}
+
+.hotspot:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+
+.hotspotActive {
+  background: #000;
+}
+
+.hotspotActive::before {
+  animation: none;
+  opacity: 0;
+}
+
+.hotspotNum {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.hotspotTip {
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 8px);
+  transform: translateX(-50%);
+  padding: 4px 8px;
+  border-radius: 6px;
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 400;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s;
+}
+
+.hotspot:hover .hotspotTip,
+.hotspot:focus-visible .hotspotTip {
+  opacity: 1;
+}
+
+.hotspotActive .hotspotTip {
+  display: none;
+}
+
+.hotspotCard {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  max-width: 340px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  animation: hotspotCardIn 0.25s ease-out;
+}
+
+.hotspotCardTitle {
+  display: block;
+  font-size: 14px;
+}
+
+.hotspotCardText {
+  margin: 4px 0 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.hotspotReset {
+  padding: 4px 10px;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background: #fff;
+  color: #000;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.hotspotReset:hover {
+  background: #000;
+  color: #fff;
+}
+
+.hotspotReset:focus-visible {
+  outline: 3px solid #db4444;
+  outline-offset: 2px;
+}
+
+.hotspotHint {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+@keyframes hotspotPulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+
+@keyframes hotspotCardIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot::before,
+  .hotspotCard {
+    animation: none;
+  }
+}
+/* ===== end Hotspots ===== */
+
+@media (prefers-reduced-motion: reduce) {
+  .wrapper * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.arBtn {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 24px;
+  background: #db4444;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.arBtn:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 2px;
+}
+
+.arHint {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  top: 12px; /* top, so it never overlaps the hotspot annotation card at the bottom */
+  margin: 0;
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 12px;
+  text-align: center;
+  pointer-events: none;
+}

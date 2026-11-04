@@ -5,15 +5,21 @@ import styles from "./productDetails.module.css";
 import { fadeUp, slideRight, staggerContainer } from "../animations/variants";
 import { useApp } from "../../context/AppContext";
 import Stars from "../Stars/Stars";
+import Product3DViewer from "../Product3DViewer/Product3DViewer";
+import Spin360Viewer from "../Spin360Viewer/Spin360Viewer";
 import SellingProducts from "../sellingProducts/SellingProducts";
+import { withModel3d, colorConfigFor } from "../data/models3d";
 
 export default function ProductDetails() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { cart, likes, handleLike, handleCart } = useApp();
-  const product = state?.product;
+  const product = withModel3d(state?.product);
   const [selected, setSelected] = useState(0);
+  const [show3d, setShow3d] = useState(true);
   const [qty, setQty] = useState(1);
+  const [colorIdx, setColorIdx] = useState(0);
+  const [colorPicked, setColorPicked] = useState(false);
   const [postal, setPostal] = useState("");
   const [checked, setChecked] = useState(false);
   const [showReturn, setShowReturn] = useState(false);
@@ -25,9 +31,15 @@ export default function ProductDetails() {
     : [cover];
   const thumbs = Array.from({ length: 4 }, (_, i) => gallery[i % gallery.length]);
   const mainSrc = thumbs[selected] || cover;
+  const has3d = Boolean(product.model3d);
+  const has360 = !has3d && Array.isArray(product.images360) && product.images360.length > 1;
+  const name = product.title || product.name;
+  const colors = Array.isArray(product.colors) ? product.colors : [];
+  const activeColor = colors[colorIdx] || null;
+  const cartItem = activeColor ? { ...product, selectedColor: activeColor } : product;
 
   const handleBuyNow = () => {
-    if (!cart.some((item) => item.id === product.id)) handleCart(product);
+    if (!cart.some((item) => item.id === product.id)) handleCart(cartItem);
     navigate("/checkout");
   };
 
@@ -55,21 +67,37 @@ export default function ProductDetails() {
                 alt={`${product.title} view ${i + 1}`}
                 className={i === selected ? styles.thumbActive : ""}
                 aria-current={i === selected}
-                onClick={() => setSelected(i)}
+                onClick={() => { setSelected(i); setShow3d(false); }}
               />
             ))}
           </div>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.img
-              key={mainSrc + selected}
-              src={mainSrc}
-              alt={product.title}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.2 }}
-            />
-          </AnimatePresence>
+          {has3d && show3d ? (
+            <div className={styles.viewer3d}>
+              <Product3DViewer src={product.model3d} poster={cover} alt={name} color={colorPicked ? activeColor?.hex : undefined} hotspots={product.hotspots} ar {...colorConfigFor(product.model3d)} />
+            </div>
+          ) : has360 && show3d ? (
+            <div className={styles.viewer3d}>
+              <Spin360Viewer frames={product.images360} alt={name} />
+            </div>
+          ) : (
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.img
+                key={mainSrc + selected}
+                src={mainSrc}
+                alt={product.title}
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.2 }}
+              />
+            </AnimatePresence>
+          )}
+          {(has3d || has360) && !show3d && (
+            <button type="button" className={styles.view3dBtn} onClick={() => setShow3d(true)}>
+              <i className={`fa-solid ${has3d ? "fa-cube" : "fa-rotate"}`} aria-hidden="true"></i>{" "}
+              {has3d ? "3D view" : "360 view"}
+            </button>
+          )}
         </motion.div>
 
         <motion.div
@@ -85,6 +113,36 @@ export default function ProductDetails() {
           </motion.p>
           <motion.h3 variants={fadeUp} className={styles.price}>${product.price}</motion.h3>
           <motion.p variants={fadeUp} className={styles.description}>{product.description}</motion.p>
+
+          {colors.length > 0 && (
+            <motion.div variants={fadeUp} className={styles.colors} role="radiogroup" aria-label="Colour">
+              <span>Colours:</span>
+              {colors.map((c, i) => (
+                <button
+                  key={c.hex}
+                  type="button"
+                  role="radio"
+                  aria-checked={i === colorIdx}
+                  aria-label={c.name}
+                  title={c.name}
+                  tabIndex={i === colorIdx ? 0 : -1}
+                  className={`${styles.swatch} ${i === colorIdx ? styles.swatchActive : ""}`}
+                  style={{ backgroundColor: c.hex }}
+                  onClick={() => { setColorIdx(i); setColorPicked(true); }}
+                  onKeyDown={(e) => {
+                    const d = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1
+                      : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+                    if (!d) return;
+                    e.preventDefault();
+                    const n = (i + d + colors.length) % colors.length;
+                    setColorIdx(n);
+                    setColorPicked(true);
+                    e.currentTarget.parentElement.children[n + 1]?.focus();
+                  }}
+                />
+              ))}
+            </motion.div>
+          )}
 
           <motion.div variants={fadeUp} className={styles.actions}>
             <div className={styles.qty}>
@@ -105,7 +163,7 @@ export default function ProductDetails() {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => {
-                for (let i = 0; i < qty; i++) handleCart(product);
+                for (let i = 0; i < qty; i++) handleCart(cartItem);
               }}
             >
               Add To Cart
