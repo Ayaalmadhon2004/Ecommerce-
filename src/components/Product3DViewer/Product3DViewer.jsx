@@ -70,6 +70,7 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
   const [failed, setFailed] = useState(false);
   const [interacted, setInteracted] = useState(false);
   const [viewer, setViewer] = useState(null);
+  const [arSupported, setArSupported] = useState(false);
   const [reduceMotion] = useState(prefersReducedMotion);
   const [activeHotspot, setActiveHotspot] = useState(null);
   const defaultView = useRef(null);
@@ -204,6 +205,15 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
     return () => document.removeEventListener("keydown", onKey);
   }, [activeHotspot]);
 
+  // AR support is only known after the model loaded (model-viewer.canActivateAR).
+  useEffect(() => {
+    if (!viewer || !ar) return undefined;
+    const check = () => setArSupported(!!viewer.canActivateAR);
+    viewer.addEventListener("load", check);
+    check();
+    return () => viewer.removeEventListener("load", check);
+  }, [viewer, ar]);
+
   // Fallback: no model, load error or no WebGL -> plain poster image.
   if (!canRender) {
     return poster ? (
@@ -231,7 +241,14 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
           shadow-intensity="1"
           ar={ar ? true : undefined}
           ar-modes={ar ? "webxr scene-viewer quick-look" : undefined}
+          ar-scale={ar ? "auto" : undefined}
+          ar-placement={ar ? "floor" : undefined}
         >
+          {ar && (
+            <button type="button" slot="ar-button" className={styles.arBtn}>
+              <i className="fa-solid fa-expand" aria-hidden="true"></i> View in your space
+            </button>
+          )}
           {Array.isArray(hotspots) &&
             hotspots.map((h, i) => (
               <button
@@ -271,6 +288,12 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
         <button type="button" className={styles.loadBtn} onClick={() => setInView(true)}>
           <i className="fa-solid fa-cube" aria-hidden="true"></i> View in 3D
         </button>
+      )}
+      {ar && loaded && !arSupported && (
+        <p className={styles.arHint}>
+          <i className="fa-solid fa-mobile-screen" aria-hidden="true"></i> Open this page on your
+          phone to view in AR
+        </p>
       )}
       {inView && !loaded && (
         <span className={styles.status} role="status">
