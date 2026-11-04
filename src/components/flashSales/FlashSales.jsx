@@ -133,8 +133,10 @@ import React, { useState, useEffect  } from "react";
 import Countdown from "react-countdown";
 import styles from "./FlashSales.module.css";
 import Stars from "../Stars/Stars";
+import useFlyToCart from "../../hooks/useFlyToCart";
 
 function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
+  const addToCart = useFlyToCart(handleCart);
   const [clickedId, setClickedId] = useState(null);
   const [flashProducts, setFlashProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -216,9 +218,9 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
 
         <div className={styles.mainContainer}>
           {flashProducts.map((product) => (
-            <div className={styles.card} key={product.id} onClick={() => handleProductDetails(product)}>
+            <div className={styles.card} data-product-card key={product.id} onClick={() => handleProductDetails(product)}>
               <div className={styles.imagContainer}>
-                <img src={product.image} alt={product.title} />
+                <img src={product.img || product.image} alt={product.title} />
                 <div className={styles.discount}>{product.discount}</div>
                 <div className={styles.seeLove}>
                   <i
@@ -237,7 +239,7 @@ function FlashSales({ liked, handleLike, handleCart ,  handleProductDetails }) {
                 </div>
                 <button
                   className={styles.addToCart}
-                  onClick={() => handleCart(product)}
+                  onClick={(e) => addToCart(product, e)}
                 >
                   Add To Cart
                 </button>

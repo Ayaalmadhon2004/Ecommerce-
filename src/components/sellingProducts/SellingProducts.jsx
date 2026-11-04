@@ -1,7 +1,9 @@
 import styles from "./sellingProducts.module.css"
 import { useEffect, useState } from "react";
+import useFlyToCart from "../../hooks/useFlyToCart";
 
 function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varient}) {
+  const addToCart = useFlyToCart(handleCart);
   const [products,setProducts]=useState([]);
 
   useEffect(()=>{
@@ -23,9 +25,9 @@ function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varie
         </div>
          <div className={styles.mainContainer}>
          {products.map((product)=>(
-            <div className={styles.card} key={product.id} onClick={() => handleProductDetails(product)}>
+            <div className={styles.card} data-product-card key={product.id} onClick={() => handleProductDetails(product)}>
                 <div className={styles.imagContainer}>
-                    <img src={product.image} alt={product.title}/>
+                    <img src={product.img || product.image} alt={product.title}/>
                     <div className={styles.discount}>{product.discount}</div>
                     <div className={styles.seeLove}>
                         <i className={`fa-solid fa-heart ${
@@ -35,7 +37,7 @@ function SellingProducts({liked,handleLike,handleCart,handleProductDetails,varie
                     </div>
                     <button
                         className={styles.addToCart}
-                        onClick={() => handleCart(product)}
+                        onClick={(e) => addToCart(product, e)}
                         >
                         Add To Cart
                     </button>
