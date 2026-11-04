@@ -6,6 +6,7 @@ import { fadeUp, slideRight, staggerContainer } from "../animations/variants";
 import { useApp } from "../../context/AppContext";
 import Stars from "../Stars/Stars";
 import Product3DViewer from "../Product3DViewer/Product3DViewer";
+import Spin360Viewer from "../Spin360Viewer/Spin360Viewer";
 import SellingProducts from "../sellingProducts/SellingProducts";
 
 export default function ProductDetails() {
@@ -28,6 +29,7 @@ export default function ProductDetails() {
   const thumbs = Array.from({ length: 4 }, (_, i) => gallery[i % gallery.length]);
   const mainSrc = thumbs[selected] || cover;
   const has3d = Boolean(product.model3d);
+  const has360 = !has3d && Array.isArray(product.images360) && product.images360.length > 1;
   const name = product.title || product.name;
 
   const handleBuyNow = () => {
@@ -67,6 +69,10 @@ export default function ProductDetails() {
             <div className={styles.viewer3d}>
               <Product3DViewer src={product.model3d} poster={cover} alt={name} ar />
             </div>
+          ) : has360 && show3d ? (
+            <div className={styles.viewer3d}>
+              <Spin360Viewer frames={product.images360} alt={name} />
+            </div>
           ) : (
             <AnimatePresence mode="wait" initial={false}>
               <motion.img
@@ -80,9 +86,10 @@ export default function ProductDetails() {
               />
             </AnimatePresence>
           )}
-          {has3d && !show3d && (
+          {(has3d || has360) && !show3d && (
             <button type="button" className={styles.view3dBtn} onClick={() => setShow3d(true)}>
-              <i className="fa-solid fa-cube" aria-hidden="true"></i> 3D view
+              <i className={`fa-solid ${has3d ? "fa-cube" : "fa-rotate"}`} aria-hidden="true"></i>{" "}
+              {has3d ? "3D view" : "360 view"}
             </button>
           )}
         </motion.div>
