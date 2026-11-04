@@ -95,11 +95,19 @@
   font-size: var(--text-md);
   font-weight: var(--weight-500);
   cursor: pointer;
-  transition: background-color var(--transition);
+  transition: background-color var(--transition), transform var(--transition),
+    box-shadow var(--transition);
 }
 
 .btn:hover {
   background-color: var(--red-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 /* ---------- Product grid + card ---------- */
@@ -115,6 +123,11 @@
   position: relative;
   min-width: 0;
   cursor: pointer;
+  transition: transform 0.4s var(--ease-out);
+}
+
+.card:hover {
+  transform: translateY(-4px);
 }
 
 .imageBox {
@@ -127,6 +140,11 @@
   background-color: var(--gray-bg);
   border-radius: var(--radius);
   overflow: hidden;
+  transition: box-shadow 0.4s var(--ease-out);
+}
+
+.card:hover .imageBox {
+  box-shadow: var(--shadow-hover);
 }
 
 .imageBox img {
@@ -134,6 +152,11 @@
   height: 100%;
   object-fit: contain;
   padding: var(--space-5);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.card:hover .imageBox img {
+  transform: scale(1.06);
 }
 
 .cardBody {
@@ -209,6 +232,14 @@
   border-radius: var(--radius-round);
   background-color: var(--white);
   cursor: pointer;
+  transition: transform var(--transition), background-color var(--transition),
+    color var(--transition);
+}
+
+.actions i:hover {
+  transform: scale(1.12);
+  background-color: var(--red);
+  color: var(--white);
 }
 
 .liked {
@@ -233,7 +264,12 @@
   white-space: nowrap;
   cursor: pointer;
   opacity: 0;
-  transition: opacity var(--transition), transform var(--transition);
+  transition: opacity var(--transition), transform var(--transition),
+    background-color var(--transition);
+}
+
+.addToCart:hover {
+  background-color: var(--red);
 }
 
 .imageBox:hover .addToCart {
@@ -245,5 +281,14 @@
 @media (hover: none) {
   .addToCart {
     opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card:hover,
+  .btn:hover,
+  .card:hover .imageBox img {
+    transform: none;
   }
 }
