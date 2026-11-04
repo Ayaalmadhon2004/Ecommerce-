@@ -31,6 +31,12 @@ const sellingProducts = [
         img:"assets/photos/book-corner.webp",
         name:"Small BookSelf",
         model3d:"models/Duck.glb",
+        colors:[
+            {name:"Red",hex:"#d94141"},
+            {name:"Blue",hex:"#3b6fd9"},
+            {name:"Green",hex:"#3f9d5a"},
+            {name:"Black",hex:"#222222"},
+        ],
         price:"$360",
         prevPrice:"$160",
         rate:((99)),
