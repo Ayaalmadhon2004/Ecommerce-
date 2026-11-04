@@ -5,6 +5,7 @@ import styles from "./productDetails.module.css";
 import { fadeUp, slideRight, staggerContainer } from "../animations/variants";
 import { useApp } from "../../context/AppContext";
 import Stars from "../Stars/Stars";
+import Product3DViewer from "../Product3DViewer/Product3DViewer";
 import SellingProducts from "../sellingProducts/SellingProducts";
 
 export default function ProductDetails() {
@@ -13,6 +14,7 @@ export default function ProductDetails() {
   const { cart, likes, handleLike, handleCart } = useApp();
   const product = state?.product;
   const [selected, setSelected] = useState(0);
+  const [show3d, setShow3d] = useState(true);
   const [qty, setQty] = useState(1);
   const [postal, setPostal] = useState("");
   const [checked, setChecked] = useState(false);
@@ -25,6 +27,8 @@ export default function ProductDetails() {
     : [cover];
   const thumbs = Array.from({ length: 4 }, (_, i) => gallery[i % gallery.length]);
   const mainSrc = thumbs[selected] || cover;
+  const has3d = Boolean(product.model3d);
+  const name = product.title || product.name;
 
   const handleBuyNow = () => {
     if (!cart.some((item) => item.id === product.id)) handleCart(product);
@@ -55,21 +59,32 @@ export default function ProductDetails() {
                 alt={`${product.title} view ${i + 1}`}
                 className={i === selected ? styles.thumbActive : ""}
                 aria-current={i === selected}
-                onClick={() => setSelected(i)}
+                onClick={() => { setSelected(i); setShow3d(false); }}
               />
             ))}
           </div>
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.img
-              key={mainSrc + selected}
-              src={mainSrc}
-              alt={product.title}
-              initial={{ opacity: 0, scale: 0.96 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              transition={{ duration: 0.2 }}
-            />
-          </AnimatePresence>
+          {has3d && show3d ? (
+            <div className={styles.viewer3d}>
+              <Product3DViewer src={product.model3d} poster={cover} alt={name} />
+            </div>
+          ) : (
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.img
+                key={mainSrc + selected}
+                src={mainSrc}
+                alt={product.title}
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.2 }}
+              />
+            </AnimatePresence>
+          )}
+          {has3d && !show3d && (
+            <button type="button" className={styles.view3dBtn} onClick={() => setShow3d(true)}>
+              <i className="fa-solid fa-cube" aria-hidden="true"></i> 3D view
+            </button>
+          )}
         </motion.div>
 
         <motion.div
