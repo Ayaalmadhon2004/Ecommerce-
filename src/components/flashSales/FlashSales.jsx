@@ -27,6 +27,9 @@ const toFlashProduct = (p) => {
     rate: p.rate,
     discount: `${off}% OFF`,
     description: "",
+    model3d: p.model3d,
+    colors: p.colors,
+    hotspots: p.hotspots,
   };
 };
 const FALLBACK_FLASH_PRODUCTS = sellingProducts.slice(0, 5).map(toFlashProduct);
