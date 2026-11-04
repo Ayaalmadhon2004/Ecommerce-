@@ -22,6 +22,10 @@
   min-width: 0;
 }
 
+.left img {
+  border-radius: var(--radius-lg);
+}
+
 .right h3 {
   font-weight: 500;
   font-size: var(--text-2xl);
@@ -43,10 +47,28 @@
   height: 40px;
   margin-bottom: var(--space-6);
   padding: 0 var(--space-2);
-  color: var(--gray);
+  color: var(--gray-dark);
+  background: transparent;
   border: none;
-  border-bottom: 1px solid var(--black);
+  border-bottom: 1px solid var(--gray-border);
+  border-radius: 0;
   font-size: var(--text-md);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.form input::placeholder {
+  color: var(--gray);
+}
+
+.form input:hover {
+  border-bottom-color: var(--gray-dark);
+}
+
+.form input:focus,
+.form input:focus-visible {
+  border-bottom-color: var(--red);
+  box-shadow: 0 1px 0 0 var(--red), 0 8px 12px -8px var(--light-red);
 }
 
 .btns {
@@ -64,6 +86,29 @@
   color: var(--white);
   border: none;
   cursor: pointer;
+  font-weight: var(--weight-500);
+  transition: transform var(--transition), box-shadow var(--transition),
+    background-color var(--transition);
+}
+
+.btn1:hover:not(:disabled) {
+  background-color: var(--red-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.btn1:active:not(:disabled) {
+  transform: translateY(0) scale(0.98);
+  box-shadow: var(--shadow);
+}
+
+.btn1:focus-visible,
+.btn2:focus-visible,
+.backLink:focus-visible,
+.link:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+  border-radius: var(--radius);
 }
 
 .btn1:disabled {
@@ -78,6 +123,13 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  transition: color var(--transition);
+}
+
+.btn2:hover,
+.backLink:hover,
+.link:hover {
+  color: var(--red-dark);
 }
 
 .backLink {
@@ -89,16 +141,23 @@
   text-decoration: underline;
 }
 
-.success {
-  color: green;
+.right .success,
+.right .error {
   font-size: var(--text-sm);
-  margin-top: var(--space-2);
+  line-height: 1.5;
+  margin: var(--space-3) 0 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  border-inline-start: 3px solid currentColor;
+  background: var(--gray-bg);
 }
 
-.error {
+.right .success {
+  color: var(--success);
+}
+
+.right .error {
   color: var(--red);
-  font-size: var(--text-sm);
-  margin-top: var(--space-2);
 }
 
 @media (max-width: 768px) {
@@ -138,4 +197,23 @@
   font: inherit;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.link {
+  transition: color var(--transition);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form input,
+  .btn1,
+  .btn2,
+  .backLink,
+  .link {
+    transition: none;
+  }
+
+  .btn1:hover:not(:disabled),
+  .btn1:active:not(:disabled) {
+    transform: none;
+  }
 }

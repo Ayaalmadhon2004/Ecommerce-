@@ -1,5 +1,11 @@
 .header {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.88);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
 }
 
 .container {
@@ -32,8 +38,31 @@
 }
 
 .list li a {
+    position: relative;
     font-size: var(--text-md);
     font-weight: var(--weight-400);
+}
+
+/* underline that slides in from the start edge (works in RTL too) */
+.list li a::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    bottom: -4px;
+    height: 2px;
+    background-color: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease-out);
+}
+
+[dir="rtl"] .list li a::after {
+    transform-origin: right;
+}
+
+.list li a:hover::after,
+.list li a:focus-visible::after {
+    transform: scaleX(1);
 }
 
 .searching {
@@ -53,8 +82,14 @@
     font-size: var(--text-xs);
 }
 
+.search {
+    transition: box-shadow var(--transition), background-color var(--transition);
+}
+
 .search:focus {
-    outline: 1px solid var(--gray-border);
+    outline: none;
+    background-color: var(--white);
+    box-shadow: 0 0 0 2px var(--red);
 }
 
 .loveIcon {
