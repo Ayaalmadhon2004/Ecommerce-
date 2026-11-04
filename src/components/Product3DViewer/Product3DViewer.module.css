@@ -77,12 +77,11 @@
   transition: opacity 0.25s, transform 0.2s, visibility 0s;
 }
 
-/* model-viewer adds [visible] only while the hotspot is not hidden by the model */
+/* model-viewer adds [visible] only while the hotspot is not hidden by the model.
+   Occluded dots stay discoverable: faded and smaller, still clickable. */
 .hotspot:not([visible]) {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.25s, visibility 0s 0.25s;
+  opacity: 0.4;
+  transform: scale(0.85);
 }
 
 .hotspot::before {
@@ -191,6 +190,19 @@
 .hotspotReset:focus-visible {
   outline: 3px solid #db4444;
   outline-offset: 2px;
+}
+
+.hotspotHint {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.65);
+  color: #fff;
+  font-size: 12px;
+  pointer-events: none;
 }
 
 @keyframes hotspotPulse {

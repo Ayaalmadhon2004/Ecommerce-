@@ -73,6 +73,7 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
   const [arSupported, setArSupported] = useState(false);
   const [reduceMotion] = useState(prefersReducedMotion);
   const [activeHotspot, setActiveHotspot] = useState(null);
+  const [hotspotUsed, setHotspotUsed] = useState(false);
   const defaultView = useRef(null);
 
   const label = alt
@@ -190,6 +191,7 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
     }
     setInteracted(true); // stop auto-rotate so it does not fight the fly-to
     setActiveHotspot(i);
+    setHotspotUsed(true);
     viewer.interpolationDecay = 120;
     viewer.cameraTarget = h.cameraTarget || h.position;
     viewer.cameraOrbit = h.cameraOrbit || hotspotOrbit(h, defaultView.current.radius);
@@ -282,6 +284,10 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
             <i className="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset view
           </button>
         </div>
+      )}
+
+      {loaded && !hotspotUsed && Array.isArray(hotspots) && hotspots.length > 0 && (
+        <p className={styles.hotspotHint}>Tap the numbered dots to explore</p>
       )}
 
       {!inView && (
