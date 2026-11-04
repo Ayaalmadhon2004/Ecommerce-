@@ -27,7 +27,7 @@ function About() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-12">
       <p className="mb-8 text-sm text-gray-500">
-        <Link to="/" className="hover:text-brand">Home</Link> /{" "}
+        <Link to="/" className="transition hover:text-brand">Home</Link> /{" "}
         <span className="text-gray-900">About</span>
       </p>
 
@@ -51,17 +51,17 @@ function About() {
           </p>
           <Link
             to="/"
-            className="inline-flex items-center gap-2 rounded-lg bg-brand px-8 py-3 text-sm font-medium text-white no-underline shadow-sm transition hover:bg-red-600"
+            className="group inline-flex items-center gap-2 rounded-lg bg-brand px-8 py-3 text-sm font-medium text-white no-underline shadow-sm transition hover:-translate-y-0.5 hover:bg-red-600 hover:shadow-lg active:translate-y-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand/40 focus-visible:ring-offset-2 motion-reduce:transform-none motion-reduce:transition-none"
           >
-            Start shopping <i className="fa-solid fa-arrow-right"></i>
+            Start shopping <i className="fa-solid fa-arrow-right inline-block transition-transform group-hover:translate-x-1 rtl:-scale-x-100 rtl:group-hover:-translate-x-1 motion-reduce:transform-none"></i>
           </Link>
         </Reveal>
 
-        <Reveal variants={slideLeft} className="flex items-center justify-center rounded-2xl bg-gradient-to-br from-pink-100 via-red-50 to-white p-8 ring-1 ring-red-100">
+        <Reveal variants={slideLeft} className="group flex items-center justify-center overflow-hidden rounded-2xl bg-gradient-to-br from-pink-100 via-red-50 to-white p-8 ring-1 ring-red-100">
           <img
             src="assets/photos/Side Image.png"
             alt="Shopping cart, shopping bags and a smartphone"
-            className="h-auto max-h-[420px] w-full rounded-xl object-contain"
+            className="h-auto max-h-[420px] w-full rounded-xl object-contain transition-transform duration-500 group-hover:scale-105 motion-reduce:transform-none motion-reduce:transition-none"
           />
         </Reveal>
       </section>
@@ -70,7 +70,7 @@ function About() {
         {stats.map((stat) => (
           <motion.div key={stat.id} variants={fadeUp} className="flex">
           <div
-            className="group w-full flex flex-col items-center rounded-xl bg-white p-8 text-center shadow-sm ring-1 ring-gray-200 transition hover:-translate-y-1 hover:bg-brand hover:shadow-lg hover:ring-brand"
+            className="group w-full flex flex-col items-center rounded-xl bg-white p-8 text-center shadow-sm ring-1 ring-gray-200 transition hover:-translate-y-1 hover:bg-brand hover:shadow-lg hover:ring-brand motion-reduce:transform-none motion-reduce:transition-none"
           >
             <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-red-50 text-xl text-brand transition group-hover:bg-white/20 group-hover:text-white">
               <i className={stat.icon}></i>
@@ -84,8 +84,8 @@ function About() {
 
       <Reveal as="section" variants={staggerContainer(0.15)} aria-label="Our services" className="mt-16 grid grid-cols-1 gap-8 rounded-2xl bg-gray-50 p-8 ring-1 ring-gray-100 md:grid-cols-3">
         {features.map((f) => (
-          <motion.div key={f.id} variants={scaleIn} className="flex flex-col items-center text-center">
-            <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gray-900 text-xl text-white">
+          <motion.div key={f.id} variants={scaleIn} className="group flex flex-col items-center rounded-xl p-4 text-center transition hover:-translate-y-1 hover:bg-white hover:shadow-md motion-reduce:transform-none motion-reduce:transition-none">
+            <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gray-900 text-xl text-white transition group-hover:scale-110 group-hover:bg-brand motion-reduce:transform-none">
               <i className={f.icon}></i>
             </span>
             <h3 className="m-0 text-sm font-semibold uppercase tracking-wide text-gray-900">{f.title}</h3>
