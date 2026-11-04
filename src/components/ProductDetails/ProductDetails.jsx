@@ -69,7 +69,7 @@ export default function ProductDetails() {
           </div>
           {has3d && show3d ? (
             <div className={styles.viewer3d}>
-              <Product3DViewer src={product.model3d} poster={cover} alt={name} color={activeColor?.hex} />
+              <Product3DViewer src={product.model3d} poster={cover} alt={name} color={activeColor?.hex} hotspots={product.hotspots} />
             </div>
           ) : (
             <AnimatePresence mode="wait" initial={false}>
