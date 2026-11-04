@@ -12,6 +12,19 @@ import sellingProducts from "./sellingProducts";
 const byName = (list, name) => list.find((p) => p.name === name) || {};
 const pick = ({ model3d, colors, hotspots }) => ({ model3d, colors, hotspots });
 
+/*
+ * How a colour swatch is applied to each model: which materials to colour and
+ * whether to drop the base texture ("flat", exact colour) or multiply it ("tint").
+ * Add an entry per real model once you have it (material names are in the .glb).
+ */
+const MODEL_COLOR_CONFIG = {
+  "models/Duck.glb": { colorMaterials: ["blinn3-fx"], colorMode: "flat" },
+  "models/Fox.glb": { colorMaterials: ["fox_material"], colorMode: "flat" },
+  "models/CesiumMilkTruck.glb": { colorMaterials: ["truck"], colorMode: "flat" },
+};
+const NO_CONFIG = {};
+export const colorConfigFor = (src) => MODEL_COLOR_CONFIG[src] || NO_CONFIG;
+
 export const MODELS_BY_API_ID = {
   1: pick(byName(sellingProducts, "Small BookSelf")),
   2: pick(byName(exploreProducts, "Breed Dry Dog Food")),

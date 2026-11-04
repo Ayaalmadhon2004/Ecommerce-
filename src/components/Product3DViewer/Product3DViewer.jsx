@@ -8,7 +8,10 @@ import styles from "./Product3DViewer.module.css";
  *  - src      {string}  path/URL of a .glb file (required)
  *  - poster   {string}  fallback / loading image
  *  - alt      {string}  accessible description of the product
- *  - color    {string?} optional CSS colour used to tint the base material
+ *  - color    {string?} optional CSS colour applied to the colour target materials
+ *  - colorMaterials {string[]?} material names that `color` applies to (default: the first material)
+ *  - colorMode {"tint"|"flat"} tint multiplies the texture (can shift hue); flat drops the
+ *             base texture so the colour shows exactly as chosen (default "tint")
  *  - hotspots {Array?}  optional [{ position, normal, label, description?,
  *                       cameraOrbit?, cameraTarget? }] annotations; clicking one
  *                       flies the camera to it and opens an annotation card
@@ -29,7 +32,19 @@ const hasWebGL = () => {
   }
 };
 
-// Any CSS colour -> [r, g, b, a] in 0..1, or null
+// Materials a colour change applies to, with the base texture dropped in "flat" mode.
+const colorTargets = (model, names, mode) => {
+  const all = model?.materials || [];
+  const picked = names?.length ? all.filter((m) => names.includes(m.name)) : all.slice(0, 1);
+  const pbrs = picked.map((m) => m.pbrMetallicRoughness);
+  if (mode === "flat") pbrs.forEach((p) => p.baseColorTexture?.setTexture?.(null));
+  return pbrs;
+};
+
+// sRGB channel (0..1) -> linear, the space glTF baseColorFactor uses
+const toLinear = (c) => (c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+
+// Any CSS colour -> [r, g, b, a] in 0..1 (linear RGB), or null
 const parseColor = (value) => {
   try {
     const ctx = document.createElement("canvas").getContext("2d");
@@ -39,7 +54,7 @@ const parseColor = (value) => {
     const hex = ctx.fillStyle;
     if (!/^#[0-9a-f]{6}$/i.test(hex)) return null;
     const n = parseInt(hex.slice(1), 16);
-    return [(n >> 16) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255, 1];
+    return [toLinear((n >> 16) / 255), toLinear(((n >> 8) & 255) / 255), toLinear((n & 255) / 255), 1];
   } catch {
     return null;
   }
@@ -62,7 +77,7 @@ const hotspotOrbit = (h, radius) => {
   return `${theta.toFixed(1)}deg ${clampedPhi.toFixed(1)}deg ${(radius * HOTSPOT_ZOOM).toFixed(3)}m`;
 };
 
-export default function Product3DViewer({ src, poster, alt, color, hotspots, ar }) {
+export default function Product3DViewer({ src, poster, alt, color, hotspots, ar, colorMaterials, colorMode = "tint" }) {
   const wrapRef = useRef(null);
   const [inView, setInView] = useState(false);
   const [libReady, setLibReady] = useState(false);
@@ -121,8 +136,7 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
     const onLoad = () => {
       setLoaded(true);
       const rgba = color && parseColor(color);
-      const material = viewer.model?.materials?.[0];
-      if (rgba && material) material.pbrMetallicRoughness.setBaseColorFactor(rgba);
+      if (rgba) colorTargets(viewer.model, colorMaterials, colorMode).forEach((p) => p.setBaseColorFactor(rgba));
     };
     const onError = () => setFailed(true);
     // Stop auto-rotate for good once the user takes control.
@@ -137,30 +151,30 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
       viewer.removeEventListener("error", onError);
       viewer.removeEventListener("camera-change", onCamera);
     };
-  }, [viewer, color]);
+  }, [viewer, color, colorMaterials, colorMode]);
 
   // Live colour swap: ease the base colour to the new `color` after load.
   useEffect(() => {
     if (!viewer || !loaded) return undefined;
     const to = color && parseColor(color);
-    const pbr = viewer.model?.materials?.[0]?.pbrMetallicRoughness;
-    if (!to || !pbr) return undefined;
-    const from = [...pbr.baseColorFactor];
-    if (from.every((v, i) => Math.abs(v - to[i]) < 0.001)) return undefined;
+    const pbrs = to ? colorTargets(viewer.model, colorMaterials, colorMode) : [];
+    if (!to || !pbrs.length) return undefined;
+    const fromAll = pbrs.map((p) => [...p.baseColorFactor]);
+    if (fromAll.every((from) => from.every((v, i) => Math.abs(v - to[i]) < 0.001))) return undefined;
     if (reduceMotion) {
-      pbr.setBaseColorFactor(to);
+      pbrs.forEach((p) => p.setBaseColorFactor(to));
       return undefined;
     }
     let raf;
     const start = performance.now();
     const step = (now) => {
       const t = Math.min(1, (now - start) / 300);
-      pbr.setBaseColorFactor(from.map((v, i) => v + (to[i] - v) * t));
+      pbrs.forEach((p, k) => p.setBaseColorFactor(fromAll[k].map((v, i) => v + (to[i] - v) * t)));
       if (t < 1) raf = requestAnimationFrame(step);
     };
     raf = requestAnimationFrame(step);
     return () => cancelAnimationFrame(raf);
-  }, [viewer, loaded, color, reduceMotion]);
+  }, [viewer, loaded, color, colorMaterials, colorMode, reduceMotion]);
 
   /* ---- hotspots: camera fly-to, reset, Escape ---- */
   const resetView = () => {
@@ -243,6 +257,7 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
           shadow-intensity="1"
           ar={ar ? true : undefined}
           ar-modes={ar ? "webxr scene-viewer quick-look" : undefined}
+          tone-mapping="commerce"
           ar-scale={ar ? "auto" : undefined}
           ar-placement={ar ? "floor" : undefined}
         >

@@ -8,7 +8,7 @@ import Stars from "../Stars/Stars";
 import Product3DViewer from "../Product3DViewer/Product3DViewer";
 import Spin360Viewer from "../Spin360Viewer/Spin360Viewer";
 import SellingProducts from "../sellingProducts/SellingProducts";
-import { withModel3d } from "../data/models3d";
+import { withModel3d, colorConfigFor } from "../data/models3d";
 
 export default function ProductDetails() {
   const { state } = useLocation();
@@ -19,6 +19,7 @@ export default function ProductDetails() {
   const [show3d, setShow3d] = useState(true);
   const [qty, setQty] = useState(1);
   const [colorIdx, setColorIdx] = useState(0);
+  const [colorPicked, setColorPicked] = useState(false);
   const [postal, setPostal] = useState("");
   const [checked, setChecked] = useState(false);
   const [showReturn, setShowReturn] = useState(false);
@@ -72,7 +73,7 @@ export default function ProductDetails() {
           </div>
           {has3d && show3d ? (
             <div className={styles.viewer3d}>
-              <Product3DViewer src={product.model3d} poster={cover} alt={name} color={activeColor?.hex} hotspots={product.hotspots} ar />
+              <Product3DViewer src={product.model3d} poster={cover} alt={name} color={colorPicked ? activeColor?.hex : undefined} hotspots={product.hotspots} ar {...colorConfigFor(product.model3d)} />
             </div>
           ) : has360 && show3d ? (
             <div className={styles.viewer3d}>
@@ -127,7 +128,7 @@ export default function ProductDetails() {
                   tabIndex={i === colorIdx ? 0 : -1}
                   className={`${styles.swatch} ${i === colorIdx ? styles.swatchActive : ""}`}
                   style={{ backgroundColor: c.hex }}
-                  onClick={() => setColorIdx(i)}
+                  onClick={() => { setColorIdx(i); setColorPicked(true); }}
                   onKeyDown={(e) => {
                     const d = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1
                       : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
@@ -135,6 +136,7 @@ export default function ProductDetails() {
                     e.preventDefault();
                     const n = (i + d + colors.length) % colors.length;
                     setColorIdx(n);
+                    setColorPicked(true);
                     e.currentTarget.parentElement.children[n + 1]?.focus();
                   }}
                 />
