@@ -391,3 +391,191 @@
   outline: 2px solid #db4444;
   outline-offset: 3px;
 }
+
+/* ===== Polish ===== */
+.thumbnails img,
+.mainImage .subImages img {
+  transition: border-color var(--transition), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+}
+
+.thumbnails img:hover,
+.mainImage .subImages img:hover {
+  border-color: var(--red);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+
+.thumbnails img.thumbActive {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px var(--red);
+}
+
+.mainImage .subImages {
+  gap: var(--space-3);
+}
+
+.price {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-700);
+  letter-spacing: 0.01em;
+}
+
+.oldPrice {
+  margin-right: 0;
+  margin-inline-end: var(--space-2);
+}
+
+.sizeBtn,
+.swatch {
+  transition: border-color var(--transition), color var(--transition), box-shadow var(--transition), transform 0.2s var(--ease-out);
+}
+
+.swatch:hover {
+  transform: scale(1.12);
+}
+
+.qty {
+  transition: border-color var(--transition);
+}
+
+.qty:hover {
+  border-color: var(--red);
+}
+
+.qty button {
+  transition: background-color var(--transition), color var(--transition);
+}
+
+.qty button:hover {
+  background: var(--red);
+  color: var(--white);
+}
+
+.buyBtn,
+.cartBtn,
+.addToCart,
+.postal button {
+  transition: background-color var(--transition), color var(--transition), transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+}
+
+.buyBtn:hover,
+.cartBtn:hover,
+.addToCart:hover,
+.postal button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.buyBtn:hover,
+.addToCart:hover,
+.postal button:hover {
+  background-color: var(--red-dark);
+}
+
+.cartBtn:hover {
+  background: var(--red);
+  color: var(--white);
+}
+
+.buyBtn:active,
+.cartBtn:active,
+.addToCart:active,
+.postal button:active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: none;
+}
+
+.buyBtn:focus-visible,
+.cartBtn:focus-visible,
+.sizeBtn:focus-visible,
+.qty button:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+.delivery {
+  border: 1px solid var(--gray-bg);
+  background: var(--white);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius-lg);
+  padding-bottom: var(--space-4);
+}
+
+.postal input {
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.postal input:focus {
+  outline: none;
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--red) 15%, transparent);
+}
+
+.relatedSection h3 {
+  font-weight: var(--weight-600);
+  margin-bottom: var(--space-5);
+}
+
+.relatedCard {
+  transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+}
+
+.relatedCard:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.relatedCard img {
+  transition: transform 0.5s var(--ease-out);
+}
+
+.relatedCard:hover img {
+  transform: scale(1.05);
+}
+
+@media screen and (max-width: 480px) {
+  .price {
+    font-size: var(--text-xl);
+  }
+
+  .relatedGrid {
+    gap: var(--space-3);
+  }
+
+  .actions > * {
+    flex: 1 1 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .thumbnails img,
+  .mainImage .subImages img,
+  .sizeBtn,
+  .swatch,
+  .qty,
+  .qty button,
+  .buyBtn,
+  .cartBtn,
+  .addToCart,
+  .postal button,
+  .postal input,
+  .relatedCard,
+  .relatedCard img {
+    transition: none;
+  }
+
+  .thumbnails img:hover,
+  .mainImage .subImages img:hover,
+  .swatch:hover,
+  .buyBtn:hover,
+  .cartBtn:hover,
+  .addToCart:hover,
+  .postal button:hover,
+  .buyBtn:active,
+  .cartBtn:active,
+  .addToCart:active,
+  .postal button:active,
+  .relatedCard:hover,
+  .relatedCard:hover img {
+    transform: none;
+  }
+}

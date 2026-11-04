@@ -206,3 +206,59 @@
         gap: var(--space-3);
     }
 }
+
+/********** polish **********/
+.countdown > * {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-1);
+}
+
+.countdown div {
+    font-variant-numeric: tabular-nums;
+}
+
+.dots {
+    align-self: flex-end;
+    padding-bottom: var(--space-1);
+}
+
+.cart {
+    border-radius: var(--radius-lg);
+    animation: flashPop 0.35s var(--ease-out);
+}
+
+.cart img {
+    border-radius: var(--radius-lg);
+}
+
+.hedding i {
+    transition: color var(--transition), transform 0.2s var(--ease-out);
+}
+
+.hedding i:hover {
+    color: var(--red);
+    transform: rotate(90deg);
+}
+
+@keyframes flashPop {
+    from { opacity: 0; transform: translate(-50%, calc(-50% + 16px)); }
+    to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@media screen and (max-width: 480px) {
+    .countdown {
+        gap: var(--space-2);
+    }
+
+    .countdown div {
+        font-size: var(--text-md);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cart { animation: none; }
+    .hedding i { transition: none; }
+    .hedding i:hover { transform: none; }
+}

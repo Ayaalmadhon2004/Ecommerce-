@@ -81,3 +81,9 @@
         gap: var(--space-5) var(--space-3);
     }
 }
+
+/* header: keep heading and button comfortably spaced when they wrap */
+.mainHeader {
+    flex-wrap: wrap;
+    row-gap: var(--space-4);
+}
