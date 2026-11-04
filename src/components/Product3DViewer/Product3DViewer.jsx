@@ -116,6 +116,29 @@ export default function Product3DViewer({ src, poster, alt, color, hotspots, ar 
     };
   }, [viewer, color]);
 
+  // Live colour swap: ease the base colour to the new `color` after load.
+  useEffect(() => {
+    if (!viewer || !loaded) return undefined;
+    const to = color && parseColor(color);
+    const pbr = viewer.model?.materials?.[0]?.pbrMetallicRoughness;
+    if (!to || !pbr) return undefined;
+    const from = [...pbr.baseColorFactor];
+    if (from.every((v, i) => Math.abs(v - to[i]) < 0.001)) return undefined;
+    if (reduceMotion) {
+      pbr.setBaseColorFactor(to);
+      return undefined;
+    }
+    let raf;
+    const start = performance.now();
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / 300);
+      pbr.setBaseColorFactor(from.map((v, i) => v + (to[i] - v) * t));
+      if (t < 1) raf = requestAnimationFrame(step);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [viewer, loaded, color, reduceMotion]);
+
   // Fallback: no model, load error or no WebGL -> plain poster image.
   if (!canRender) {
     return poster ? (

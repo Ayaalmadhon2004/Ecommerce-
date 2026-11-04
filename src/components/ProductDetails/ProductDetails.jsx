@@ -16,6 +16,7 @@ export default function ProductDetails() {
   const [selected, setSelected] = useState(0);
   const [show3d, setShow3d] = useState(true);
   const [qty, setQty] = useState(1);
+  const [colorIdx, setColorIdx] = useState(0);
   const [postal, setPostal] = useState("");
   const [checked, setChecked] = useState(false);
   const [showReturn, setShowReturn] = useState(false);
@@ -29,9 +30,12 @@ export default function ProductDetails() {
   const mainSrc = thumbs[selected] || cover;
   const has3d = Boolean(product.model3d);
   const name = product.title || product.name;
+  const colors = Array.isArray(product.colors) ? product.colors : [];
+  const activeColor = colors[colorIdx] || null;
+  const cartItem = activeColor ? { ...product, selectedColor: activeColor } : product;
 
   const handleBuyNow = () => {
-    if (!cart.some((item) => item.id === product.id)) handleCart(product);
+    if (!cart.some((item) => item.id === product.id)) handleCart(cartItem);
     navigate("/checkout");
   };
 
@@ -65,7 +69,7 @@ export default function ProductDetails() {
           </div>
           {has3d && show3d ? (
             <div className={styles.viewer3d}>
-              <Product3DViewer src={product.model3d} poster={cover} alt={name} />
+              <Product3DViewer src={product.model3d} poster={cover} alt={name} color={activeColor?.hex} />
             </div>
           ) : (
             <AnimatePresence mode="wait" initial={false}>
@@ -101,6 +105,35 @@ export default function ProductDetails() {
           <motion.h3 variants={fadeUp} className={styles.price}>${product.price}</motion.h3>
           <motion.p variants={fadeUp} className={styles.description}>{product.description}</motion.p>
 
+          {colors.length > 0 && (
+            <motion.div variants={fadeUp} className={styles.colors} role="radiogroup" aria-label="Colour">
+              <span>Colours:</span>
+              {colors.map((c, i) => (
+                <button
+                  key={c.hex}
+                  type="button"
+                  role="radio"
+                  aria-checked={i === colorIdx}
+                  aria-label={c.name}
+                  title={c.name}
+                  tabIndex={i === colorIdx ? 0 : -1}
+                  className={`${styles.swatch} ${i === colorIdx ? styles.swatchActive : ""}`}
+                  style={{ backgroundColor: c.hex }}
+                  onClick={() => setColorIdx(i)}
+                  onKeyDown={(e) => {
+                    const d = e.key === "ArrowRight" || e.key === "ArrowDown" ? 1
+                      : e.key === "ArrowLeft" || e.key === "ArrowUp" ? -1 : 0;
+                    if (!d) return;
+                    e.preventDefault();
+                    const n = (i + d + colors.length) % colors.length;
+                    setColorIdx(n);
+                    e.currentTarget.parentElement.children[n + 1]?.focus();
+                  }}
+                />
+              ))}
+            </motion.div>
+          )}
+
           <motion.div variants={fadeUp} className={styles.actions}>
             <div className={styles.qty}>
               <button type="button" aria-label="Decrease quantity" onClick={() => setQty((q) => Math.max(1, q - 1))}>-</button>
@@ -120,7 +153,7 @@ export default function ProductDetails() {
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => {
-                for (let i = 0; i < qty; i++) handleCart(product);
+                for (let i = 0; i < qty; i++) handleCart(cartItem);
               }}
             >
               Add To Cart
