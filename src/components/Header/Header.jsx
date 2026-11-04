@@ -37,7 +37,7 @@ function Header({likedCount}) {
                <span className={styles.badge}>{likedCount}</span>
              )}
             </div>
-           <Link to="/cart" className={styles.loveIcon}>
+           <Link to="/cart" className={styles.loveIcon} data-cart-icon>
              <i className="fa-solid fa-cart-shopping"></i>
              {cartCount > 0 && (
                <span className={styles.badge}>{cartCount}</span>
