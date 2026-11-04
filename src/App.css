@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html, body {
     width: 100%;
     height:auto;
@@ -21,4 +25,22 @@ a{
 .notFound {
   margin: var(--space-10) var(--space-4);
   text-align: center;
+}
+
+::selection {
+  background-color: var(--red);
+  color: var(--white);
+}
+
+/* a clear ring for keyboard users only; mouse clicks stay clean */
+:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

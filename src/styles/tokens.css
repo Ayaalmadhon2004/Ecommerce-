@@ -68,6 +68,8 @@
   --radius-round: 50%;
   --shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 4px 24px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.14);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --transition: 0.3s ease;
 
   /* Components */
