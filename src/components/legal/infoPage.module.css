@@ -1,14 +1,40 @@
 .page {
-  max-width: 800px;
-  margin: var(--space-6) auto;
-  padding: 0 var(--inset);
+  max-width: calc(70ch + 2 * var(--gutter));
+  margin: var(--space-8) auto var(--space-10);
+  padding-inline: var(--inset);
 }
 
 .title {
-  margin-bottom: var(--space-4);
+  font-size: var(--text-title);
+  font-weight: var(--weight-600);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--gray-bg);
+  position: relative;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: -1px;
+  width: var(--space-9);
+  height: 2px;
+  background: var(--red);
 }
 
 .text {
-  margin-bottom: var(--space-3);
-  line-height: 1.6;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-md);
+  line-height: 1.75;
+  color: var(--gray-dark);
+  max-width: 70ch;
+}
+
+@media (max-width: 480px) {
+  .page {
+    margin-top: var(--space-6);
+  }
 }
