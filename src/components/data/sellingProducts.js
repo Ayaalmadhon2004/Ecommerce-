@@ -31,6 +31,12 @@ const sellingProducts = [
         img:"assets/photos/book-corner.webp",
         name:"Small BookSelf",
         model3d:"models/Duck.glb",
+        hotspots:[
+            {position:"0.9 1.25 -0.1", normal:"1 0 0", label:"Smooth rounded edges", description:"Gently rounded edges that are safe to handle."},
+            {position:"0.3 1.55 -0.04", normal:"0 1 0", label:"Premium glossy finish", description:"A bright, easy-to-wipe finish that resists fading."},
+            {position:"0.1 0.45 0.5", normal:"0 0 1", label:"Solid sturdy build", description:"A solid body that holds up to everyday use."},
+            {position:"-0.62 0.55 -0.06", normal:"-1 0 0", label:"Stable balanced base", description:"A weighted base that keeps it upright."},
+        ],
         price:"$360",
         prevPrice:"$160",
         rate:((99)),

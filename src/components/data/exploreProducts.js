@@ -4,6 +4,11 @@ const exploreProducts=[
         img:"assets/photos/dog-food.webp",
         name:"Breed Dry Dog Food",
         model3d:"models/Fox.glb",
+        hotspots:[
+            {position:"11 38 4", normal:"1 0 0", label:"Soft durable fabric", description:"A soft, dense finish that stays comfortable and keeps its shape after daily use."},
+            {position:"0 68 50", normal:"0 0.4 1", label:"Natural ingredients", description:"Made with carefully selected ingredients and no artificial colours."},
+            {position:"0 20 -80", normal:"0 0 -1", label:"Easy to clean", description:"Wipes clean in seconds, so it always looks fresh."},
+        ],
         price:"$100",
         rate:(88),
         stars:5,
@@ -37,6 +42,11 @@ const exploreProducts=[
         img:"assets/photos/car.webp",
         name:"Kids Electric Car",
         model3d:"models/CesiumMilkTruck.glb",
+        hotspots:[
+            {position:"0 1.0 2.4", normal:"0 0 1", label:"Comfortable cabin", description:"A roomy cabin with a wide windshield for a clear view."},
+            {position:"1.35 1.6 -0.8", normal:"1 0 0", label:"Glossy durable paint", description:"Scratch-resistant paint that keeps its shine."},
+            {position:"1.35 0.4 1.4", normal:"1 0 0", label:"Sturdy rubber wheels", description:"Grippy wheels for a smooth, stable ride."},
+        ],
         price:"600$",
         rate:(88),
         stars:5,
